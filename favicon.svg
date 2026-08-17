@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#080C14"/>
+    </linearGradient>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Favicon Container Background -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="8"/>
+
+  <!-- Glowing Qbonic Brand Mark -->
+  <g transform="translate(40, 40) scale(18)" filter="url(#glow)">
+    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#iconGrad)" stroke="#38BDF8" stroke-width="0.8" stroke-linejoin="round"/>
+  </g>
+</svg>

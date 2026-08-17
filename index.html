@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qbonic — Interactive Data Cubes for Sheets & CSVs (100% Private)</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Qbonic — Interactive Data Cubes for Sheets & CSVs (100% Private)">
+  <meta name="description"
+    content="Build interactive dashboards from Google Sheets & CSVs in minutes. 100% in-browser processing with zero server uploads, zero SQL required, and zero privacy risks. Owned & operated by VitanuGenAI Technology Pvt Ltd, India.">
+  <meta name="keywords"
+    content="Qbonic, interactive data cubes, Google Sheets dashboard, in-browser analytics, private CSV reporting, client-side BI dashboard, zero code BI tool, GDPR compliant reporting app, VitanuGenAI Technology">
+  <meta name="author" content="VitanuGenAI Technology Pvt Ltd, India">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#080C14">
+
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+
+  <!-- Canonical Link -->
+  <link rel="canonical" href="https://qbonic.com/">
+
+  <!-- Open Graph / Facebook / LinkedIn Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qbonic.com/">
+  <meta property="og:site_name" content="Qbonic">
+  <meta property="og:title" content="Qbonic — Interactive Data Cubes for Sheets & CSVs (100% Private)">
+  <meta property="og:description"
+    content="Turn Google Sheets & CSVs into interactive executive dashboards right inside your browser. Zero server uploads. 100% In-Browser Privacy.">
+  <meta property="og:image" content="https://qbonic.com/favicon.svg">
+  <meta property="og:image:alt" content="Qbonic Executive Interactive Reporting Dashboard">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://qbonic.com/">
+  <meta name="twitter:title" content="Qbonic — Interactive Data Cubes for Sheets & CSVs">
+  <meta name="twitter:description"
+    content="Build interactive dashboards from Google Sheets & CSVs in minutes. 100% in-browser processing with zero cloud server overhead.">
+  <meta name="twitter:image" content="https://qbonic.com/favicon.svg">
+
+  <!-- Structured Data JSON-LD (Google Rich Search Results) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://qbonic.com/#software",
+        "name": "Qbonic",
+        "url": "https://qbonic.com",
+        "operatingSystem": "All (Web Browser)",
+        "applicationCategory": "BusinessApplication",
+        "description": "Interactive Data Cubes for Google Sheets & CSVs. Build interactive executive BI dashboards with 100% in-browser privacy.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "publisher": {
+          "@id": "https://qbonic.com/#organization"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://qbonic.com/#organization",
+        "name": "VitanuGenAI Technology Pvt Ltd, India",
+        "url": "https://qbonic.com",
+        "logo": "https://qbonic.com/favicon.svg"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Background Ambient Glow -->
+  <div class="ambient-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow bg-glow-2" aria-hidden="true"></div>
+
+  <!-- Minimal Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#logo_grad)" stroke="#38BDF8" stroke-width="1.5"
+              stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="logo_grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38BDF8" />
+                <stop offset="1" stop-color="#6366F1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <span class="brand-tagline">Interactive Data Cubes for Sheets</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#problem" class="nav-link">The Problem</a>
+        <a href="#demo" class="nav-link">Live Demo</a>
+        <a href="#beta" class="nav-link">Paid Beta</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#about" class="nav-link">About Us</a>
+        <a href="#contact" class="nav-link">Contact Us</a>
+      </nav>
+      <div class="header-actions">
+        <div class="theme-switch-wrapper" title="Switch Theme">
+          <span class="theme-switch-icon">🌙</span>
+          <label class="theme-switch" for="themeToggle">
+            <input type="checkbox" id="themeToggle" aria-label="Toggle light or dark theme">
+            <span class="slider round"></span>
+          </label>
+          <span class="theme-switch-icon">☀️</span>
+        </div>
+        <a href="#signup" class="btn btn-primary btn-sm">Join Beta</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <div class="brand-text-group">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <span class="brand-tagline">Interactive Dashboard for Sheets</span>
+        </div>
+        <button class="drawer-close" id="drawerClose">&times;</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="#problem" class="drawer-link">The Problem</a>
+        <a href="#demo" class="drawer-link">Live Demo</a>
+        <a href="#beta" class="drawer-link">Paid Beta</a>
+        <a href="#faq" class="drawer-link">FAQ</a>
+        <a href="#about" class="drawer-link">About Us</a>
+        <a href="#contact" class="drawer-link">Contact Us</a>
+        <a href="#signup" class="drawer-link btn btn-primary mt-4">Join Beta</a>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO SECTION (Minimal & Direct) -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-badge-wrapper">
+          <span class="badge badge-glow">
+            <span class="badge-dot"></span>
+            Built for Spreadsheet Lovers • 100% In-Browser Privacy 🔒
+          </span>
+        </div>
+
+        <h1 class="hero-title">
+          Build Interactive Dashboards.<br>
+          <span class="gradient-text">From Spreadsheets In Minutes.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Turn CSV, Excel, and Google Sheet exports into instant executive BI dashboards — <strong>zero technical
+            expertise required</strong>. 100% private, zero cloud data uploads, and processed purely inside your
+          browser.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#signup" class="btn btn-primary btn-lg glow-button">Request Beta Access</a>
+          <a href="#demo" class="btn btn-secondary btn-lg">Try Live Demo</a>
+        </div>
+
+        <!-- Trust Stats Bar -->
+        <div class="hero-trust-bar">
+          <div class="trust-stat">
+            <span class="stat-number">0 Tech Skills</span>
+            <span class="stat-label">Zero Code Required</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-stat">
+            <span class="stat-number">&lt; 2 Mins</span>
+            <span class="stat-label">To Build Dashboard</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Client-Side Memory</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-stat">
+            <span class="stat-number">0 Bytes</span>
+            <span class="stat-label">Uploaded to Cloud</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE PROBLEM SECTION -->
+    <section class="section problem-section" id="problem">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">The Problem</span>
+          <h2 class="section-title">BI Tools Are Too Complex & Insecure</h2>
+          <p class="section-description">
+            Traditional reporting apps force you through steep learning curves or make you upload confidential
+            spreadsheets to third-party databases.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          <!-- Traditional Cloud BI Card -->
+          <div class="comparison-card card-negative">
+            <div class="card-badge badge-danger">Traditional Cloud BI</div>
+            <h3 class="card-title">Complex & Insecure</h3>
+            <ul class="comparison-list">
+              <li>
+                <span class="icon-cross">✕</span>
+                <div><strong>High Technical Barrier:</strong> Requires complex data engineering, SQL, or tedious
+                  spreadsheet formula building.</div>
+              </li>
+              <li>
+                <span class="icon-cross">✕</span>
+                <div><strong>Third-Party Data Storage:</strong> Confidential customer and revenue CSVs stored on remote
+                  servers.</div>
+              </li>
+              <li>
+                <span class="icon-cross">✕</span>
+                <div><strong>Slow & Clunky Setup:</strong> Hours spent configuring basic charts and dashboards.</div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Qbonic In-Browser Card -->
+          <div class="comparison-card card-positive glow-border">
+            <div class="card-badge badge-success">The Qbonic Way</div>
+            <h3 class="card-title">Instant & 100% Private</h3>
+            <ul class="comparison-list">
+              <li>
+                <span class="icon-check">✓</span>
+                <div><strong>Zero Technical Expertise:</strong> Drop your CSV or Google Sheet export and get an instant
+                  dashboard in minutes.</div>
+              </li>
+              <li>
+                <span class="icon-check">✓</span>
+                <div><strong>Zero Cloud Uploads:</strong> Files remain strictly inside browser memory — 100% GDPR safe
+                  by default.</div>
+              </li>
+              <li>
+                <span class="icon-check">✓</span>
+                <div><strong>Automated Column Classifier:</strong> Dates, metrics, and dimensions auto-classified
+                  instantly.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE DEMO SIMULATOR SECTION (Actual Qbonic Executive Dashboard) -->
+    <section class="section simulator-section" id="demo">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">Interactive Sandbox</span>
+          <h2 class="section-title">Experience In-Browser Reporting</h2>
+          <p class="section-description">
+            Explore the real Qbonic executive dashboard below — zero technical expertise, instant aggregation, and 100%
+            in-browser privacy.
+          </p>
+        </div>
+
+        <div class="simulator-window glow-border">
+          <!-- Top Screen Pagination Dots Bar -->
+          <div class="sim-screen-dots sim-dots-top">
+            <span class="sim-dot-nav active" data-view="dashboard" title="Executive Dashboard"></span>
+            <span class="sim-dot-nav" data-view="config" title="AI Column Configuration"></span>
+          </div>
+
+          <!-- App Dashboard Toolbar -->
+          <div class="sim-app-toolbar">
+            <div class="toolbar-left">
+              <h3 class="dash-title">GLOBAL SUPERSTORE REPORT</h3>
+              <span class="row-count-badge">29,283 Rows</span>
+              <button class="save-config-btn">💾 Save Configuration</button>
+            </div>
+            <div class="toolbar-right">
+              <div class="filter-chip">
+                📅 Duration: <strong>01/01/2025</strong> to <strong>30/06/2025</strong>
+              </div>
+              <div class="filter-chip">
+                Granularity: <span class="chip-select">Month</span>
+              </div>
+              <div class="filter-chip">
+                Table Metric: <span class="chip-select font-emerald">Sales (SUM)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Summary Metrics Strip (8 Metrics) -->
+          <div class="sim-metrics-strip">
+            <div class="metric-tile active">
+              <div class="tile-header"><span class="tile-title">SALES</span> <span class="tile-tag tag-sum">SUM</span>
+              </div>
+              <div class="tile-val">$12.64M</div>
+            </div>
+            <div class="metric-tile">
+              <div class="tile-header"><span class="tile-title">SHIPPING COST</span> <span
+                  class="tile-tag tag-sum">SUM</span></div>
+              <div class="tile-val">$1.35M</div>
+            </div>
+            <div class="metric-tile">
+              <div class="tile-header"><span class="tile-title">PROFIT</span> <span class="tile-tag tag-sum">SUM</span>
+              </div>
+              <div class="tile-val">$1.47M</div>
+            </div>
+            <div class="metric-tile">
+              <div class="tile-header"><span class="tile-title">QUANTITY</span> <span
+                  class="tile-tag tag-sum">SUM</span></div>
+              <div class="tile-val">178.31K</div>
+            </div>
+            <div class="metric-tile">
+              <div class="tile-header"><span class="tile-title">DISCOUNT</span> <span
+                  class="tile-tag tag-sum">SUM</span></div>
+              <div class="tile-val">$7.33K</div>
+            </div>
+            <div class="metric-tile derived">
+              <div class="tile-header"><span class="tile-title">TOTAL REVENUE</span> <span
+                  class="tile-tag tag-derived">DERIVED</span></div>
+              <div class="tile-val">$14M</div>
+            </div>
+            <div class="metric-tile derived">
+              <div class="tile-header"><span class="tile-title">PROFIT MARGIN</span> <span
+                  class="tile-tag tag-derived">DERIVED</span></div>
+              <div class="tile-val">11.6%</div>
+            </div>
+            <div class="metric-tile derived">
+              <div class="tile-header"><span class="tile-title">AVG ORDER VALUE</span> <span
+                  class="tile-tag tag-derived">DERIVED</span></div>
+              <div class="tile-val">$246.5</div>
+            </div>
+          </div>
+
+          <!-- 3-Column Executive Dashboard Body Grid -->
+          <div class="dash-3col-grid">
+            <!-- Column 1: Ranked Entity Tables -->
+            <div class="dash-col">
+              <!-- Product Name Table -->
+              <div class="dash-table-card">
+                <div class="table-card-header green-header">
+                  <div class="table-head-left">
+                    <span class="table-icon">📊</span>
+                    <span class="table-title">PRODUCT NAME</span>
+                    <span class="table-count-badge">10768</span>
+                  </div>
+                  <span class="table-sort-badge">SALES ↓</span>
+                </div>
+                <div class="table-card-body">
+                  <div class="table-row">
+                    <span class="rank-badge gold">1</span>
+                    <span class="row-name">Canon imageCLASS...</span>
+                    <span class="row-code">(TEC-CO-10004722)</span>
+                    <span class="row-val">$61.6K</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge silver">2</span>
+                    <span class="row-name">Nokia Smart Phone...</span>
+                    <span class="row-code">(TEC-PH-10004664)</span>
+                    <span class="row-val">$30.04K</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge bronze">3</span>
+                    <span class="row-name">Fellowes PB500 El...</span>
+                    <span class="row-code">(OFF-BI-10003527)</span>
+                    <span class="row-val">$27.45K</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge">4</span>
+                    <span class="row-name">Cisco TelePresence...</span>
+                    <span class="row-code">(TEC-MA-10002412)</span>
+                    <span class="row-val">$22.64K</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge">5</span>
+                    <span class="row-name">Nokia Smart Phone...</span>
+                    <span class="row-code">(TEC-PH-10004823)</span>
+                    <span class="row-val">$22.26K</span>
+                  </div>
+                  <div class="table-footer-link">View All (10768) ˅</div>
+                </div>
+              </div>
+
+              <!-- Segment Table -->
+              <div class="dash-table-card">
+                <div class="table-card-header green-header">
+                  <div class="table-head-left">
+                    <span class="table-icon">📊</span>
+                    <span class="table-title">SEGMENT</span>
+                    <span class="table-count-badge">3</span>
+                  </div>
+                  <span class="table-sort-badge">SALES ↓</span>
+                </div>
+                <div class="table-card-body">
+                  <div class="table-row">
+                    <span class="rank-badge gold">1</span>
+                    <span class="row-name">Consumer</span>
+                    <span class="row-val">$6.51M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge silver">2</span>
+                    <span class="row-name">Corporate</span>
+                    <span class="row-val">$3.82M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge bronze">3</span>
+                    <span class="row-name">Home Office</span>
+                    <span class="row-val">$2.31M</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Market Table -->
+              <div class="dash-table-card">
+                <div class="table-card-header green-header">
+                  <div class="table-head-left">
+                    <span class="table-icon">📊</span>
+                    <span class="table-title">MARKET</span>
+                    <span class="table-count-badge">7</span>
+                  </div>
+                  <span class="table-sort-badge">SALES ↓</span>
+                </div>
+                <div class="table-card-body">
+                  <div class="table-row">
+                    <span class="rank-badge gold">1</span>
+                    <span class="row-name">APAC</span>
+                    <span class="row-val">$3.59M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge silver">2</span>
+                    <span class="row-name">EU</span>
+                    <span class="row-val">$2.94M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge bronze">3</span>
+                    <span class="row-name">US</span>
+                    <span class="row-val">$2.3M</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2: Ranked Entity Tables -->
+            <div class="dash-col">
+              <!-- Sub-Category Table -->
+              <div class="dash-table-card">
+                <div class="table-card-header green-header">
+                  <div class="table-head-left">
+                    <span class="table-icon">📊</span>
+                    <span class="table-title">SUB-CATEGORY</span>
+                    <span class="table-count-badge">17</span>
+                  </div>
+                  <span class="table-sort-badge">SALES ↓</span>
+                </div>
+                <div class="table-card-body">
+                  <div class="table-row">
+                    <span class="rank-badge gold">1</span>
+                    <span class="row-name">Phones</span>
+                    <span class="row-val">$1.71M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge silver">2</span>
+                    <span class="row-name">Copiers</span>
+                    <span class="row-val">$1.51M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge bronze">3</span>
+                    <span class="row-name">Chairs</span>
+                    <span class="row-val">$1.5M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge">4</span>
+                    <span class="row-name">Bookcases</span>
+                    <span class="row-val">$1.47M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge">5</span>
+                    <span class="row-name">Storage</span>
+                    <span class="row-val">$1.13M</span>
+                  </div>
+                  <div class="table-footer-link">View All (17) ˅</div>
+                </div>
+              </div>
+
+              <!-- Country Table -->
+              <div class="dash-table-card">
+                <div class="table-card-header green-header">
+                  <div class="table-head-left">
+                    <span class="table-icon">📊</span>
+                    <span class="table-title">COUNTRY</span>
+                    <span class="table-count-badge">147</span>
+                  </div>
+                  <span class="table-sort-badge">SALES ↓</span>
+                </div>
+                <div class="table-card-body">
+                  <div class="table-row">
+                    <span class="rank-badge gold">1</span>
+                    <span class="row-name">United States</span>
+                    <span class="row-val">$2.3M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge silver">2</span>
+                    <span class="row-name">Australia</span>
+                    <span class="row-val">$925.26K</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge bronze">3</span>
+                    <span class="row-name">France</span>
+                    <span class="row-val">$858.93K</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge">4</span>
+                    <span class="row-name">China</span>
+                    <span class="row-val">$700.59K</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge">5</span>
+                    <span class="row-name">Germany</span>
+                    <span class="row-val">$628.86K</span>
+                  </div>
+                  <div class="table-footer-link">View All (147) ˅</div>
+                </div>
+              </div>
+
+              <!-- Ship Mode Table -->
+              <div class="dash-table-card">
+                <div class="table-card-header green-header">
+                  <div class="table-head-left">
+                    <span class="table-icon">📊</span>
+                    <span class="table-title">SHIP MODE</span>
+                    <span class="table-count-badge">4</span>
+                  </div>
+                  <span class="table-sort-badge">SALES ↓</span>
+                </div>
+                <div class="table-card-body">
+                  <div class="table-row">
+                    <span class="rank-badge gold">1</span>
+                    <span class="row-name">Standard Class</span>
+                    <span class="row-val">$7.58M</span>
+                  </div>
+                  <div class="table-row">
+                    <span class="rank-badge silver">2</span>
+                    <span class="row-name">Second Class</span>
+                    <span class="row-val">$2.57M</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3: Synchronized Sparkline Trend Graphs -->
+            <div class="dash-col graphs-col" id="sparklineCol">
+              <!-- Sales Graph -->
+              <div class="sparkline-card">
+                <div class="sparkline-head">
+                  <div class="spark-left">
+                    <span class="spark-dot" style="background:#38BDF8"></span>
+                    <span class="spark-title">SALES</span>
+                    <span class="spark-tag">SUM</span>
+                    <span class="spark-tag active-table-tag">TABLE METRIC</span>
+                  </div>
+                  <span class="spark-val">Val: $1.98M</span>
+                </div>
+                <div class="spark-svg-container">
+                  <svg viewBox="0 0 350 40" class="spark-svg" id="sparkSvgSales"></svg>
+                </div>
+              </div>
+
+              <!-- Shipping Cost Graph -->
+              <div class="sparkline-card">
+                <div class="sparkline-head">
+                  <div class="spark-left">
+                    <span class="spark-dot" style="background:#34D399"></span>
+                    <span class="spark-title">SHIPPING COST</span>
+                    <span class="spark-tag">SUM</span>
+                  </div>
+                  <span class="spark-val">Val: $214.43K</span>
+                </div>
+                <div class="spark-svg-container">
+                  <svg viewBox="0 0 350 40" class="spark-svg" id="sparkSvgShipping"></svg>
+                </div>
+              </div>
+
+              <!-- Profit Graph -->
+              <div class="sparkline-card">
+                <div class="sparkline-head">
+                  <div class="spark-left">
+                    <span class="spark-dot" style="background:#F87171"></span>
+                    <span class="spark-title">PROFIT</span>
+                    <span class="spark-tag">SUM</span>
+                  </div>
+                  <span class="spark-val">Val: $225.23K</span>
+                </div>
+                <div class="spark-svg-container">
+                  <svg viewBox="0 0 350 40" class="spark-svg" id="sparkSvgProfit"></svg>
+                </div>
+              </div>
+
+              <!-- Quantity Graph -->
+              <div class="sparkline-card">
+                <div class="sparkline-head">
+                  <div class="spark-left">
+                    <span class="spark-dot" style="background:#FB923C"></span>
+                    <span class="spark-title">QUANTITY</span>
+                    <span class="spark-tag">SUM</span>
+                  </div>
+                  <span class="spark-val">Val: 27.75K</span>
+                </div>
+                <div class="spark-svg-container">
+                  <svg viewBox="0 0 350 40" class="spark-svg" id="sparkSvgQuantity"></svg>
+                </div>
+              </div>
+
+              <!-- Discount Graph -->
+              <div class="sparkline-card">
+                <div class="sparkline-head">
+                  <div class="spark-left">
+                    <span class="spark-dot" style="background:#818CF8"></span>
+                    <span class="spark-title">DISCOUNT</span>
+                    <span class="spark-tag">SUM</span>
+                  </div>
+                  <span class="spark-val">Val: $1.11K</span>
+                </div>
+                <div class="spark-svg-container">
+                  <svg viewBox="0 0 350 40" class="spark-svg" id="sparkSvgDiscount"></svg>
+                </div>
+              </div>
+
+              <!-- Total Revenue Graph -->
+              <div class="sparkline-card">
+                <div class="sparkline-head">
+                  <div class="spark-left">
+                    <span class="spark-dot" style="background:#10B981"></span>
+                    <span class="spark-title">TOTAL REVENUE</span>
+                    <span class="spark-tag tag-derived">DERIVED</span>
+                  </div>
+                  <span class="spark-val">Val: $2.19M</span>
+                </div>
+                <div class="spark-svg-container">
+                  <svg viewBox="0 0 350 40" class="spark-svg" id="sparkSvgRevenue"></svg>
+                </div>
+              </div>
+
+              <!-- Profit Margin Graph -->
+              <div class="sparkline-card">
+                <div class="sparkline-head">
+                  <div class="spark-left">
+                    <span class="spark-dot" style="background:#C084FC"></span>
+                    <span class="spark-title">PROFIT MARGIN</span>
+                    <span class="spark-tag tag-derived">DERIVED</span>
+                  </div>
+                  <span class="spark-val">Val: 11.4%</span>
+                </div>
+                <div class="spark-svg-container">
+                  <svg viewBox="0 0 350 40" class="spark-svg" id="sparkSvgMargin"></svg>
+                </div>
+              </div>
+
+              <!-- Average Order Value Graph -->
+              <div class="sparkline-card">
+                <div class="sparkline-head">
+                  <div class="spark-left">
+                    <span class="spark-dot" style="background:#22D3EE"></span>
+                    <span class="spark-title">AVERAGE ORDER VALUE</span>
+                    <span class="spark-tag tag-derived">DERIVED</span>
+                  </div>
+                  <span class="spark-val">Val: $250.87</span>
+                </div>
+                <div class="spark-svg-container">
+                  <svg viewBox="0 0 350 40" class="spark-svg" id="sparkSvgAov"></svg>
+                </div>
+              </div>
+
+              <!-- Unified Synchronized Hover Tooltip Overlay -->
+              <div class="sync-tooltip-popup" id="syncTooltipPopup">
+                <div class="sync-tt-head">Time: Feb 2025</div>
+                <div class="sync-tt-row"><span class="tt-dot" style="background:#38BDF8"></span> Sales:
+                  <strong>$1.98M</strong>
+                </div>
+                <div class="sync-tt-row"><span class="tt-dot" style="background:#34D399"></span> Shipping Cost:
+                  <strong>$214.43K</strong>
+                </div>
+                <div class="sync-tt-row"><span class="tt-dot" style="background:#F87171"></span> Profit:
+                  <strong>$225.23K</strong>
+                </div>
+                <div class="sync-tt-row"><span class="tt-dot" style="background:#FB923C"></span> Quantity:
+                  <strong>27.75K</strong>
+                </div>
+                <div class="sync-tt-row"><span class="tt-dot" style="background:#818CF8"></span> Discount:
+                  <strong>$1.11K</strong>
+                </div>
+                <div class="sync-tt-row"><span class="tt-dot" style="background:#10B981"></span> Total Revenue:
+                  <strong>$2.19M</strong>
+                </div>
+                <div class="sync-tt-row"><span class="tt-dot" style="background:#C084FC"></span> Profit Margin:
+                  <strong>11.4%</strong>
+                </div>
+                <div class="sync-tt-row"><span class="tt-dot" style="background:#22D3EE"></span> Average Order Value:
+                  <strong>$250.87</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Configuration View Panel (AI Classified Column Schema) -->
+          <div class="sim-config-panel hidden" id="configPanel">
+            <!-- Top Report Settings Card -->
+            <div class="config-settings-card">
+              <div class="config-row-top">
+                <div class="config-input-box flex-2">
+                  <label class="cfg-label">Report Display Title <span class="req">*</span></label>
+                  <input type="text" class="cfg-input" value="Global Superstore Report" readonly>
+                </div>
+                <div class="config-input-box flex-1">
+                  <label class="cfg-label">Currency Symbol</label>
+                  <div class="curr-pill-group">
+                    <span class="curr-pill active">$</span>
+                    <span class="curr-pill">₹</span>
+                    <span class="curr-pill">€</span>
+                    <span class="curr-pill">£</span>
+                    <span class="curr-pill">¥</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="config-input-box mt-3">
+                <label class="cfg-label">Google Sheet Public URL <span class="req">*</span></label>
+                <div class="url-input-wrap">
+                  <input type="text" class="cfg-input url-field"
+                    value="https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit?gid=0#gid=0"
+                    readonly>
+                  <button class="detect-btn">🔄 Detect Sheet</button>
+                </div>
+                <span class="cfg-hint">ⓘ Ensure the sheet is set to <strong>"Anyone with the link can view"</strong>.
+                  Tab GID is automatically extracted.</span>
+              </div>
+            </div>
+
+            <!-- AI Column Categorization Section Header -->
+            <div class="ai-categorization-bar">
+              <div class="ai-cat-left">
+                <span class="ai-cat-icon">✨</span>
+                <h4 class="ai-cat-title">Unified Column Categorization <span class="ai-cat-sub">(AI Classified by Groq
+                    Llama-3.3-70B)</span></h4>
+              </div>
+              <button class="reclassify-btn">🤖 Re-classify with Groq AI</button>
+            </div>
+            <p class="ai-cat-desc">Drag & drop pills. Click ✏️ to edit display names. Derived Time dimensions (Month,
+              Quarter, Year) automatically inferred from Date.</p>
+
+            <!-- 4 Categorization Columns Grid -->
+            <div class="config-4col-grid">
+              <!-- 1. TIME HIERARCHY -->
+              <div class="cat-col green-cat">
+                <div class="cat-col-head">
+                  <span class="cat-col-title">📅 1. TIME HIERARCHY</span>
+                  <span class="cat-col-count green-count">3</span>
+                </div>
+                <p class="cat-col-desc">Time dimensions & derived Month/Quarter/Year hierarchy.</p>
+
+                <div class="cat-card">
+                  <div class="cat-card-title">
+                    <span>📅 Order Date ✏️</span>
+                  </div>
+                  <div class="cat-card-format">Format: <strong>YYYY-MM-DD (2025-01-31)</strong></div>
+                </div>
+
+                <div class="cat-card">
+                  <div class="cat-card-title">
+                    <span>(Quarter from Order Date)</span>
+                  </div>
+                  <div class="cat-card-format">Format: <strong>YYYY-Q# (2025-Q1)</strong></div>
+                </div>
+
+                <div class="cat-card">
+                  <div class="cat-card-title">
+                    <span>(Month from Order Date)</span>
+                  </div>
+                  <div class="cat-card-format">Format: <strong>MMM YYYY (Jan 2025)</strong></div>
+                </div>
+              </div>
+
+              <!-- 2. DIMENSIONS -->
+              <div class="cat-col orange-cat">
+                <div class="cat-col-head">
+                  <span class="cat-col-title">📦 2. DIMENSIONS</span>
+                  <span class="cat-col-count orange-count">12 TABLES</span>
+                </div>
+                <p class="cat-col-desc">Generates reporting breakdown tables.</p>
+
+                <div class="cat-card">
+                  <div class="cat-card-title">
+                    <span>📦 Product Name ✏️</span>
+                  </div>
+                  <div class="cat-card-pair">🔑 ID/Code: <strong>Product ID</strong></div>
+                </div>
+
+                <div class="cat-card">
+                  <div class="cat-card-title">
+                    <span>📦 Category ✏️</span>
+                  </div>
+                  <div class="cat-card-hint">+ Drag ID column here to pair</div>
+                </div>
+
+                <div class="cat-card">
+                  <div class="cat-card-title">
+                    <span>📦 Sub-Category ✏️</span>
+                  </div>
+                  <div class="cat-card-badge-min">📌 Default Minimized</div>
+                </div>
+              </div>
+
+              <!-- 3. METRIC COLUMNS -->
+              <div class="cat-col purple-cat">
+                <div class="cat-col-head">
+                  <span class="cat-col-title">📊 3. METRIC COLUMNS</span>
+                  <span class="cat-col-count purple-count">5 GRAPHS</span>
+                </div>
+                <p class="cat-col-desc">Trend graphs with aggregations & unit types.</p>
+
+                <div class="cat-card">
+                  <div class="cat-card-title">
+                    <span>📊 Sales ✏️</span>
+                  </div>
+                  <div class="cat-card-agg">
+                    <span class="agg-tag">Agg: <strong>SUM</strong></span>
+                    <span class="curr-tag">$$</span>
+                  </div>
+                </div>
+
+                <div class="cat-card">
+                  <div class="cat-card-title">
+                    <span>📊 Shipping Cost ✏️</span>
+                  </div>
+                  <div class="cat-card-agg">
+                    <span class="agg-tag">Agg: <strong>SUM</strong></span>
+                    <span class="curr-tag">$$</span>
+                  </div>
+                </div>
+
+                <div class="cat-card">
+                  <div class="cat-card-title">
+                    <span>📊 Profit ✏️</span>
+                  </div>
+                  <div class="cat-card-agg">
+                    <span class="agg-tag">Agg: <strong>SUM</strong></span>
+                    <span class="curr-tag">$$</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. UNASSIGNED COLUMNS -->
+              <div class="cat-col grey-cat">
+                <div class="cat-col-head">
+                  <span class="cat-col-title">📋 4. UNASSIGNED COLUMNS</span>
+                  <span class="cat-col-count grey-count">8</span>
+                </div>
+                <p class="cat-col-desc">Unassigned columns. Drag pills to/from here to categorize.</p>
+
+                <div class="unassigned-pill">Customer ID ✏️</div>
+                <div class="unassigned-pill">Customer Name ✏️</div>
+                <div class="unassigned-pill">ji_lu-shu ✏️</div>
+                <div class="unassigned-pill">Order ID ✏️</div>
+                <div class="unassigned-pill">Row ID ✏️</div>
+                <div class="unassigned-pill">Ship Date ✏️</div>
+                <div class="unassigned-pill">Year ✏️</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulator Bottom Screen Pagination Dots Indicator -->
+          <div class="sim-screen-dots" id="simScreenDots">
+            <span class="sim-dot-nav active" data-view="dashboard" title="Executive Dashboard"></span>
+            <span class="sim-dot-nav" data-view="config" title="AI Column Configuration"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section beta-info-section" id="beta">
+      <div class="container container-narrow">
+        <div class="paid-beta-card glow-border text-center">
+          <span class="beta-card-badge">⚡ LIMITED BETA SEATS • LAUNCHING IN 2-3 WEEKS</span>
+          <h2 class="beta-card-title">Apply For Early Access</h2>
+          <p class="beta-card-desc">
+            Launching in the next 2–3 weeks.<br>
+            We don't believe in charging exorbitant prices like $40–$100/month per user.
+          </p>
+
+          <div class="beta-perks-grid">
+            <div class="perk-box">
+              <span class="perk-icon">🚀</span>
+              <h4>Zero Technical Expertise</h4>
+              <p>Build dashboards in &lt;2 minutes without SQL or code.</p>
+            </div>
+            <div class="perk-box">
+              <span class="perk-icon">🛡️</span>
+              <h4>100% In-Browser Privacy</h4>
+              <p>Zero data touches external servers.</p>
+            </div>
+            <div class="perk-box">
+              <span class="perk-icon">📈</span>
+              <h4>High-Volume Support</h4>
+              <p>Processes up to 30,000 CSV & Excel rows.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BETA SIGN-UP FORM SECTION -->
+    <section class="section signup-section" id="signup">
+      <div class="container container-narrow">
+        <div class="signup-card-wrapper glow-border">
+          <div class="signup-content">
+            <div class="signup-badge">
+              <span class="badge-dot"></span> <strong class="badge-highlight">LIMITED</strong> Beta Spots Available •
+              Launching in 2–3 Weeks
+            </div>
+            <h2 class="signup-title">Apply For Beta Access</h2>
+            <p class="signup-subtitle">
+              Secure your spot for early access when invitations roll out before public launch.
+            </p>
+
+            <form class="beta-form" id="betaForm" novalidate>
+              <div class="form-grid">
+                <!-- Full Name -->
+                <div class="form-group">
+                  <label for="fullName" class="form-label">Full Name <span class="req">*</span></label>
+                  <input type="text" id="fullName" class="form-input" placeholder="Alex Morgan" required>
+                  <span class="form-error">Please enter your name.</span>
+                </div>
+
+                <!-- Work Email -->
+                <div class="form-group">
+                  <label for="workEmail" class="form-label">Work Email <span class="req">*</span></label>
+                  <input type="email" id="workEmail" class="form-input" placeholder="alex@company.com" required>
+                  <span class="form-error">Please enter a valid email address.</span>
+                </div>
+
+                <!-- Primary Role -->
+                <div class="form-group">
+                  <label for="userRole" class="form-label">Primary Role <span class="req">*</span></label>
+                  <select id="userRole" class="form-select" required>
+                    <option value="" disabled selected>Select your role...</option>
+                    <option value="ecom">E-Commerce Lead / Owner</option>
+                    <option value="analyst">Data Analyst / BI Lead</option>
+                    <option value="marketing">Marketer / Growth Lead</option>
+                    <option value="agency">Agency Founder / Client Manager</option>
+                    <option value="freelance">Freelancer / Consultant</option>
+                    <option value="other">Other Professional</option>
+                  </select>
+                  <span class="form-error">Please select your role.</span>
+                </div>
+
+                <!-- Country -->
+                <div class="form-group">
+                  <label for="userCountry" class="form-label">Country <span class="req">*</span></label>
+                  <select id="userCountry" class="form-select" required>
+                    <option value="" disabled selected>Select your country...</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="DE">Germany</option>
+                    <option value="AU">Australia</option>
+                    <option value="FR">France</option>
+                    <option value="NL">Netherlands</option>
+                    <option value="SE">Sweden / Nordics</option>
+                    <option value="IN">India</option>
+                    <option value="OTHER">Other Country</option>
+                  </select>
+                  <span class="form-error">Please select your country.</span>
+                </div>
+
+                <!-- Data Source / Use Case -->
+                <div class="form-group">
+                  <label for="dataTool" class="form-label">Primary Data Source / Use Case</label>
+                  <select id="dataTool" class="form-select">
+                    <option value="shopify">Shopify / WooCommerce Sales Data</option>
+                    <option value="ads">Meta & Google Ads Campaign Reports</option>
+                    <option value="stripe">Stripe / Payment Subscription CSVs</option>
+                    <option value="excel">Microsoft Excel / Spreadsheet Exports</option>
+                    <option value="crm">HubSpot / Salesforce CRM Exports</option>
+                  </select>
+                </div>
+
+                <!-- Primary Frustration -->
+                <div class="form-group">
+                  <label for="primaryFrustration" class="form-label">Primary Frustration <span
+                      class="req">*</span></label>
+                  <select id="primaryFrustration" class="form-select" required>
+                    <option value="" disabled selected>What is your main issue with current tools?</option>
+                    <option value="privacy">🔒 Data Privacy & GDPR (Cannot upload CSVs to cloud servers)</option>
+                    <option value="cost">💸 High Price / Cost (Current BI software is too
+                      expensive)</option>
+                    <option value="speed">⚡ Slow Setup & Complexity (Want instant charts without data engineering
+                      hassle)</option>
+                    <option value="excel">📊 Excel / Spreadsheet Fatigue (Manual chart building is tedious)</option>
+                    <option value="other">💡 Other / Curious about in-browser reporting</option>
+                  </select>
+                  <span class="form-error">Please select your primary frustration.</span>
+                </div>
+              </div>
+
+              <div class="form-group checkbox-group mt-2">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="founderInterviewOptIn" checked>
+                  <span class="checkmark"></span>
+                  <span class="checkbox-label"><strong>Open to a quick 15-minute feedback chat with the
+                      founder</strong></span>
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-lg glow-button mt-4" id="submitBtn">
+                <span id="submitBtnText">Request Beta Access</span>
+                <div class="spinner" id="submitSpinner" aria-hidden="true"></div>
+              </button>
+
+              <p class="form-privacy-note text-center mt-4">
+                🔒 <strong>100% Privacy Guarantee</strong>: Zero spam. We process applications strictly per GDPR & CCPA.
+                Read our <a href="javascript:void(0)" id="openPrivacyModal" class="privacy-link">Privacy Policy</a>.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="section faq-section" id="faq">
+      <div class="container container-narrow">
+        <div class="section-header text-center">
+          <span class="section-tag">FAQ</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-accordion" id="faqAccordion">
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>How does Qbonic guarantee 100% data privacy?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>
+                Qbonic runs entirely inside your web browser. When you open a CSV or Excel file, raw data is parsed
+                directly inside your device's RAM. Zero data is ever sent to remote servers or third-party cloud
+                databases.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>What file formats and row limits are supported?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>
+                Qbonic supports <strong>Google Sheets</strong>, <code>.csv</code>, <code>.tsv</code>, and
+                <code>.xlsx</code> files. The engine processes up to <strong>30,000 rows</strong> per file directly in
+                browser memory.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Does Qbonic work offline?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>
+                Yes! Because all computation occurs locally in the browser DOM, Qbonic runs completely offline or in
+                restricted corporate network environments.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>How much will Qbonic cost?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>
+                Exact pricing will be disclosed at launch in 2–3 weeks. Rest assured, it will be extremely
+                pocket-friendly with both flexible <strong>monthly</strong> and cost-saving <strong>annual
+                  (yearly)</strong> plans available.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>When will beta testing invitations roll out?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>
+                Beta invitations will roll out in waves over the next 2 weeks to accepted applicants.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT US SECTION (Founder Spotlight) -->
+    <section class="section about-section" id="about">
+      <div class="container container-narrow">
+        <div class="section-header text-center">
+          <span class="section-tag">OUR MISSION</span>
+          <h2 class="section-title">Built To Eliminate Reporting Complexity For Spreadsheets</h2>
+        </div>
+
+        <div class="about-founder-spotlight glow-border">
+          <div class="spotlight-header-badge">
+            <span class="badge-dot"></span> 👋 A NOTE FROM THE FOUNDER
+          </div>
+          <div class="quote-mark-watermark" aria-hidden="true">“</div>
+
+          <p class="founder-quote-text">
+            Building interactive reporting for Google Sheets & CSVs takes way too much time, manual effort, and setup complexity. I built Qbonic to eliminate that struggle — turning spreadsheet rows into instant, multi-dimensional reporting cubes in minutes, right inside your browser.
+          </p>
+
+          <div class="founder-signature-block">
+            <img src="shailesh-avatar.jpg" alt="Shailesh - Founder of Qbonic" class="founder-avatar-img"
+              onError="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="founder-avatar-large" style="display:none;">SG</div>
+            <div class="founder-info-text">
+              <div class="founder-name-row">
+                <h4 class="founder-author-name">Shailesh</h4>
+                <a href="https://www.linkedin.com/in/gshailesh/" target="_blank" rel="noopener noreferrer"
+                  class="linkedin-badge-link" title="View LinkedIn Profile">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="#0A66C2">
+                    <path
+                      d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                  </svg>
+                  <span>LinkedIn</span>
+                </a>
+              </div>
+              <p class="founder-author-role">Founder, Qbonic</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT US SECTION -->
+    <section class="section contact-section" id="contact">
+      <div class="container container-narrow">
+        <div class="section-header text-center">
+          <span class="section-tag">GET IN TOUCH</span>
+          <h2 class="section-title">Contact Us</h2>
+          <p class="section-description">
+            Have questions about Beta access, custom Google Sheet integrations, or enterprise volume limits? Reach out
+            directly to our team.
+          </p>
+        </div>
+
+        <div class="contact-card-wrapper glow-border">
+          <div class="contact-card-body">
+            <div class="contact-methods-grid">
+              <div class="contact-method-item">
+                <div class="method-icon-box">📧</div>
+                <div class="method-details">
+                  <span class="method-label">Official Email</span>
+                  <a href="mailto:admin@qbonic.com" class="method-value">admin@qbonic.com</a>
+                  <span class="method-sub">Click to send an instant email</span>
+                </div>
+              </div>
+
+              <div class="contact-method-item">
+                <div class="method-icon-box">🏢</div>
+                <div class="method-details">
+                  <span class="method-label">Operating Entity</span>
+                  <span class="method-value">VitanuGenAI Technology Pvt Ltd, India 🇮🇳</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-footer-note text-center mt-4">
+              <span class="cfg-hint">❤️ Crafted with love in India 🇮🇳 • We reply to all inquiries!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SUCCESS MODAL -->
+  <dialog class="modal-dialog" id="betaModal">
+    <div class="modal-content glow-border">
+      <button class="modal-close" id="modalClose" aria-label="Close dialog">&times;</button>
+
+      <div class="pass-card">
+        <div class="pass-header">
+          <div class="pass-badge">🔒 BETA APPLICATION RECEIVED</div>
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+        </div>
+
+        <div class="pass-body">
+          <h3 class="pass-title">Application Submitted!</h3>
+          <p class="pass-msg">
+            Thank you, <strong id="passUserName">Analyst</strong>! Your beta application has been recorded.
+          </p>
+
+          <div class="ticket-box">
+            <span class="ticket-label">APPLICATION REFERENCE CODE</span>
+            <div class="ticket-code-row">
+              <code id="ticketCode">QB-BETA-2026-X892K</code>
+              <button class="btn btn-xs btn-secondary" id="copyCodeBtn">Copy</button>
+            </div>
+            <span class="ticket-sub" id="passEmailSub">Sent confirmation to email</span>
+          </div>
+
+          <div class="pass-perks">
+            <div class="perk-item">✓ Beta application recorded</div>
+            <div class="perk-item">✓ Priority rollout notification</div>
+            <div class="perk-item">✓ 100% Client-side zero tracking guarantee</div>
+          </div>
+        </div>
+
+        <div class="pass-footer">
+          <button class="btn btn-primary btn-block" id="modalDoneBtn">Done</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- PRIVACY POLICY & GDPR MODAL -->
+  <dialog class="modal-dialog" id="privacyModal">
+    <div class="modal-content glow-border privacy-modal-content">
+      <button class="modal-close" id="privacyModalClose" aria-label="Close dialog">&times;</button>
+      <div class="privacy-body">
+        <h3 class="privacy-modal-title">Privacy Policy & Data Protection</h3>
+        <p class="privacy-update-date"><strong>Effective Date:</strong> August 18, 2026 | <strong>Entity:</strong>
+          VitanuGenAI Technology Pvt Ltd</p>
+
+        <h4 class="privacy-subhead">1. 100% In-Browser Data Processing Guarantee</h4>
+        <p>Qbonic processes all user CSVs, Excel files, and Google Sheets <strong>100% locally in your device's web
+            browser memory (RAM)</strong>. Raw spreadsheet data is never uploaded, stored, or transmitted to any cloud
+          servers or third-party databases.</p>
+
+        <h4 class="privacy-subhead">2. Personal Data We Collect (Beta Form Submissions)</h4>
+        <p>When you apply for Beta Access, we collect your Full Name, Work Email, Role, Country, Use Case, and Primary
+          Frustration. This data is collected solely to manage early invitations and communicate beta rollout updates.
+        </p>
+
+        <h4 class="privacy-subhead">3. EU GDPR & US CCPA Rights</h4>
+        <p>Under EU GDPR and California CCPA/CPRA, you have the right to request access to, rectification of, or
+          deletion of your email data ("Right to be Forgotten") at any time. To exercise these rights, contact us at
+          <code>admin@qbonic.com</code>.
+        </p>
+
+        <h4 class="privacy-subhead">4. Zero Third-Party Selling & Zero Tracking Cookies</h4>
+        <p>We do not sell, rent, trade, or monetize your personal information. We do not use third-party cross-site
+          tracking cookies.</p>
+
+        <div class="pass-footer mt-4">
+          <button class="btn btn-primary btn-block" id="privacyDoneBtn">Close Privacy Policy</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-top-row">
+        <div class="footer-brand">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <p class="footer-tagline">Interactive Data Cubes for Sheets</p>
+        </div>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#problem">The Problem</a>
+          <a href="#demo">Live Demo</a>
+          <a href="#beta">Paid Beta</a>
+          <a href="#faq">FAQ</a>
+          <a href="#about">About Us</a>
+          <a href="#contact">Contact Us</a>
+          <a href="javascript:void(0)" id="footerPrivacyLink">Privacy Policy</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright-text">&copy; 2026 Qbonic. All rights reserved.</p>
+        <p class="company-attribution">Crafted with ❤️ in India by <strong>VitanuGenAI Technology Pvt Ltd 🇮🇳</strong></p>
+        <button class="back-to-top" id="backToTop" aria-label="Scroll to top">↑ Back to Top</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
