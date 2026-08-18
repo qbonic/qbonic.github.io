@@ -502,4 +502,67 @@ document.addEventListener('DOMContentLoaded', () => {
   if (privacyModalClose) privacyModalClose.addEventListener('click', hidePrivacyModal);
   if (privacyDoneBtn) privacyDoneBtn.addEventListener('click', hidePrivacyModal);
 
+  /* --------------------------------------------------------------------------
+     10. GA4 FUNNEL & DROP-OFF ANALYTICS TRACKING
+     -------------------------------------------------------------------------- */
+  // 1. Track Simulator Section View when scrolled into viewport
+  const simElem = document.getElementById('demo');
+  if (simElem) {
+    let simTracked = false;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !simTracked) {
+          simTracked = true;
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'view_simulator', {
+              event_category: 'engagement',
+              event_label: 'Executive Simulator Viewed'
+            });
+          }
+        }
+      });
+    }, { threshold: 0.4 });
+    observer.observe(simElem);
+  }
+
+  // 2. Track Form Start & Drop-off / Abandonment
+  let formStarted = false;
+  let formSubmitted = false;
+
+  if (betaForm) {
+    betaForm.addEventListener('focusin', () => {
+      if (!formStarted) {
+        formStarted = true;
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'form_start', {
+            form_id: 'betaForm',
+            event_category: 'conversion'
+          });
+        }
+      }
+    });
+
+    betaForm.addEventListener('submit', () => {
+      formSubmitted = true;
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          form_id: 'betaForm',
+          event_category: 'conversion'
+        });
+      }
+    });
+  }
+
+  // 3. Track Form Abandonment when user leaves without submitting
+  window.addEventListener('beforeunload', () => {
+    if (formStarted && !formSubmitted) {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'form_abandoned', {
+          form_id: 'betaForm',
+          event_category: 'conversion'
+        });
+      }
+    }
+  });
+
 });
