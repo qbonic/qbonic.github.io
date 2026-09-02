@@ -489,6 +489,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function startSimAutoTimer() {
+    if (simAutoTimer) clearInterval(simAutoTimer);
+    simAutoTimer = setInterval(() => {
+      const nextView = currentSimView === 'dashboard' ? 'config' : 'dashboard';
+      switchSimView(nextView);
+    }, 15000);
+  }
+
+  function resetSimAutoTimer() {
+    startSimAutoTimer();
+  }
+
   dotNavs.forEach(dot => {
     dot.addEventListener('click', () => {
       const viewMode = dot.dataset.simView;
@@ -564,5 +576,59 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(() => {
       // Graceful offline fallback already applied
     });
+
+  /* --------------------------------------------------------------------------
+     VIDEO DEMO MODAL CONTROLLER
+     -------------------------------------------------------------------------- */
+  const videoModal = document.getElementById('videoModal');
+  const videoModalBackdrop = document.getElementById('videoModalBackdrop');
+  const closeVideoModalBtn = document.getElementById('closeVideoModal');
+  const youtubePlayer = document.getElementById('youtubePlayer');
+  const videoTriggers = document.querySelectorAll('.open-video-modal');
+
+  function openVideoModal(e) {
+    if (e) e.preventDefault();
+    if (!videoModal || !youtubePlayer) return;
+
+    const src = youtubePlayer.getAttribute('data-src');
+    if (src) {
+      youtubePlayer.src = src;
+    }
+
+    videoModal.classList.add('active');
+    videoModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideoModal() {
+    if (!videoModal || !youtubePlayer) return;
+
+    videoModal.classList.remove('active');
+    videoModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    // Stop video playback by clearing src
+    youtubePlayer.src = '';
+  }
+
+  if (videoTriggers && videoTriggers.length > 0) {
+    videoTriggers.forEach(trigger => {
+      trigger.addEventListener('click', openVideoModal);
+    });
+  }
+
+  if (closeVideoModalBtn) {
+    closeVideoModalBtn.addEventListener('click', closeVideoModal);
+  }
+
+  if (videoModalBackdrop) {
+    videoModalBackdrop.addEventListener('click', closeVideoModal);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoModal && videoModal.classList.contains('active')) {
+      closeVideoModal();
+    }
+  });
 
 });

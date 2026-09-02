@@ -168,7 +168,7 @@
 
       <nav class="nav-menu" id="navMenu">
         <a href="#problem" class="nav-link">The Problem</a>
-        <a href="#demo" class="nav-link">Live Demo</a>
+        <a href="#video-demo" class="nav-link open-video-modal" id="navWatchDemoBtn">Watch Demo ▶</a>
         <a href="pricing.html" class="nav-link">Pricing</a>
         <a href="#faq" class="nav-link">FAQ</a>
         <a href="#about" class="nav-link">About Us</a>
@@ -183,7 +183,7 @@
           </label>
           <span class="theme-switch-icon">☀️</span>
         </div>
-        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
+        <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
           <span class="burger-bar"></span>
           <span class="burger-bar"></span>
@@ -204,12 +204,12 @@
       </div>
       <nav class="drawer-nav">
         <a href="#problem" class="drawer-link">The Problem</a>
-        <a href="#demo" class="drawer-link">Live Demo</a>
+        <a href="#video-demo" class="drawer-link open-video-modal" id="drawerWatchDemoBtn">Watch Demo ▶</a>
         <a href="pricing.html" class="drawer-link">Pricing</a>
         <a href="#faq" class="drawer-link">FAQ</a>
         <a href="#about" class="drawer-link">About Us</a>
         <a href="#contact" class="drawer-link">Contact Us</a>
-        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="drawer-link btn btn-primary mt-4"
+        <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)" class="drawer-link btn btn-primary mt-4"
           id="drawerLoginBtn">Login</a>
       </nav>
     </div>
@@ -239,7 +239,9 @@
 
         <div class="hero-cta-group">
           <a href="#signup" class="btn btn-primary btn-lg glow-button">Request Beta Access</a>
-          <a href="#demo" class="btn btn-secondary btn-lg">Try Live Demo</a>
+          <button type="button" class="btn btn-secondary btn-lg open-video-modal" id="heroWatchDemoBtn">
+            <span style="margin-right: 6px;">▶</span> Watch Demo (40 sec)
+          </button>
         </div>
 
         <!-- Trust Stats Bar -->
@@ -338,6 +340,11 @@
             Explore the real Qbonic executive dashboard below — zero technical expertise, instant aggregation, and 100%
             in-browser privacy.
           </p>
+          <div style="margin-top: 1.25rem;">
+            <button type="button" class="btn btn-secondary btn-sm open-video-modal" id="simulatorWatchDemoBtn" style="border-radius: 9999px; padding: 0.5rem 1.25rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+              <span>▶</span> Watch 40-Sec Product Walkthrough
+            </button>
+          </div>
         </div>
 
         <div class="simulator-window glow-border">
@@ -1423,6 +1430,26 @@
       </div>
     </div>
   </footer>
+
+  <!-- Video Demo Lightbox Modal -->
+  <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Qbonic Product Demo Video">
+    <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+    <div class="video-modal-dialog">
+      <button type="button" class="video-modal-close" id="closeVideoModal" aria-label="Close video modal">&times;</button>
+      <div class="video-modal-content">
+        <div class="video-responsive-wrapper">
+          <iframe 
+            id="youtubePlayer" 
+            src="" 
+            data-src="https://www.youtube-nocookie.com/embed/ODs5cmz5Gsc?autoplay=1&rel=0&modestbranding=1" 
+            title="Qbonic Product Demo Walkthrough" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
