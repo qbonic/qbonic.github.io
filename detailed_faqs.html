@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security, Privacy & Technical Architecture FAQs — Qbonic</title>
+  <meta name="description" content="Comprehensive 54-point Security, Privacy, and Architecture FAQ for Qbonic: 100% In-browser processing, GDPR, CCPA, Groq AI metadata isolation, and Paddle payment security.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://qbonic.com/detailed_faqs.html">
+
+  <script>
+    (function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var urlTheme = urlParams.get('theme');
+      var savedTheme = urlTheme || localStorage.getItem('qbonic_theme');
+      var isLight = savedTheme === 'light' || savedTheme === 'qbonic-light';
+      var finalTheme = isLight ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', finalTheme);
+    })();
+
+    function redirectToLogin(e) {
+      if (e) e.preventDefault();
+      var docTheme = document.documentElement.getAttribute('data-theme');
+      var baseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? "http://localhost:5173/?auth=signin"
+        : "https://app.qbonic.com/?auth=signin";
+      window.location.href = baseUrl + "&theme=" + (docTheme === 'light' ? 'light' : 'dark');
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=11">
+
+  <style>
+    .faq-page-header {
+      padding-top: 130px;
+      padding-bottom: 30px;
+      text-align: center;
+    }
+    .faq-category-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 24px 0 36px;
+    }
+    .cat-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cat-btn.active, .cat-btn:hover {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+    [data-theme="dark"] .cat-btn.active, [data-theme="dark"] .cat-btn:hover {
+      background: var(--primary);
+      color: #080C14;
+      border-color: var(--primary);
+    }
+    .faq-category-section {
+      margin-bottom: 40px;
+    }
+    .faq-cat-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .print-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    @media print {
+      .site-header, .site-footer, .faq-category-nav, .print-actions, .ambient-glow {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .faq-content {
+        display: block !important;
+        max-height: none !important;
+        padding-top: 8px !important;
+      }
+      .faq-item {
+        break-inside: avoid;
+        border: 1px solid #ddd !important;
+        margin-bottom: 12px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Ambient Glow -->
+  <div class="ambient-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow bg-glow-2" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#logo_grad)" stroke="#38BDF8" stroke-width="1.5" stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="logo_grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38BDF8" />
+                <stop offset="1" stop-color="#6366F1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <span class="brand-tagline">Interactive Data Cubes for Sheets</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html#problem" class="nav-link">The Problem</a>
+        <a href="index.html#demo" class="nav-link">Live Demo</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="detailed_faqs.html" class="nav-link active" style="color: var(--primary); font-weight: 700;">Security & FAQs</a>
+        <a href="index.html#about" class="nav-link">About Us</a>
+        <a href="index.html#contact" class="nav-link">Contact Us</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="theme-switch-wrapper" title="Switch Theme">
+          <span class="theme-switch-icon">🌙</span>
+          <label class="theme-switch" for="themeToggle">
+            <input type="checkbox" id="themeToggle" aria-label="Toggle light or dark theme">
+            <span class="slider round"></span>
+          </label>
+          <span class="theme-switch-icon">☀️</span>
+        </div>
+        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <div class="brand-text-group">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <span class="brand-tagline">Interactive Dashboard for Sheets</span>
+        </div>
+        <button class="drawer-close" id="drawerClose">&times;</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="index.html#problem" class="drawer-link">The Problem</a>
+        <a href="index.html#demo" class="drawer-link">Live Demo</a>
+        <a href="pricing.html" class="drawer-link">Pricing</a>
+        <a href="detailed_faqs.html" class="drawer-link">Security & FAQs</a>
+        <a href="index.html#about" class="drawer-link">About Us</a>
+        <a href="index.html#contact" class="drawer-link">Contact Us</a>
+        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="drawer-link btn btn-primary mt-4" id="drawerLoginBtn">Login</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container container-narrow" style="padding-bottom: 80px;">
+    <!-- Page Header -->
+    <section class="faq-page-header">
+      <span class="section-tag" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">SECURITY, PRIVACY & ARCHITECTURE WHITEPAPER</span>
+      <h1 class="section-title" style="font-size: 2.5rem; margin-top: 10px;">Frequently Asked Questions & Technical Specifications</h1>
+      <p class="section-subtitle" style="max-width: 680px; margin: 10px auto 0;">
+        Detailed breakdown of Qbonic’s 100% in-browser memory model, Groq AI metadata isolation, GDPR/CCPA compliance, telemetry, and payment security.
+      </p>
+
+      <!-- Print Button -->
+      <div class="print-actions">
+        <button onclick="window.print()" class="btn btn-outline btn-sm font-bold" style="border-radius: 999px; gap: 8px;">
+          🖨️ Print / Save as PDF
+        </button>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="faq-category-nav">
+        <button class="cat-btn active" onclick="filterFaqCategory('all')">All Questions</button>
+        <button class="cat-btn" onclick="filterFaqCategory('cat1')">1. In-Browser Privacy</button>
+        <button class="cat-btn" onclick="filterFaqCategory('cat2')">2. AI & Groq Security</button>
+        <button class="cat-btn" onclick="filterFaqCategory('cat3')">3. GDPR & Compliance</button>
+        <button class="cat-btn" onclick="filterFaqCategory('cat4')">4. Product Telemetry</button>
+        <button class="cat-btn" onclick="filterFaqCategory('cat5')">5. Auth & Accounts</button>
+        <button class="cat-btn" onclick="filterFaqCategory('cat6')">6. Payments & Paddle</button>
+        <button class="cat-btn" onclick="filterFaqCategory('cat7')">7. Browser Storage</button>
+        <button class="cat-btn" onclick="filterFaqCategory('cat8')">8. Enterprise</button>
+      </div>
+    </section>
+
+    <!-- Category 1: In-Browser Privacy -->
+    <section class="faq-category-section" id="cat1">
+      <h2 class="faq-cat-title">🛡️ 1. Core Data Privacy & Zero-Server-Upload Architecture</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Where does my spreadsheet data go? Does Qbonic upload files to any server?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p><strong>100% in-browser processing.</strong> Raw CSV, TSV, and Excel data is parsed directly inside your device's local memory (RAM / Web Workers). Zero raw spreadsheet cell values or customer records are ever uploaded to remote servers or third-party cloud databases.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does Qbonic, its developers, or any backend server ever store or cache my sales data?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>No. We operate on a strict Zero-Data Architecture. We have no database tables or storage buckets capable of holding your spreadsheet rows.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How can I verify that my data never leaves my browser?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>You can open your browser Developer Tools (F12) &rarr; Network tab while loading files and pivoting data. You will observe zero file payloads or raw cell data uploaded over the network.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>When I connect a Google Sheet via URL, does Qbonic proxy it through a server?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>No. Your browser makes a direct client-side HTTPS fetch to Google's public CSV export endpoint. Qbonic's servers never touch the connection.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What happens to my data in memory when I close the browser tab?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>All in-memory parsed rows are immediately wiped and garbage-collected by your browser's JavaScript runtime engine.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Are any third-party CDNs or scripts able to read my in-memory dataset?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>No. Qbonic runs in an isolated client-side React scope. We do not load third-party ad trackers, tag managers, or invasive session-replay scripts.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Can Qbonic see the content of my pivot cubes, charts, or generated dashboard summaries?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>No. All aggregation sums, sparkline trends, and pivot table cells are rendered locally in your browser DOM.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 2: AI & Groq -->
+    <section class="faq-category-section" id="cat2">
+      <h2 class="faq-cat-title">🤖 2. AI Classification & Groq API Key Security</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does AI (Groq) see my actual customer rows, sales numbers, or private data?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p><strong>No.</strong> Groq AI only receives high-level column metadata (header names, inferred data types, distinct value counts, and up to 3 anonymized sample values) to suggest smart classifications and formulas. Your full dataset, customer tables, and financial records are never uploaded or shared with external AI servers.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Can I use Qbonic without creating a Groq AI account or entering an API key?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p><strong>Absolutely.</strong> Qbonic includes an intelligent built-in rule heuristics engine that works out of the box with zero API key or configuration required. Because spreadsheets vary across business domains, automated classifications (both rule-based and AI) serve as smart starting points—we recommend reviewing the interactive Configuration page to fine-tune column types, unit formats (Currency, %, Count), and custom KPI formulas for your exact use case.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Where is my Groq API Key stored?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Your Groq API key is stored exclusively in your browser's private `localStorage` (`qbonic_groq_api_key`). It is never transmitted to Qbonic servers or telemetry.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does Groq use my column headers to train foundational models?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Under Groq's API terms of service, data sent via API is processed for inference and is not used to train foundational AI models.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How can I delete or rotate my Groq API Key?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Navigate to Settings &rarr; AI Configuration and click "Remove Key". It is instantly purged from your browser storage.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 3: GDPR & Compliance -->
+    <section class="faq-category-section" id="cat3">
+      <h2 class="faq-cat-title">⚖️ 3. Regulatory & Legal Compliance (GDPR, CCPA, HIPAA)</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Is Qbonic compliant with GDPR (Europe) and CCPA (US)?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p><strong>Yes.</strong> Qbonic is engineered on strict <em>"Privacy-by-Design"</em> principles (GDPR Article 25). Because raw dataset rows never leave your computer, there is zero persistent cloud data retention and zero invasive third-party cross-site advertising cookies.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Can healthcare teams safely analyze clinical data on Qbonic under HIPAA?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Because processing occurs entirely on the user's local hardware without uploading Protected Health Information (PHI) to cloud servers, Qbonic supports secure local healthcare data analysis.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How does Qbonic handle GDPR "Right to be Forgotten" (Data Erasure)?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>You can request permanent account deletion by emailing `admin@qbonic.com`. All account metadata in Firestore is wiped within 30 days. No raw dataset rows exist to erase.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does Qbonic use third-party advertising cookies or cross-site tracking pixels?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>No. We do not use Meta Pixel, Google Ads remarketing pixels, or third-party behavioral advertising cookies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 4: Telemetry -->
+    <section class="faq-category-section" id="cat4">
+      <h2 class="faq-cat-title">📊 4. Product Usage Telemetry & Error Logging</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What telemetry does Qbonic collect?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>We collect lightweight milestone event logs: event name (e.g. `DATASET_LOADED`, `REPORT_SAVED`), pseudonymous `User_UID`, device type, browser, screen resolution, and unhandled error stack traces.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Why does Qbonic use a pseudonymous User_UID instead of email?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>In accordance with GDPR Article 25 (Privacy by Design), using pseudonymous business IDs (e.g., `SHP1000001` or guest session hash) prevents PII (email addresses) from proliferating into operational telemetry logs.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does product telemetry ever log cell values or financial numbers?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Strictly zero. Telemetry only captures high-level counts (e.g., row count tier `10K-30K`, total dimensions `4`). Cell values and financial amounts are never captured.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 5: Auth & Accounts -->
+    <section class="faq-category-section" id="cat5">
+      <h2 class="faq-cat-title">🔐 5. User Authentication & Cloud Sync</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What permissions does Qbonic request when I sign in with Google SSO?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Only basic profile identity (`email`, `name`, `photoURL`). Qbonic requests zero access to your Google Drive, Gmail, or Google Contacts.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Are my saved report configurations stored in the cloud or locally?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Saved report workspaces (column layouts, formulas, aliases) are stored locally in your browser's `localStorage` / `IndexedDB` for 100% privacy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 6: Payments & Paddle -->
+    <section class="faq-category-section" id="cat6">
+      <h2 class="faq-cat-title">💳 6. Payment Security, Billing & Merchant of Record</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How much does Qbonic cost, and can I cancel anytime?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>You can start with our Free Plan ($0) or upgrade to <strong>Pro with a <span data-bind="pro-trial-days">7</span>-Day Free Trial (<span data-bind="pro-price-monthly">$5.99</span>/month or <span data-bind="pro-price-yearly">$49</span>/year, saving <span data-bind="pro-discount">32%</span>)</strong> for <span data-bind="pro-max-rows">30,000+</span> rows, unlimited dimensions, and custom KPI formulas. View our full <a href="pricing.html" style="color: var(--primary); font-weight: 700; text-decoration: underline;">Pricing Page</a>. Powered by Paddle with instant 1-click self-serve cancellation.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does Qbonic store or process credit card numbers?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>No. All transactions are securely handled by Paddle (our Merchant of Record) using PCI-DSS Level 1 compliant tokenization. We never see or store your raw card details.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How does the 7-day free trial and cancellation work?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Your card is authorized at $0.00 today. You have full 7 days of Pro access. You can cancel anytime with 1 click before Day 7 to avoid any charges.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 7: Browser Storage -->
+    <section class="faq-category-section" id="cat7">
+      <h2 class="faq-cat-title">💾 7. Browser Storage, File Limits & Offline Mode</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What file formats and row limits are supported?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Connect Google Sheets, Zoho Sheets, or drag-and-drop <code>.csv</code>, <code>.tsv</code>, <code>.xlsx</code>, and <code>.xls</code> files. The engine processes up to <strong data-bind="free-max-rows">1,000 rows</strong> on the Free Plan and up to <strong data-bind="pro-max-rows">30,000+ rows</strong> on the Pro Plan directly in your browser's local memory.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does Qbonic work offline?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p><strong>Yes!</strong> All pivot cube aggregations, sparklines, tables, and multi-dimension cross-filters run 100% locally in your browser DOM without requiring an active internet connection. Background product telemetry requests fail silently when offline with zero interruption to your analysis.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What should I do on a shared or public computer?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>Simply use Incognito / Private Browsing mode, or click "Reset Saved Reports & Local Storage" from the Error Boundary / Settings before closing the browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 8: Enterprise -->
+    <section class="faq-category-section" id="cat8">
+      <h2 class="faq-cat-title">🏢 8. Enterprise Governance & Security</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Can I export or download data from Qbonic?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>In the current MVP release, Qbonic focuses exclusively on real-time interactive in-browser dashboard exploration, filtering, and metric calculation. File exports (such as downloading modified CSVs or PDF reports) are not currently supported; your source files remain untouched on your device, and saved dashboard views are stored privately in your local browser storage.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How do I report a security vulnerability?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <p>We maintain a responsible disclosure program. Please report any security findings to `security@qbonic.com` or `admin@qbonic.com`.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-top-row">
+        <div class="footer-brand">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <p class="footer-tagline">Interactive Data Cubes for Sheets</p>
+        </div>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="pricing.html">Pricing</a>
+          <a href="detailed_faqs.html" style="color: var(--primary); font-weight: 700;">Security & FAQs</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund.html">Refund Policy</a>
+          <a href="index.html#contact">Contact Us</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright-text">&copy; 2026 Qbonic. All rights reserved.</p>
+        <p class="company-attribution">Crafted with ❤️ in India by <strong>VitanuGenAI Technology Pvt Ltd 🇮🇳</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    function filterFaqCategory(catId) {
+      const catBtns = document.querySelectorAll('.cat-btn');
+      catBtns.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const sections = document.querySelectorAll('.faq-category-section');
+      sections.forEach(sec => {
+        if (catId === 'all' || sec.id === catId) {
+          sec.style.display = 'block';
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

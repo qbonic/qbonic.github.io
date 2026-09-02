@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Qbonic</title>
+  <meta name="description" content="Privacy Policy for Qbonic: 100% in-browser processing guarantee. GDPR, CCPA, PIPEDA, and India DPDP Act compliant privacy terms.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://qbonic.com/privacy.html">
+
+  <script>
+    (function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var urlTheme = urlParams.get('theme');
+      var savedTheme = urlTheme || localStorage.getItem('qbonic_theme');
+      var isLight = savedTheme === 'light' || savedTheme === 'qbonic-light';
+      var finalTheme = isLight ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', finalTheme);
+    })();
+
+    function redirectToLogin(e) {
+      if (e) e.preventDefault();
+      var docTheme = document.documentElement.getAttribute('data-theme');
+      var baseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? "http://localhost:5173/?auth=signin"
+        : "https://app.qbonic.com/?auth=signin";
+      window.location.href = baseUrl + "&theme=" + (docTheme === 'light' ? 'light' : 'dark');
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=10">
+</head>
+
+<body>
+
+  <!-- Background Ambient Glow -->
+  <div class="ambient-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow bg-glow-2" aria-hidden="true"></div>
+
+  <!-- Header matching website main layout -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#logo_grad)" stroke="#38BDF8" stroke-width="1.5"
+              stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="logo_grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38BDF8" />
+                <stop offset="1" stop-color="#6366F1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <span class="brand-tagline">Interactive Data Cubes for Sheets</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html#problem" class="nav-link">The Problem</a>
+        <a href="index.html#demo" class="nav-link">Live Demo</a>
+        <a href="index.html#beta" class="nav-link">Paid Beta</a>
+        <a href="index.html#faq" class="nav-link">FAQ</a>
+        <a href="index.html#about" class="nav-link">About Us</a>
+        <a href="index.html#contact" class="nav-link">Contact Us</a>
+      </nav>
+      <div class="header-actions">
+        <div class="theme-switch-wrapper" title="Switch Theme">
+          <span class="theme-switch-icon">🌙</span>
+          <label class="theme-switch" for="themeToggle">
+            <input type="checkbox" id="themeToggle" aria-label="Toggle light or dark theme">
+            <span class="slider round"></span>
+          </label>
+          <span class="theme-switch-icon">☀️</span>
+        </div>
+        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <div class="brand-text-group">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <span class="brand-tagline">Interactive Dashboard for Sheets</span>
+        </div>
+        <button class="drawer-close" id="drawerClose">&times;</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="index.html#problem" class="drawer-link">The Problem</a>
+        <a href="index.html#demo" class="drawer-link">Live Demo</a>
+        <a href="index.html#beta" class="drawer-link">Paid Beta</a>
+        <a href="index.html#faq" class="drawer-link">FAQ</a>
+        <a href="index.html#about" class="drawer-link">About Us</a>
+        <a href="index.html#contact" class="drawer-link">Contact Us</a>
+        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="drawer-link btn btn-primary mt-4" id="drawerLoginBtn">Login</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="legal-page-container container container-narrow" style="padding-top: 130px; padding-bottom: 80px;">
+    <div class="legal-header" style="margin-bottom: 30px;">
+      <span class="section-tag" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">PRIVACY & TRUST</span>
+      <h1 class="section-title" style="font-size: 2.5rem; margin-top: 8px;">Privacy Policy</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 8px;">
+        <strong>Data Controller:</strong> VitanuGenAI Technology Pvt Ltd, India • <strong>Version:</strong> 2026-v2 (Global Compliance)
+      </p>
+    </div>
+
+    <div id="legal-body" class="legal-content-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 36px; line-height: 1.8; color: var(--text-color); box-shadow: var(--card-shadow, 0 10px 30px rgba(0,0,0,0.2));">
+      <p style="color: var(--text-muted);">Loading privacy.md...</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-top-row">
+        <div class="footer-brand">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <p class="footer-tagline">Interactive Data Cubes for Sheets</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html" style="color: var(--primary-color); font-weight: 700;">Privacy Policy</a>
+          <a href="refund.html">Refund Policy</a>
+          <a href="index.html#faq">FAQ</a>
+          <a href="index.html#contact">Contact Us</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright-text">&copy; 2026 Qbonic. All rights reserved.</p>
+        <p class="company-attribution">Crafted with ❤️ in India by <strong>VitanuGenAI Technology Pvt Ltd 🇮🇳</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // Client-side markdown renderer for single-source legal files
+    fetch('legal/privacy.md')
+      .then(res => res.text())
+      .then(md => {
+        var html = '';
+        var lines = md.split('\n');
+        var inList = false;
+
+        lines.forEach(function(line) {
+          var trimmed = line.trim();
+          if (trimmed.startsWith('# ')) {
+            html += '<h1 style="font-size: 1.6rem; font-weight: 800; margin: 24px 0 12px; color: var(--text-color); border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">' + trimmed.replace('# ', '') + '</h1>';
+          } else if (trimmed.startsWith('## ')) {
+            if (inList) { html += '</ul>'; inList = false; }
+            html += '<h2 style="font-size: 1.25rem; font-weight: 700; color: #10b981; margin: 28px 0 10px;">' + trimmed.replace('## ', '') + '</h2>';
+          } else if (trimmed.startsWith('### ')) {
+            if (inList) { html += '</ul>'; inList = false; }
+            html += '<h3 style="font-size: 1.05rem; font-weight: 600; color: var(--text-color); margin: 18px 0 8px;">' + trimmed.replace('### ', '') + '</h3>';
+          } else if (trimmed === '---') {
+            if (inList) { html += '</ul>'; inList = false; }
+            html += '<hr style="border: none; border-top: 1px solid var(--border-color); margin: 24px 0;">';
+          } else if (trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
+            if (!inList) { html += '<ul style="margin: 8px 0 16px 24px; list-style-type: disc;">'; inList = true; }
+            var item = trimmed.replace(/^[-•]\s*/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`(.*?)`/g, '<code style="background: rgba(125,125,125,0.15); padding: 2px 6px; border-radius: 4px; font-family: monospace;">$1</code>');
+            html += '<li style="margin-bottom: 6px;">' + item + '</li>';
+          } else if (/^\d+\.\s/.test(trimmed)) {
+            if (inList) { html += '</ul>'; inList = false; }
+            var item = trimmed.replace(/^\d+\.\s*/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`(.*?)`/g, '<code style="background: rgba(125,125,125,0.15); padding: 2px 6px; border-radius: 4px; font-family: monospace;">$1</code>');
+            html += '<p style="margin: 6px 0 6px 12px;">' + item + '</p>';
+          } else if (trimmed === '') {
+            if (inList) { html += '</ul>'; inList = false; }
+            html += '<div style="height: 8px;"></div>';
+          } else {
+            if (inList) { html += '</ul>'; inList = false; }
+            var parsed = trimmed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`(.*?)`/g, '<code style="background: rgba(125,125,125,0.15); padding: 2px 6px; border-radius: 4px; font-family: monospace;">$1</code>');
+            html += '<p style="margin-bottom: 12px; font-size: 0.95rem;">' + parsed + '</p>';
+          }
+        });
+        if (inList) { html += '</ul>'; }
+        document.getElementById('legal-body').innerHTML = html;
+      })
+      .catch(err => {
+        console.error('Error loading markdown:', err);
+      });
+  </script>
+</body>
+</html>

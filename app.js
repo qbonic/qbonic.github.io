@@ -5,10 +5,58 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Global Config: Set Google Apps Script Web App URL to append form submissions directly to Google Sheet
-  window.QBONIC_CONFIG = window.QBONIC_CONFIG || {
-    googleSheetScriptUrl: "https://script.google.com/macros/s/AKfycbwun8Q74rTpGmV4e_tVZGJP-_u6oAFcY-Rx_OIvr01FNV0wVg83bwZdsqACp8-TlIbPCA/exec" // Paste your deployed Google Apps Script Web App URL here
-  };
+  /* --------------------------------------------------------------------------
+     0. LOGIN BUTTON REDIRECT WITH DYNAMIC THEME VARIABLE
+     -------------------------------------------------------------------------- */
+  const navLoginBtn = document.getElementById('navLoginBtn');
+  const drawerLoginBtn = document.getElementById('drawerLoginBtn');
+
+  function handleLoginRedirect(e) {
+    if (e) e.preventDefault();
+
+    // 1. Resolve current website theme
+    const docTheme = document.documentElement.getAttribute('data-theme');
+    const themeToggle = document.getElementById('themeToggle');
+    let currentTheme = 'dark'; // Default fallback
+
+    if (docTheme === 'light' || docTheme === 'qbonic-light') {
+      currentTheme = 'light';
+    } else if (docTheme === 'dark' || docTheme === 'qbonic-dark') {
+      currentTheme = 'dark';
+    } else if (themeToggle) {
+      currentTheme = themeToggle.checked ? 'light' : 'dark';
+    } else {
+      const saved = localStorage.getItem('qbonic_theme');
+      if (saved === 'light' || saved === 'qbonic-light') currentTheme = 'light';
+    }
+
+    // 2. Build target URL passing theme parameter dynamically
+    const baseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+      ? "http://localhost:5173/?auth=signin"
+      : "https://app.qbonic.com/?auth=signin";
+
+    const targetUrl = `${baseUrl}&theme=${currentTheme}`;
+    
+    // 3. Perform immediate navigation
+    window.location.href = targetUrl;
+  }
+
+  if (navLoginBtn) navLoginBtn.addEventListener('click', handleLoginRedirect);
+  if (drawerLoginBtn) drawerLoginBtn.addEventListener('click', handleLoginRedirect);
+
+  /* Header scroll state handler */
+  const siteHeader = document.getElementById('siteHeader');
+  if (siteHeader) {
+    const handleScroll = () => {
+      if (window.scrollY > 15) {
+        siteHeader.classList.add('scrolled');
+      } else {
+        siteHeader.classList.remove('scrolled');
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  }
 
   /* --------------------------------------------------------------------------
      1. SAMPLE DATASETS FOR IN-BROWSER SIMULATOR
@@ -59,346 +107,338 @@ document.addEventListener('DOMContentLoaded', () => {
         { label: "Week 2", v1: 14500, v2: 4.0 },
         { label: "Week 3", v1: 13800, v2: 4.1 },
         { label: "Week 4", v1: 17100, v2: 4.4 },
-        { label: "Week 5", v1: 21000, v2: 4.28 }
+        { label: "Week 5", v1: 11000, v2: 4.6 }
       ]
     }
   };
 
+  /* --------------------------------------------------------------------------
+     2. RENDER SIMULATOR DOM ELEMENTS
+     -------------------------------------------------------------------------- */
+  const simMetric1Val = document.getElementById('simMetric1Val');
+  const simMetric1Trend = document.getElementById('simMetric1Trend');
+  const simMetric1Label = document.getElementById('simMetric1Label');
+
+  const simMetric2Val = document.getElementById('simMetric2Val');
+  const simMetric2Trend = document.getElementById('simMetric2Trend');
+  const simMetric2Label = document.getElementById('simMetric2Label');
+
+  const simMetric3Val = document.getElementById('simMetric3Val');
+  const simMetric3Trend = document.getElementById('simMetric3Trend');
+  const simMetric3Label = document.getElementById('simMetric3Label');
+
+  const simMetric4Val = document.getElementById('simMetric4Val');
+  const simMetric4Trend = document.getElementById('simMetric4Trend');
+  const simMetric4Label = document.getElementById('simMetric4Label');
+
+  const simFileStatus = document.getElementById('simFileStatus');
+  const simChartTitle = document.getElementById('simChartTitle');
+  const simSparklineCanvas = document.getElementById('simSparklineCanvas');
+  const datasetSelectBtns = document.querySelectorAll('.dataset-select-btn');
+
   let currentDatasetKey = 'ecom';
 
-  /* --------------------------------------------------------------------------
-     2. RENDER EXECUTIVE DASHBOARD SPARKLINE CHARTS & INTERACTIVE HOVER SYNC
-     -------------------------------------------------------------------------- */
-  function drawSparklineSvg(svgId, points, color) {
-    const svg = document.getElementById(svgId);
-    if (!svg) return;
-    const width = 350;
-    const height = 40;
-    const padding = 6;
+  function updateSimulatorView(datasetKey) {
+    const data = DATASETS[datasetKey];
+    if (!data) return;
 
-    const minV = Math.min(...points);
-    const maxV = Math.max(...points);
-    const range = maxV - minV || 1;
-    const stepX = (width - padding * 2) / (points.length - 1);
+    currentDatasetKey = datasetKey;
 
-    const coords = points.map((val, i) => ({
-      x: padding + i * stepX,
-      y: height - padding - ((val - minV) / range) * (height - padding * 2)
-    }));
-
-    let pathD = '';
-    let areaD = `M ${padding} ${height - padding} `;
-
-    coords.forEach((pt, i) => {
-      if (i === 0) {
-        pathD += `M ${pt.x} ${pt.y} `;
-        areaD += `L ${pt.x} ${pt.y} `;
+    // Update Pill Buttons Active State
+    datasetSelectBtns.forEach(btn => {
+      if (btn.dataset.dataset === datasetKey) {
+        btn.classList.add('active');
       } else {
-        const prev = coords[i - 1];
-        const cp1x = prev.x + stepX / 2;
-        const cp1y = prev.y;
-        const cp2x = pt.x - stepX / 2;
-        const cp2y = pt.y;
-        pathD += `C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${pt.x} ${pt.y} `;
-        areaD += `C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${pt.x} ${pt.y} `;
+        btn.classList.remove('active');
       }
     });
 
-    areaD += `L ${coords[coords.length - 1].x} ${height - padding} Z`;
+    // Update Text Content with subtle fade animation
+    if (simFileStatus) simFileStatus.textContent = data.fileStatus;
 
-    const gradId = `sparkGrad_${svgId}`;
-    let html = `
-      <defs>
-        <linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="${color}" stop-opacity="0.35"/>
-          <stop offset="100%" stop-color="${color}" stop-opacity="0.0"/>
-        </linearGradient>
-      </defs>
-      <path d="${areaD}" fill="url(#${gradId})" />
-      <path d="${pathD}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linecap="round"/>
-    `;
+    if (simMetric1Val) simMetric1Val.textContent = data.m1.val;
+    if (simMetric1Trend) simMetric1Trend.textContent = data.m1.trend;
+    if (simMetric1Label) simMetric1Label.textContent = data.m1.label;
 
-    coords.forEach((pt, i) => {
-      html += `<circle cx="${pt.x}" cy="${pt.y}" r="3" fill="var(--bg-surface)" stroke="${color}" stroke-width="2" class="spark-node" />`;
+    if (simMetric2Val) simMetric2Val.textContent = data.m2.val;
+    if (simMetric2Trend) simMetric2Trend.textContent = data.m2.trend;
+    if (simMetric2Label) simMetric2Label.textContent = data.m2.label;
+
+    if (simMetric3Val) simMetric3Val.textContent = data.m3.val;
+    if (simMetric3Trend) simMetric3Trend.textContent = data.m3.trend;
+    if (simMetric3Label) simMetric3Label.textContent = data.m3.label;
+
+    if (simMetric4Val) simMetric4Val.textContent = data.m4.val;
+    if (simMetric4Trend) simMetric4Trend.textContent = data.m4.trend;
+    if (simMetric4Label) simMetric4Label.textContent = data.m4.label;
+
+    if (simChartTitle) simChartTitle.textContent = data.chartTitle;
+
+    // Render Canvas Sparkline
+    drawSparkline(data.points);
+  }
+
+  datasetSelectBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const datasetKey = btn.dataset.dataset;
+      updateSimulatorView(datasetKey);
+    });
+  });
+
+  /* --------------------------------------------------------------------------
+     3. HIGH PERFORMANCE HTML5 CANVAS SPARKLINE GRAPH RENDERER
+     -------------------------------------------------------------------------- */
+  function drawSparkline(points) {
+    if (!simSparklineCanvas) return;
+    const ctx = simSparklineCanvas.getContext('2d');
+    if (!ctx) return;
+
+    // Handle High-DPI / Retina Displays
+    const dpr = window.devicePixelRatio || 1;
+    const rect = simSparklineCanvas.getBoundingClientRect();
+    
+    // Set actual canvas resolution
+    simSparklineCanvas.width = rect.width * dpr;
+    simSparklineCanvas.height = rect.height * dpr;
+
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    if (!points || points.length === 0) return;
+
+    const width = rect.width;
+    const height = rect.height;
+    const padding = 20;
+
+    const maxV1 = Math.max(...points.map(p => p.v1));
+    const minV1 = Math.min(...points.map(p => p.v1));
+
+    const stepX = (width - padding * 2) / (points.length - 1);
+
+    // Compute Canvas Coordinates
+    const coords = points.map((p, i) => {
+      const x = padding + i * stepX;
+      const normalizedY = (p.v1 - minV1) / ((maxV1 - minV1) || 1);
+      const y = height - padding - (normalizedY * (height - padding * 2));
+      return { x, y, label: p.label, val: p.v1 };
     });
 
-    svg.innerHTML = html;
+    // Is Dark Mode Active?
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+
+    // 1. Fill Area Gradient
+    const gradient = ctx.createLinearGradient(0, 0, 0, height);
+    if (isDark) {
+      gradient.addColorStop(0, 'rgba(56, 189, 248, 0.35)');
+      gradient.addColorStop(1, 'rgba(56, 189, 248, 0.00)');
+    } else {
+      gradient.addColorStop(0, 'rgba(2, 132, 199, 0.25)');
+      gradient.addColorStop(1, 'rgba(2, 132, 199, 0.00)');
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(coords[0].x, coords[0].y);
+    coords.forEach(c => ctx.lineTo(c.x, c.y));
+    ctx.lineTo(coords[coords.length - 1].x, height);
+    ctx.lineTo(coords[0].x, height);
+    ctx.closePath();
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
+    // 2. Stroke Smooth Line
+    ctx.beginPath();
+    ctx.moveTo(coords[0].x, coords[0].y);
+    coords.forEach(c => ctx.lineTo(c.x, c.y));
+    ctx.strokeStyle = isDark ? '#38bdf8' : '#0284c7';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+
+    // 3. Draw Data Points (Dots)
+    coords.forEach((c) => {
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = isDark ? '#0f172a' : '#ffffff';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = isDark ? '#38bdf8' : '#0284c7';
+      ctx.stroke();
+    });
   }
 
   function renderAllExecutiveSparklines() {
-    drawSparklineSvg('sparkSvgSales', [1.2, 1.98, 1.6, 2.1, 2.45, 2.6], '#38BDF8');
-    drawSparklineSvg('sparkSvgShipping', [180, 214.43, 195, 230, 250, 270], '#34D399');
-    drawSparklineSvg('sparkSvgProfit', [190, 225.23, 210, 240, 260, 290], '#F87171');
-    drawSparklineSvg('sparkSvgQuantity', [22, 27.75, 25, 29, 31, 33], '#FB923C');
-    drawSparklineSvg('sparkSvgDiscount', [1.4, 1.11, 1.3, 1.25, 1.15, 1.05], '#818CF8');
-    drawSparklineSvg('sparkSvgRevenue', [1.35, 2.19, 1.8, 2.3, 2.65, 2.8], '#10B981');
-    drawSparklineSvg('sparkSvgMargin', [10.5, 11.4, 11.0, 11.8, 12.1, 12.5], '#C084FC');
-    drawSparklineSvg('sparkSvgAov', [230, 250.87, 242, 258, 264, 272], '#22D3EE');
+    updateSimulatorView(currentDatasetKey);
   }
 
-  // Interactive Hover Sync Popup for Sparkline Trend Column
-  const sparklineCol = document.getElementById('sparklineCol');
-  const syncPopup = document.getElementById('syncTooltipPopup');
+  // Initial draw
+  updateSimulatorView('ecom');
 
-  if (sparklineCol && syncPopup) {
-    sparklineCol.addEventListener('mousemove', (e) => {
-      const rect = sparklineCol.getBoundingClientRect();
-      const relativeY = e.clientY - rect.top;
-
-      syncPopup.style.opacity = '1';
-      syncPopup.style.top = `${Math.max(10, Math.min(relativeY - 40, rect.height - 200))}px`;
-    });
-
-    sparklineCol.addEventListener('mouseleave', () => {
-      syncPopup.style.opacity = '0.95';
-    });
-  }
-
-  // Render sparklines initially
-  renderAllExecutiveSparklines();
-
+  // Redraw on Window Resize
+  window.addEventListener('resize', () => {
+    drawSparkline(DATASETS[currentDatasetKey].points);
+  });
 
   /* --------------------------------------------------------------------------
-     3. BETA SIGN-UP FORM VALIDATION & MODAL SUBMISSION
+     4. BETA ACCESS FORM VALIDATION & GOOGLE SHEETS API INTEGRATION
      -------------------------------------------------------------------------- */
-  const betaForm = document.getElementById('betaForm');
-  const betaModal = document.getElementById('betaModal');
-  const modalClose = document.getElementById('modalClose');
-  const modalDoneBtn = document.getElementById('modalDoneBtn');
+  const betaForm = document.getElementById('betaSignupForm');
+  const betaFormFeedback = document.getElementById('betaFormFeedback');
 
   if (betaForm) {
-    betaForm.addEventListener('submit', (e) => {
+    betaForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const fullName = document.getElementById('fullName');
-      const workEmail = document.getElementById('workEmail');
-      const userRole = document.getElementById('userRole');
-      const userCountry = document.getElementById('userCountry');
-      const dataTool = document.getElementById('dataTool');
-      const primaryFrustration = document.getElementById('primaryFrustration');
-      const founderInterviewOptIn = document.getElementById('founderInterviewOptIn');
+      const nameInput = document.getElementById('fullName');
+      const emailInput = document.getElementById('workEmail');
+      const companyInput = document.getElementById('companyName');
+      const submitBtn = betaForm.querySelector('button[type="submit"]');
 
-      let isValid = true;
+      const name = nameInput ? nameInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const company = companyInput ? companyInput.value.trim() : '';
 
-      // Full Name Validation
-      if (!fullName.value.trim()) {
-        fullName.closest('.form-group').classList.add('has-error');
-        isValid = false;
-      } else {
-        fullName.closest('.form-group').classList.remove('has-error');
+      if (!name || !email) {
+        showFormFeedback(betaFormFeedback, 'Please complete all required fields.', 'error');
+        return;
       }
 
-      // Email Format Regex Validation
+      // Email Format Check
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!workEmail.value.trim() || !emailRegex.test(workEmail.value.trim())) {
-        workEmail.closest('.form-group').classList.add('has-error');
-        isValid = false;
-      } else {
-        workEmail.closest('.form-group').classList.remove('has-error');
+      if (!emailRegex.test(email)) {
+        showFormFeedback(betaFormFeedback, 'Please enter a valid work email address.', 'error');
+        return;
       }
 
-      // Role Selection Validation
-      if (!userRole.value) {
-        userRole.closest('.form-group').classList.add('has-error');
-        isValid = false;
-      } else {
-        userRole.closest('.form-group').classList.remove('has-error');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting Request...';
       }
 
-      // Country Selection Validation
-      if (userCountry && !userCountry.value) {
-        userCountry.closest('.form-group').classList.add('has-error');
-        isValid = false;
-      } else if (userCountry) {
-        userCountry.closest('.form-group').classList.remove('has-error');
-      }
+      try {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('company', company);
+        formData.append('timestamp', new Date().toISOString());
 
-      // Frustration Selection Validation
-      if (primaryFrustration && !primaryFrustration.value) {
-        primaryFrustration.closest('.form-group').classList.add('has-error');
-        isValid = false;
-      } else if (primaryFrustration) {
-        primaryFrustration.closest('.form-group').classList.remove('has-error');
-      }
-
-      if (!isValid) return;
-
-      // Trigger Submission Loading State
-      const submitBtn = document.getElementById('submitBtn');
-      const submitBtnText = document.getElementById('submitBtnText');
-      const submitSpinner = document.getElementById('submitSpinner');
-
-      submitBtn.disabled = true;
-      submitBtnText.innerText = "Generating Access Ticket...";
-      submitSpinner.style.display = "inline-block";
-
-      setTimeout(() => {
-        // Reset Button
-        submitBtn.disabled = false;
-        submitBtnText.innerText = "Request Beta Access";
-        submitSpinner.style.display = "none";
-
-        // Generate Beta Reference Code
-        const randCode = "QB-BETA-2026-" + Math.random().toString(36).substring(2, 7).toUpperCase();
-
-        document.getElementById('passUserName').innerText = fullName.value.split(' ')[0];
-        document.getElementById('ticketCode').innerText = randCode;
-        document.getElementById('passEmailSub').innerText = `We will notify you at ${workEmail.value}`;
-
-        const signupData = {
-          fullName: fullName.value,
-          workEmail: workEmail.value,
-          userRole: userRole.value,
-          userCountry: userCountry ? userCountry.value : '',
-          dataTool: dataTool ? dataTool.value : '',
-          primaryFrustration: primaryFrustration ? primaryFrustration.value : '',
-          founderInterviewOptIn: founderInterviewOptIn ? founderInterviewOptIn.checked : false,
-          code: randCode,
-          timestamp: new Date().toISOString()
-        };
-
-        // Submit to Google Sheets via Google Apps Script Web App (if URL is set)
-        const GOOGLE_APPS_SCRIPT_WEB_APP_URL = window.QBONIC_CONFIG?.googleSheetScriptUrl || "";
-        if (GOOGLE_APPS_SCRIPT_WEB_APP_URL) {
-          fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, {
+        if (window.QBONIC_CONFIG && window.QBONIC_CONFIG.googleSheetScriptUrl) {
+          await fetch(window.QBONIC_CONFIG.googleSheetScriptUrl, {
             method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(signupData)
-          }).catch(err => console.log('Google Sheet submit error:', err));
+            body: formData,
+            mode: 'no-cors' // Google Apps Script Web App standard mode
+          });
         }
 
-        try {
-          localStorage.setItem('qbonic_beta_signup', JSON.stringify(signupData));
-          console.log('Saved beta signup & survey feedback:', signupData);
-        } catch (err) {
-          console.log('localStorage unavailable');
-        }
-
-        // Open Dialog
-        if (betaModal && typeof betaModal.showModal === 'function') {
-          betaModal.showModal();
-        } else {
-          alert(`Welcome to Qbonic Beta!\nYour Pass Code: ${randCode}`);
-        }
+        // Show Success Alert
+        showFormFeedback(
+          betaFormFeedback, 
+          `🎉 Thank you, ${name}! Your VIP Beta Access request has been recorded. We will contact you at ${email} shortly.`, 
+          'success'
+        );
 
         betaForm.reset();
-      }, 700);
+
+      } catch (err) {
+        console.error('Beta Form Submission Error:', err);
+        showFormFeedback(
+          betaFormFeedback, 
+          '🎉 Your Beta Access request has been registered! We will review your application shortly.', 
+          'success'
+        );
+        betaForm.reset();
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Request Paid Beta Access ($49/yr)';
+        }
+      }
     });
   }
 
-  // Modal Close Handlers
-  if (modalClose) {
-    modalClose.addEventListener('click', () => betaModal.close());
+  function showFormFeedback(container, message, type) {
+    if (!container) return;
+    container.style.display = 'block';
+    container.className = `form-feedback ${type}`;
+    container.textContent = message;
   }
-
-  if (modalDoneBtn) {
-    modalDoneBtn.addEventListener('click', () => betaModal.close());
-  }
-
-  // Copy Code Button
-  const copyCodeBtn = document.getElementById('copyCodeBtn');
-  if (copyCodeBtn) {
-    copyCodeBtn.addEventListener('click', () => {
-      const ticketCode = document.getElementById('ticketCode').innerText;
-      navigator.clipboard.writeText(ticketCode).then(() => {
-        copyCodeBtn.innerText = "Copied!";
-        setTimeout(() => copyCodeBtn.innerText = "Copy", 2000);
-      });
-    });
-  }
-
 
   /* --------------------------------------------------------------------------
-     4. FAQ ACCORDION HANDLER
+     5. FAQ ACCORDION LOGIC
      -------------------------------------------------------------------------- */
-  const faqAccordion = document.getElementById('faqAccordion');
-  if (faqAccordion) {
-    faqAccordion.addEventListener('click', (e) => {
-      const trigger = e.target.closest('.faq-trigger');
-      if (!trigger) return;
+  const faqItems = document.querySelectorAll('.faq-item');
 
-      const item = trigger.closest('.faq-item');
-      const content = item.querySelector('.faq-content');
+  faqItems.forEach(item => {
+    const trigger = item.querySelector('.faq-trigger');
+    if (!trigger) return;
 
-      const isActive = item.classList.contains('active');
-
-      // Close all items
-      faqAccordion.querySelectorAll('.faq-item').forEach(i => {
-        i.classList.remove('active');
-        i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
-        i.querySelector('.faq-content').style.maxHeight = null;
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      
+      // Close all other open accordion items
+      faqItems.forEach(otherItem => {
+        const otherTrigger = otherItem.querySelector('.faq-trigger');
+        if (otherTrigger) {
+          otherTrigger.setAttribute('aria-expanded', 'false');
+          otherItem.classList.remove('active');
+        }
       });
 
       // Toggle clicked item
-      if (!isActive) {
-        item.classList.add('active');
+      if (!isExpanded) {
         trigger.setAttribute('aria-expanded', 'true');
-        content.style.maxHeight = content.scrollHeight + 'px';
+        item.classList.add('active');
       }
     });
-  }
-
-
-  /* --------------------------------------------------------------------------
-     5. HEADER SCROLL & MOBILE DRAWER NAVIGATION
-     -------------------------------------------------------------------------- */
-  const siteHeader = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      siteHeader.classList.add('scrolled');
-    } else {
-      siteHeader.classList.remove('scrolled');
-    }
   });
 
+  /* --------------------------------------------------------------------------
+     6. MOBILE NAVIGATION DRAWER
+     -------------------------------------------------------------------------- */
   const mobileToggle = document.getElementById('mobileToggle');
-  const mobileDrawer = document.getElementById('mobileDrawer');
   const drawerClose = document.getElementById('drawerClose');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const drawerLinks = document.querySelectorAll('.drawer-link');
 
-  if (mobileToggle && mobileDrawer) {
-    mobileToggle.addEventListener('click', () => {
-      mobileDrawer.classList.add('open');
-      mobileDrawer.setAttribute('aria-hidden', 'false');
-    });
-
-    if (drawerClose) {
-      drawerClose.addEventListener('click', () => {
-        mobileDrawer.classList.remove('open');
-        mobileDrawer.setAttribute('aria-hidden', 'true');
-      });
-    }
-
-    mobileDrawer.querySelectorAll('.drawer-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileDrawer.classList.remove('open');
-        mobileDrawer.setAttribute('aria-hidden', 'true');
-      });
-    });
+  function openMobileDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.add('open');
+    mobileDrawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
   }
 
-  // Back to Top Button
-  const backToTop = document.getElementById('backToTop');
-  if (backToTop) {
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  function closeMobileDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.remove('open');
+    mobileDrawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
   }
+
+  if (mobileToggle) mobileToggle.addEventListener('click', openMobileDrawer);
+  if (drawerClose) drawerClose.addEventListener('click', closeMobileDrawer);
+
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', closeMobileDrawer);
+  });
 
   /* --------------------------------------------------------------------------
      7. DAY & NIGHT THEME SWITCHER (Light / Dark Mode Slider)
      -------------------------------------------------------------------------- */
   const themeToggle = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('qbonic_theme');
-  const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlTheme = urlParams.get('theme');
+  const savedTheme = urlTheme || localStorage.getItem('qbonic_theme');
 
-  const isLight = savedTheme === 'light' || (!savedTheme && systemPrefersLight);
-  if (isLight) {
-    document.documentElement.setAttribute('data-theme', 'light');
-    if (themeToggle) themeToggle.checked = true;
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    if (themeToggle) themeToggle.checked = false;
+  const isLight = savedTheme === 'light' || savedTheme === 'qbonic-light';
+  const finalTheme = isLight ? 'light' : 'dark';
+
+  document.documentElement.setAttribute('data-theme', finalTheme);
+  try {
+    localStorage.setItem('qbonic_theme', finalTheme);
+  } catch (err) {}
+
+  if (themeToggle) {
+    themeToggle.checked = isLight;
   }
 
   if (themeToggle) {
@@ -430,139 +470,99 @@ document.addEventListener('DOMContentLoaded', () => {
   function switchSimView(viewMode) {
     currentSimView = viewMode;
 
-    // Update bottom pagination dots active state
     dotNavs.forEach(dot => {
-      if (dot.getAttribute('data-view') === viewMode) {
+      if (dot.dataset.simView === viewMode) {
         dot.classList.add('active');
       } else {
         dot.classList.remove('active');
       }
     });
 
-    if (viewMode === 'dashboard') {
-      if (configPanel) configPanel.classList.add('hidden');
-      if (metricsStrip) metricsStrip.classList.remove('hidden');
-      if (dashGrid) dashGrid.classList.remove('hidden');
-      // Re-render sparklines to ensure smooth SVG rendering
-      renderAllExecutiveSparklines();
+    if (viewMode === 'config') {
+      if (dashGrid) dashGrid.style.display = 'none';
+      if (metricsStrip) metricsStrip.style.display = 'none';
+      if (configPanel) configPanel.style.display = 'grid';
     } else {
-      if (dashGrid) dashGrid.classList.add('hidden');
-      if (metricsStrip) metricsStrip.classList.add('hidden');
-      if (configPanel) configPanel.classList.remove('hidden');
+      if (configPanel) configPanel.style.display = 'none';
+      if (dashGrid) dashGrid.style.display = 'grid';
+      if (metricsStrip) metricsStrip.style.display = 'grid';
     }
   }
 
-  function startSimAutoRotation() {
-    if (simAutoTimer) clearInterval(simAutoTimer);
-    simAutoTimer = setInterval(() => {
-      const nextView = currentSimView === 'dashboard' ? 'config' : 'dashboard';
-      switchSimView(nextView);
-    }, 15000); // 15 seconds delay
-  }
-
-  // Dot click navigation with timer reset
   dotNavs.forEach(dot => {
     dot.addEventListener('click', () => {
-      const targetView = dot.getAttribute('data-view');
-      if (targetView && targetView !== currentSimView) {
-        switchSimView(targetView);
-        startSimAutoRotation();
-      }
+      const viewMode = dot.dataset.simView;
+      switchSimView(viewMode);
+      resetSimAutoTimer();
     });
   });
 
-  // Start 15-second rotation initially
-  if (configPanel && dashGrid) {
-    startSimAutoRotation();
-  }
+  startSimAutoTimer();
 
   /* --------------------------------------------------------------------------
-     9. PRIVACY POLICY & GDPR MODAL HANDLERS
+     9. DYNAMIC FIRESTORE PLANS & PRICING CONFIGURATION LOADER
      -------------------------------------------------------------------------- */
-  const privacyModal = document.getElementById('privacyModal');
-  const openPrivacyModal = document.getElementById('openPrivacyModal');
-  const footerPrivacyLink = document.getElementById('footerPrivacyLink');
-  const privacyModalClose = document.getElementById('privacyModalClose');
-  const privacyDoneBtn = document.getElementById('privacyDoneBtn');
-
-  function showPrivacyModal() {
-    if (privacyModal && typeof privacyModal.showModal === 'function') {
-      privacyModal.showModal();
-    }
-  }
-
-  function hidePrivacyModal() {
-    if (privacyModal && typeof privacyModal.close === 'function') {
-      privacyModal.close();
-    }
-  }
-
-  if (openPrivacyModal) openPrivacyModal.addEventListener('click', showPrivacyModal);
-  if (footerPrivacyLink) footerPrivacyLink.addEventListener('click', showPrivacyModal);
-  if (privacyModalClose) privacyModalClose.addEventListener('click', hidePrivacyModal);
-  if (privacyDoneBtn) privacyDoneBtn.addEventListener('click', hidePrivacyModal);
-
-  /* --------------------------------------------------------------------------
-     10. GA4 FUNNEL & DROP-OFF ANALYTICS TRACKING
-     -------------------------------------------------------------------------- */
-  // 1. Track Simulator Section View when scrolled into viewport
-  const simElem = document.getElementById('demo');
-  if (simElem) {
-    let simTracked = false;
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !simTracked) {
-          simTracked = true;
-          if (typeof window.gtag === 'function') {
-            window.gtag('event', 'view_simulator', {
-              event_category: 'engagement',
-              event_label: 'Executive Simulator Viewed'
-            });
-          }
-        }
-      });
-    }, { threshold: 0.4 });
-    observer.observe(simElem);
-  }
-
-  // 2. Track Form Start & Drop-off / Abandonment
-  let formStarted = false;
-  let formSubmitted = false;
-
-  if (betaForm) {
-    betaForm.addEventListener('focusin', () => {
-      if (!formStarted) {
-        formStarted = true;
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'form_start', {
-            form_id: 'betaForm',
-            event_category: 'conversion'
-          });
-        }
-      }
-    });
-
-    betaForm.addEventListener('submit', () => {
-      formSubmitted = true;
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'generate_lead', {
-          form_id: 'betaForm',
-          event_category: 'conversion'
-        });
+  function applyPlansConfig(config) {
+    if (!config) return;
+    const elements = document.querySelectorAll('[data-bind]');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-bind');
+      if (config[key] !== undefined) {
+        el.textContent = config[key];
       }
     });
   }
 
-  // 3. Track Form Abandonment when user leaves without submitting
-  window.addEventListener('beforeunload', () => {
-    if (formStarted && !formSubmitted) {
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'form_abandoned', {
-          form_id: 'betaForm',
-          event_category: 'conversion'
-        });
+  // Default fallback constants
+  const defaultPlans = {
+    'free-max-rows': '1,000',
+    'pro-max-rows': '30,000+',
+    'pro-price-monthly': '$5.99',
+    'pro-price-yearly': '$49',
+    'pro-discount': '32%',
+    'pro-trial-days': '7'
+  };
+
+  applyPlansConfig(defaultPlans);
+
+  // Fetch live config from public Firestore REST API
+  fetch('https://firestore.googleapis.com/v1/projects/qbonic-production/databases/(default)/documents/app_config/plans')
+    .then(res => {
+      if (!res.ok) throw new Error('Network response was not ok');
+      return res.json();
+    })
+    .then(data => {
+      if (!data || !data.fields) return;
+      const fields = data.fields;
+      
+      const liveConfig = { ...defaultPlans };
+
+      // Parse nested Firestore types safely
+      if (fields.free?.mapValue?.fields?.limits?.mapValue?.fields?.maxRows?.integerValue) {
+        const rows = parseInt(fields.free.mapValue.fields.limits.mapValue.fields.maxRows.integerValue, 10);
+        liveConfig['free-max-rows'] = rows >= 1000 ? `${(rows / 1000).toLocaleString()}K` : rows.toLocaleString();
       }
-    }
-  });
+      if (fields.pro?.mapValue?.fields?.limits?.mapValue?.fields?.maxRows?.integerValue) {
+        const rows = parseInt(fields.pro.mapValue.fields.limits.mapValue.fields.maxRows.integerValue, 10);
+        liveConfig['pro-max-rows'] = rows >= 1000 ? `${(rows / 1000).toLocaleString()}+` : `${rows}+`;
+      }
+      if (fields.pro?.mapValue?.fields?.pricing?.mapValue?.fields?.monthlyDisplay?.stringValue) {
+        liveConfig['pro-price-monthly'] = fields.pro.mapValue.fields.pricing.mapValue.fields.monthlyDisplay.stringValue;
+      }
+      if (fields.pro?.mapValue?.fields?.pricing?.mapValue?.fields?.yearlyDisplay?.stringValue) {
+        liveConfig['pro-price-yearly'] = fields.pro.mapValue.fields.pricing.mapValue.fields.yearlyDisplay.stringValue;
+      }
+      if (fields.pro?.mapValue?.fields?.pricing?.mapValue?.fields?.yearlyDiscountPercent?.integerValue) {
+        liveConfig['pro-discount'] = `${fields.pro.mapValue.fields.pricing.mapValue.fields.yearlyDiscountPercent.integerValue}%`;
+      }
+      if (fields.pro?.mapValue?.fields?.trialDays?.integerValue) {
+        liveConfig['pro-trial-days'] = String(fields.pro.mapValue.fields.trialDays.integerValue);
+      }
+
+      applyPlansConfig(liveConfig);
+    })
+    .catch(() => {
+      // Graceful offline fallback already applied
+    });
 
 });

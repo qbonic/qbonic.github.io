@@ -6,7 +6,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P4YG3984FX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-P4YG3984FX');
@@ -25,6 +25,46 @@
   <meta name="author" content="VitanuGenAI Technology Pvt Ltd, India">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#080C14">
+
+  <!-- Instant Synchronous Theme & Login Redirect Initializer -->
+  <script>
+    (function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var urlTheme = urlParams.get('theme');
+      var savedTheme = urlTheme || localStorage.getItem('qbonic_theme');
+      var isLight = savedTheme === 'light' || savedTheme === 'qbonic-light';
+      var finalTheme = isLight ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', finalTheme);
+      try {
+        localStorage.setItem('qbonic_theme', finalTheme);
+      } catch(e) {}
+    })();
+
+    function redirectToLogin(e) {
+      if (e) e.preventDefault();
+      var docTheme = document.documentElement.getAttribute('data-theme');
+      var themeToggle = document.getElementById('themeToggle');
+      var currentTheme = 'dark';
+
+      if (docTheme === 'light' || docTheme === 'qbonic-light') {
+        currentTheme = 'light';
+      } else if (docTheme === 'dark' || docTheme === 'qbonic-dark') {
+        currentTheme = 'dark';
+      } else if (themeToggle) {
+        currentTheme = themeToggle.checked ? 'light' : 'dark';
+      } else {
+        var saved = localStorage.getItem('qbonic_theme');
+        if (saved === 'light' || saved === 'qbonic-light') currentTheme = 'light';
+      }
+
+      var baseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? "http://localhost:5173/?auth=signin"
+        : "https://app.qbonic.com/?auth=signin";
+
+      var targetUrl = baseUrl + "&theme=" + currentTheme;
+      window.location.href = targetUrl;
+    }
+  </script>
 
   <!-- Favicon Icons -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -95,7 +135,7 @@
     rel="stylesheet">
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=11">
 </head>
 
 <body>
@@ -106,10 +146,10 @@
 
   <!-- Minimal Header -->
   <header class="site-header" id="siteHeader">
-    <div class="container header-inner">
+    <div class="header-inner">
       <a href="#" class="brand-logo">
         <div class="logo-icon-box">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#logo_grad)" stroke="#38BDF8" stroke-width="1.5"
               stroke-linejoin="round" />
             <defs>
@@ -129,7 +169,7 @@
       <nav class="nav-menu" id="navMenu">
         <a href="#problem" class="nav-link">The Problem</a>
         <a href="#demo" class="nav-link">Live Demo</a>
-        <a href="#beta" class="nav-link">Paid Beta</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
         <a href="#faq" class="nav-link">FAQ</a>
         <a href="#about" class="nav-link">About Us</a>
         <a href="#contact" class="nav-link">Contact Us</a>
@@ -143,7 +183,7 @@
           </label>
           <span class="theme-switch-icon">☀️</span>
         </div>
-        <a href="#signup" class="btn btn-primary btn-sm">Join Beta</a>
+        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
           <span class="burger-bar"></span>
           <span class="burger-bar"></span>
@@ -165,11 +205,12 @@
       <nav class="drawer-nav">
         <a href="#problem" class="drawer-link">The Problem</a>
         <a href="#demo" class="drawer-link">Live Demo</a>
-        <a href="#beta" class="drawer-link">Paid Beta</a>
+        <a href="pricing.html" class="drawer-link">Pricing</a>
         <a href="#faq" class="drawer-link">FAQ</a>
         <a href="#about" class="drawer-link">About Us</a>
         <a href="#contact" class="drawer-link">Contact Us</a>
-        <a href="#signup" class="drawer-link btn btn-primary mt-4">Join Beta</a>
+        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="drawer-link btn btn-primary mt-4"
+          id="drawerLoginBtn">Login</a>
       </nav>
     </div>
   </div>
@@ -916,10 +957,10 @@
     <section class="section beta-info-section" id="beta">
       <div class="container container-narrow">
         <div class="paid-beta-card glow-border text-center">
-          <span class="beta-card-badge">⚡ LIMITED BETA SEATS • LAUNCHING IN 2-3 WEEKS</span>
+          <span class="beta-card-badge">⚡ EXCLUSIVE EARLY ACCESS • LIMITED SEATS</span>
           <h2 class="beta-card-title">Apply For Early Access</h2>
           <p class="beta-card-desc">
-            Launching in the next 2–3 weeks.<br>
+            Experience privacy-first, lightning-fast spreadsheet reporting.<br>
             We don't believe in charging exorbitant prices like $40–$100/month per user.
           </p>
 
@@ -950,12 +991,11 @@
         <div class="signup-card-wrapper glow-border">
           <div class="signup-content">
             <div class="signup-badge">
-              <span class="badge-dot"></span> <strong class="badge-highlight">LIMITED</strong> Beta Spots Available •
-              Launching in 2–3 Weeks
+              <span class="badge-dot"></span> <strong class="badge-highlight">LIMITED</strong> Early Access Spots Available
             </div>
-            <h2 class="signup-title">Apply For Beta Access</h2>
+            <h2 class="signup-title">Apply For Early Access</h2>
             <p class="signup-subtitle">
-              Secure your spot for early access when invitations roll out before public launch.
+              Secure your spot today and start transforming your spreadsheets into interactive data cubes.
             </p>
 
             <form class="beta-form" id="betaForm" novalidate>
@@ -1053,8 +1093,8 @@
               </button>
 
               <p class="form-privacy-note text-center mt-4">
-                🔒 <strong>100% Privacy Guarantee</strong>: Zero spam. We process applications strictly per GDPR & CCPA.
-                Read our <a href="javascript:void(0)" id="openPrivacyModal" class="privacy-link">Privacy Policy</a>.
+                🔒 <strong>100% Privacy Guarantee</strong>: Zero spam. We process applications strictly per GDPR, CCPA & DPDP.
+                Read our <a href="privacy.html" class="privacy-link">Privacy Policy</a>.
               </p>
             </form>
           </div>
@@ -1068,23 +1108,63 @@
         <div class="section-header text-center">
           <span class="section-tag">FAQ</span>
           <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">Everything you need to know about privacy, security, row limits, and instant data cubes.</p>
         </div>
 
         <div class="faq-accordion" id="faqAccordion">
+          <!-- Q1: Core Privacy -->
           <div class="faq-item">
             <button class="faq-trigger" aria-expanded="false">
-              <span>How does Qbonic guarantee 100% data privacy?</span>
+              <span>Where does my spreadsheet data go? Does Qbonic upload files to any server?</span>
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-content">
               <p>
-                Qbonic runs entirely inside your web browser. When you open a CSV or Excel file, raw data is parsed
-                directly inside your device's RAM. Zero data is ever sent to remote servers or third-party cloud
-                databases.
+                <strong>100% in-browser processing.</strong> Raw CSV, TSV, and Excel data is parsed directly inside your device's local memory (RAM / Web Workers). Zero raw spreadsheet cell values or customer records are ever uploaded to remote servers or third-party cloud databases.
               </p>
             </div>
           </div>
 
+          <!-- Q2: AI & Groq Safety -->
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Does AI (Groq) see my actual customer rows, sales numbers, or private data?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>
+                <strong>No.</strong> Groq AI only receives high-level column metadata (header names, inferred data types, distinct value counts, and up to 3 anonymized sample values) to suggest smart classifications and formulas. Your full dataset, customer tables, and financial records are never uploaded or shared with external AI servers.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q3: GDPR & CCPA -->
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Is Qbonic compliant with GDPR (Europe) and CCPA (US)?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>
+                <strong>Yes.</strong> Qbonic is engineered on strict <em>"Privacy-by-Design"</em> principles (GDPR Article 25). Because raw dataset rows never leave your computer, there is zero persistent cloud data retention and zero invasive third-party cross-site advertising cookies.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q4: Rule Heuristics & Review Recommendation -->
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Can I use Qbonic without creating a Groq AI account or entering an API key?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>
+                <strong>Absolutely.</strong> Qbonic includes an intelligent built-in rule heuristics engine that works out of the box with zero API key or configuration required. Because spreadsheets vary across business domains, automated classifications (both rule-based and AI) serve as smart starting points—we recommend reviewing the interactive Configuration page to fine-tune column types, unit formats (Currency, %, Count), and custom KPI formulas for your exact use case.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q5: File Formats & Row Limits -->
           <div class="faq-item">
             <button class="faq-trigger" aria-expanded="false">
               <span>What file formats and row limits are supported?</span>
@@ -1092,13 +1172,12 @@
             </button>
             <div class="faq-content">
               <p>
-                Qbonic supports <strong>Google Sheets</strong>, <code>.csv</code>, <code>.tsv</code>, and
-                <code>.xlsx</code> files. The engine processes up to <strong>30,000 rows</strong> per file directly in
-                browser memory.
+                Connect Google Sheets, Zoho Sheets, or drag-and-drop <code>.csv</code>, <code>.tsv</code>, <code>.xlsx</code>, and <code>.xls</code> files. The engine processes up to <strong data-bind="free-max-rows">1,000 rows</strong> on the Free Plan and up to <strong data-bind="pro-max-rows">30,000+ rows</strong> on the Pro Plan directly in your browser's local memory.
               </p>
             </div>
           </div>
 
+          <!-- Q6: Offline Mode -->
           <div class="faq-item">
             <button class="faq-trigger" aria-expanded="false">
               <span>Does Qbonic work offline?</span>
@@ -1106,37 +1185,52 @@
             </button>
             <div class="faq-content">
               <p>
-                Yes! Because all computation occurs locally in the browser DOM, Qbonic runs completely offline or in
-                restricted corporate network environments.
+                <strong>Yes!</strong> All pivot cube aggregations, sparklines, tables, and multi-dimension cross-filters run 100% locally in your browser DOM without requiring an active internet connection. Background product telemetry requests fail silently when offline with zero interruption to your analysis.
               </p>
             </div>
           </div>
 
+          <!-- Q7: Pricing & Billing -->
           <div class="faq-item">
             <button class="faq-trigger" aria-expanded="false">
-              <span>How much will Qbonic cost?</span>
+              <span>How much does Qbonic cost, and can I cancel anytime?</span>
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-content">
               <p>
-                Exact pricing will be disclosed at launch in 2–3 weeks. Rest assured, it will be extremely
-                pocket-friendly with both flexible <strong>monthly</strong> and cost-saving <strong>annual
-                  (yearly)</strong> plans available.
+                You can start with our Free Plan ($0) or upgrade to <strong>Pro with a <span data-bind="pro-trial-days">7</span>-Day Free Trial (<span data-bind="pro-price-monthly">$5.99</span>/month or <span data-bind="pro-price-yearly">$49</span>/year, saving <span data-bind="pro-discount">32%</span>)</strong> for <span data-bind="pro-max-rows">30,000+</span> rows, unlimited dimensions, and custom KPI formulas. View our full <a href="pricing.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Pricing & Feature Comparison Page</a>. Powered by Paddle with instant 1-click self-serve cancellation.
               </p>
             </div>
           </div>
 
+          <!-- Q8: Versus Excel / BI -->
           <div class="faq-item">
             <button class="faq-trigger" aria-expanded="false">
-              <span>When will beta testing invitations roll out?</span>
+              <span>How does Qbonic compare to Excel Pivot Tables or complex BI tools like PowerBI/Tableau?</span>
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-content">
               <p>
-                Beta invitations will roll out in waves over the next 2 weeks to accepted applicants.
+                Zero steep learning curves, instant interactive dashboards, and no messy spreadsheet formulas. Unlike desktop BI software that requires installations and cloud pipelines, Qbonic opens in any web browser and transforms your data instantly while guaranteeing 100% data privacy.
               </p>
             </div>
           </div>
+        </div>
+
+        <!-- Detailed FAQs & Architecture Whitepaper Callout Card -->
+        <div class="faq-whitepaper-card" style="margin-top: 40px; padding: 26px 32px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-card); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; box-shadow: var(--card-shadow, 0 10px 30px rgba(0,0,0,0.15));">
+          <div style="max-width: 580px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <span style="font-size: 1.25rem;">🔒</span>
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-color); margin: 0;">Looking for Enterprise Security & Architecture Details?</h3>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.55;">
+              Read our comprehensive 54-point Security, Privacy & Architecture FAQ covering GDPR, CCPA, memory sandboxing, and AI metadata isolation.
+            </p>
+          </div>
+          <a href="detailed_faqs.html" class="btn btn-primary btn-sm" style="white-space: nowrap; font-weight: 700;">
+            View All 54 Detailed FAQs &rarr;
+          </a>
         </div>
       </div>
     </section>
@@ -1156,7 +1250,9 @@
           <div class="quote-mark-watermark" aria-hidden="true">“</div>
 
           <p class="founder-quote-text">
-            Building interactive reporting for Google Sheets & CSVs takes way too much time, manual effort, and setup complexity. I built Qbonic to eliminate that struggle — turning spreadsheet rows into instant, multi-dimensional reporting cubes in minutes, right inside your browser.
+            Building interactive reporting for Google Sheets & CSVs takes way too much time, manual effort, and setup
+            complexity. I built Qbonic to eliminate that struggle — turning spreadsheet rows into instant,
+            multi-dimensional reporting cubes in minutes, right inside your browser.
           </p>
 
           <div class="founder-signature-block">
@@ -1310,19 +1406,19 @@
         </div>
 
         <nav class="footer-links" aria-label="Footer navigation">
-          <a href="#problem">The Problem</a>
-          <a href="#demo">Live Demo</a>
-          <a href="#beta">Paid Beta</a>
-          <a href="#faq">FAQ</a>
-          <a href="#about">About Us</a>
-          <a href="#contact">Contact Us</a>
-          <a href="javascript:void(0)" id="footerPrivacyLink">Privacy Policy</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="detailed_faqs.html">Security & FAQs</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund.html">Refund Policy</a>
+          <a href="index.html#contact">Contact Us</a>
         </nav>
       </div>
 
       <div class="footer-bottom">
         <p class="copyright-text">&copy; 2026 Qbonic. All rights reserved.</p>
-        <p class="company-attribution">Crafted with ❤️ in India by <strong>VitanuGenAI Technology Pvt Ltd 🇮🇳</strong></p>
+        <p class="company-attribution">Crafted with ❤️ in India by <strong>VitanuGenAI Technology Pvt Ltd 🇮🇳</strong>
+        </p>
         <button class="back-to-top" id="backToTop" aria-label="Scroll to top">↑ Back to Top</button>
       </div>
     </div>
