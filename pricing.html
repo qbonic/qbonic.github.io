@@ -38,8 +38,6 @@
     }
   </script>
 
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -397,7 +395,7 @@
           </ul>
         </div>
 
-        <button onclick="startCheckout('pro')" class="btn btn-primary btn-block" style="font-weight: 800; border-radius: 12px; padding: 14px; font-size: 1rem;">
+        <button onclick="redirectToApp('pro')" class="btn btn-primary btn-block" style="font-weight: 800; border-radius: 12px; padding: 14px; font-size: 1rem;">
           Start <span data-bind="pro-trial-days">7</span>-Day Free Trial
         </button>
       </div>
@@ -537,43 +535,6 @@
         monthlyBtn.classList.add('active');
         priceDisplay.textContent = priceDisplay.getAttribute('data-monthly') || '$5.99';
         cycleDisplay.textContent = 'Billed monthly • Cancel anytime';
-      }
-    }
-
-    // Initialize Paddle with production token for direct review checkout
-    if (window.Paddle) {
-      Paddle.Environment.set('production');
-      Paddle.Initialize({
-        token: 'live_442dcf4bee4cc79ea8bbb2b8acf',
-        eventCallback: function(data) {
-          if (data && data.name === 'checkout.completed') {
-            window.location.href = 'https://console.qbonic.com/?checkout=success';
-          }
-        }
-      });
-    }
-
-    function startCheckout(plan) {
-      if (plan === 'free') {
-        redirectToApp('free');
-        return;
-      }
-
-      const yearlyPriceId = 'pri_01m1gvysns0rf7t181xwg62m7v';
-      const monthlyPriceId = 'pri_01m1gvwspzkqr7bey12nm9fqzp';
-      const targetPriceId = (activeCycle === 'monthly') ? monthlyPriceId : yearlyPriceId;
-
-      if (window.Paddle && typeof Paddle.Checkout?.open === 'function') {
-        Paddle.Checkout.open({
-          items: [{ priceId: targetPriceId, quantity: 1 }],
-          settings: {
-            displayMode: 'overlay',
-            theme: document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
-            locale: 'en'
-          }
-        });
-      } else {
-        redirectToApp('pro');
       }
     }
   </script>
