@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Build target URL passing theme parameter dynamically
     const baseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
       ? "http://localhost:5173/?auth=signin"
-      : "https://app.qbonic.com/?auth=signin";
+      : "https://console.qbonic.com/?auth=signin";
 
     const targetUrl = `${baseUrl}&theme=${currentTheme}`;
     

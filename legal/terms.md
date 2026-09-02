@@ -72,7 +72,7 @@ Telemetry data contains **no personally identifiable business records or spreads
 ## 7. Subscriptions, 7-Day Free Trial & Merchant of Record
 Qbonic offers Free tier access as well as paid subscription plans ("Qbonic Pro").
 
-- **Merchant of Record:** All payments, billing processing, and invoicing are handled by **Paddle.com Market Ltd** (or Paddle Payments Inc), who acts as the Merchant of Record (MoR) for all transactions. Paddle is responsible for calculating, collecting, and remitting applicable sales tax, GST, and VAT.
+- **Merchant of Record:** Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns. Paddle is responsible for calculating, collecting, and remitting applicable sales tax, GST, and VAT.
 - **7-Day Free Trial:** Paid plans include an upfront 7-Day Free Trial period ($0 charged today). You can cancel at any time during the trial with 1 click via your in-app Plans Page without incurring any charge.
 - **Self-Serve Cancellation:** You can cancel auto-renew anytime with 1 click in your Plans Page.
 

@@ -51,7 +51,9 @@ We investigate all billing inquiries in good faith and work with our Merchant of
 ---
 
 ## 7. Merchant of Record (Paddle) Receipts & VAT Invoices
-All transactions are processed by **Paddle.com**. You can view past invoices, download official VAT receipts, or manage your payment methods through the Paddle Customer Portal link provided on your email receipt or in your Qbonic Plans Page.
+Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.
+
+All subscription transactions are securely processed by Paddle. You can view past invoices, download official VAT receipts, or manage your payment methods through the Paddle Customer Portal link provided on your email receipt or in your Qbonic in-app Plans Page.
 
 ---
 
