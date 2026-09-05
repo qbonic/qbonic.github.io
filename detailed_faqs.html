@@ -2,15 +2,91 @@
 <html lang="en" data-theme="dark">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P4YG3984FX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-P4YG3984FX');
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Security, Privacy & Technical Architecture FAQs — Qbonic</title>
-  <meta name="description" content="Comprehensive 54-point Security, Privacy, and Architecture FAQ for Qbonic: 100% In-browser processing, GDPR, CCPA, Groq AI metadata isolation, and Paddle payment security.">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="description"
+    content="Comprehensive Security, Privacy, and Architecture FAQ for Qbonic: 100% In-browser processing, GDPR, CCPA, Groq AI metadata isolation, and Paddle payment security.">
   <link rel="canonical" href="https://qbonic.com/detailed_faqs.html">
 
+  <!-- Open Graph / Social Meta Tags -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://qbonic.com/detailed_faqs.html">
+  <meta property="og:site_name" content="Qbonic">
+  <meta property="og:title" content="Security, Privacy & Technical Architecture FAQs — Qbonic">
+  <meta property="og:description" content="Comprehensive 29-point FAQ covering Qbonic's 100% in-browser processing, GDPR/CCPA compliance, Groq AI metadata isolation, and Paddle payment security.">
+  <meta property="og:image" content="https://qbonic.com/favicon.svg">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://qbonic.com/detailed_faqs.html">
+  <meta name="twitter:title" content="Security, Privacy & Technical Architecture FAQs — Qbonic">
+  <meta name="twitter:description" content="Comprehensive 29-point FAQ covering Qbonic's 100% in-browser processing, GDPR/CCPA compliance, Groq AI metadata isolation, and Paddle payment security.">
+  <meta name="twitter:image" content="https://qbonic.com/favicon.svg">
+
+  <!-- Structured Data (JSON-LD FAQPage for Google Rich Snippets & AI Engines / GEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where does my data go when I upload a spreadsheet to Qbonic?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your data never leaves your computer. When you upload a CSV or connect a spreadsheet, Qbonic parses and processes the file 100% locally inside your browser memory using WebAssembly and client-side JavaScript. Zero cell data is ever transmitted to Qbonic servers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Groq AI ever see my raw spreadsheet data or customer numbers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. When AI assistance is enabled, Qbonic sends only sanitized column header names and data types (e.g. 'OrderDate': date, 'Revenue': number) to Groq's high-speed inference API. Zero raw row values, customer names, or numeric cell entries are ever sent."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Qbonic compliant with GDPR (Europe) and CCPA (US)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Qbonic implements Privacy by Design under GDPR Article 25. Because user datasets are processed client-side in volatile browser RAM and never stored on cloud servers, Qbonic does not act as a data processor for your business CSV data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Qbonic store or process credit card numbers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All payment processing, subscription management, invoicing, and tax calculations are handled by Paddle, who acts as the Merchant of Record with full PCI-DSS Level 1 certification."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Qbonic work offline without an active internet connection?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Once the Qbonic web application is loaded in your browser, the core pivot engine, aggregation formulas, filtering, and chart rendering operate completely offline without internet connectivity."
+        }
+      }
+    ]
+  }
+  </script>
+
   <script>
-    (function() {
+    (function () {
       var urlParams = new URLSearchParams(window.location.search);
       var urlTheme = urlParams.get('theme');
       var savedTheme = urlTheme || localStorage.getItem('qbonic_theme');
@@ -31,76 +107,1231 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=11">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=18">
 
   <style>
+    /* ==========================================================================
+       DETAILED FAQS — GLOBAL B2C USABILITY & DESIGN OVERHAUL
+       ========================================================================== */
     .faq-page-header {
       padding-top: 130px;
-      padding-bottom: 30px;
+      padding-bottom: 24px;
       text-align: center;
     }
+
+    /* 4-Card Trust Anchor Grid (Above the Fold) */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 32px 0 28px;
+    }
+
+    @media (max-width: 992px) {
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .trust-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trust-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.3);
+    }
+
+    .trust-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .trust-icon-box {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .trust-icon-emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+    }
+
+    .trust-icon-blue {
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+    }
+
+    .trust-icon-purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: #a855f7;
+    }
+
+    .trust-icon-amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+    }
+
+    .trust-card-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0;
+    }
+
+    .trust-card-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Live Search & Utility Toolbar Bar */
+    .faq-toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .faq-search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .faq-search-input {
+      width: 100%;
+      padding: 14px 44px 14px 46px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .faq-search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .faq-search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 1.05rem;
+    }
+
+    .faq-search-clear {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 999px;
+      display: none;
+    }
+
+    .faq-search-clear:hover {
+      color: var(--text-main);
+    }
+
+    /* Floating Sticky Beta Bar */
+    .faq-floating-cta-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      width: calc(100% - 32px);
+      max-width: 860px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 999px;
+      padding: 10px 16px 10px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      z-index: 990;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 20px rgba(56, 189, 248, 0.18);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Light Theme Contrast Support (data-theme="light" and body.light-theme) */
+    [data-theme="light"] .faq-floating-cta-bar,
+    body.light-theme .faq-floating-cta-bar {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(2, 132, 199, 0.35);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14), 0 0 20px rgba(2, 132, 199, 0.12);
+    }
+
+    .faq-floating-cta-bar.is-visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .floating-bar-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .floating-bar-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      white-space: nowrap;
+    }
+
+    [data-theme="light"] .floating-bar-badge,
+    body.light-theme .floating-bar-badge {
+      background: #e0f2fe;
+      color: #0284c7;
+      border: 1px solid rgba(2, 132, 199, 0.35);
+    }
+
+    .floating-bar-text {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #f8fafc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    [data-theme="light"] .floating-bar-text,
+    body.light-theme .floating-bar-text {
+      color: #0f172a;
+    }
+
+    .floating-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .floating-bar-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: #ffffff !important;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .floating-bar-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+    }
+
+    .floating-bar-close {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    .floating-bar-close:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="light"] .floating-bar-close,
+    body.light-theme .floating-bar-close {
+      color: #475569;
+    }
+
+    [data-theme="light"] .floating-bar-close:hover,
+    body.light-theme .floating-bar-close:hover {
+      color: #0f172a;
+      background: rgba(15, 23, 42, 0.08);
+    }
+
+    @media (max-width: 640px) {
+      .faq-floating-cta-bar {
+        border-radius: 16px;
+        padding: 10px 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        bottom: 14px;
+      }
+
+      .floating-bar-info {
+        justify-content: space-between;
+      }
+
+      .floating-bar-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .floating-bar-close {
+        position: absolute;
+        top: 6px;
+        right: 8px;
+      }
+    }
+
+    .faq-meta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .faq-count-badge {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .faq-action-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-tool {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-tool:hover {
+      background: var(--bg-card);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    [data-theme="light"] .btn-tool {
+      background: #ffffff;
+      border-color: rgba(15, 23, 42, 0.18);
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .btn-tool:hover {
+      background: #f1f5f9;
+      border-color: #0284c7;
+      color: #0284c7;
+    }
+
+    /* Category Filter Tabs — Responsive Hybrid (Wrap on Desktop, Swipe on Mobile) */
+    .faq-category-nav-wrapper {
+      position: relative;
+      max-width: 980px;
+      margin: 16px auto 28px;
+      width: 100%;
+    }
+
+    /* Desktop View: Centered, Wrapped, 100% Discoverable */
     .faq-category-nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
       justify-content: center;
-      margin: 24px 0 36px;
+      gap: 10px;
+      padding: 4px 2px;
+      margin: 0;
+      transition: all 0.2s ease;
     }
+
+    .cat-nav-arrow {
+      display: none;
+    }
+
     .cat-btn {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       color: var(--text-muted);
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: 700;
       padding: 8px 16px;
       border-radius: 999px;
       cursor: pointer;
+      white-space: nowrap;
       transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      font-family: var(--font-body);
     }
-    .cat-btn.active, .cat-btn:hover {
+
+    .cat-btn.active,
+    .cat-btn:hover {
       background: #0284c7;
-      color: #ffffff;
+      color: #ffffff !important;
+      border-color: #0284c7;
+      transform: translateY(-1px);
+    }
+
+    [data-theme="light"] .cat-btn,
+    body.light-theme .cat-btn {
+      background: #ffffff;
+      border-color: rgba(15, 23, 42, 0.15);
+      color: #334155;
+    }
+
+    [data-theme="light"] .cat-btn.active,
+    [data-theme="light"] .cat-btn:hover,
+    body.light-theme .cat-btn.active,
+    body.light-theme .cat-btn:hover {
+      background: #0284c7;
+      color: #ffffff !important;
       border-color: #0284c7;
     }
-    [data-theme="dark"] .cat-btn.active, [data-theme="dark"] .cat-btn:hover {
+
+    [data-theme="dark"] .cat-btn.active,
+    [data-theme="dark"] .cat-btn:hover,
+    body:not(.light-theme) .cat-btn.active,
+    body:not(.light-theme) .cat-btn:hover {
       background: var(--primary);
-      color: #080C14;
+      color: #080C14 !important;
       border-color: var(--primary);
     }
-    .faq-category-section {
-      margin-bottom: 40px;
+
+    /* Mobile & Smaller Tablets (< 860px): Swipeable Track with Arrows & Fade Masks */
+    @media (max-width: 860px) {
+      .faq-category-nav-wrapper {
+        padding: 0 34px;
+      }
+
+      .faq-category-nav {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding: 6px 4px 10px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+      }
+
+      .faq-category-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .cat-btn {
+        scroll-snap-align: start;
+      }
+
+      /* Edge Fade Indicators on Mobile */
+      .faq-category-nav-wrapper::before,
+      .faq-category-nav-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 10px;
+        width: 32px;
+        pointer-events: none;
+        z-index: 2;
+        transition: opacity 0.25s ease;
+      }
+
+      .faq-category-nav-wrapper::before {
+        left: 32px;
+        background: linear-gradient(to right, var(--bg-body, #080C14), transparent);
+      }
+
+      .faq-category-nav-wrapper::after {
+        right: 32px;
+        background: linear-gradient(to left, var(--bg-body, #080C14), transparent);
+      }
+
+      [data-theme="light"] .faq-category-nav-wrapper::before,
+      body.light-theme .faq-category-nav-wrapper::before {
+        background: linear-gradient(to right, #f8fafc, transparent);
+      }
+
+      [data-theme="light"] .faq-category-nav-wrapper::after,
+      body.light-theme .faq-category-nav-wrapper::after {
+        background: linear-gradient(to left, #f8fafc, transparent);
+      }
+
+      /* Swipe Arrow Buttons on Mobile */
+      .cat-nav-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: calc(50% - 5px);
+        transform: translateY(-50%);
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        color: var(--text-main);
+        font-size: 1.25rem;
+        line-height: 1;
+        cursor: pointer;
+        z-index: 4;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        transition: all 0.2s ease;
+      }
+
+      .cat-nav-arrow:hover {
+        background: var(--primary);
+        color: #080C14;
+        border-color: var(--primary);
+      }
+
+      [data-theme="light"] .cat-nav-arrow,
+      body.light-theme .cat-nav-arrow {
+        background: #ffffff;
+        border-color: rgba(15, 23, 42, 0.15);
+        color: #0f172a;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      [data-theme="light"] .cat-nav-arrow:hover,
+      body.light-theme .cat-nav-arrow:hover {
+        background: #0284c7;
+        color: #ffffff;
+        border-color: #0284c7;
+      }
+
+      .cat-nav-arrow-left {
+        left: 0;
+      }
+
+      .cat-nav-arrow-right {
+        right: 0;
+      }
+
+      .cat-nav-arrow:disabled {
+        opacity: 0.25;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
     }
+
+    /* Category Section Headers */
+    .faq-category-section {
+      margin-bottom: 36px;
+    }
+
     .faq-cat-title {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 800;
+      font-family: var(--font-heading);
       color: var(--text-main);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 10px;
-      padding-bottom: 8px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--border-subtle);
     }
-    .print-actions {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 30px;
+
+    .faq-cat-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--primary);
     }
+
+    /* Enhanced Accordion Card */
+    .faq-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      background: var(--bg-surface);
+    }
+
+    .faq-item.active {
+      border-color: var(--primary);
+      box-shadow: 0 4px 20px -6px rgba(56, 189, 248, 0.15);
+      background: var(--bg-card);
+    }
+
+    /* Trigger Layout */
+    .faq-trigger {
+      width: 100%;
+      padding: 14px 18px;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: var(--font-heading);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .faq-item-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .icon-box-emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+    }
+
+    .icon-box-blue {
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+    }
+
+    .icon-box-purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: #a855f7;
+    }
+
+    .icon-box-amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+    }
+
+    .faq-title-wrap {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .faq-q-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    /* Reassurance Micro-Pill */
+    .reassurance-pill {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+
+    .pill-emerald {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+    }
+
+    .pill-blue {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+    }
+
+    .pill-purple {
+      background: rgba(168, 85, 247, 0.15);
+      color: #a855f7;
+    }
+
+    .pill-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+    }
+
+    /* Light Theme High-Contrast Pills */
+    [data-theme="light"] .pill-emerald {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    [data-theme="light"] .pill-blue {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    [data-theme="light"] .pill-purple {
+      background: #f3e8ff;
+      color: #7e22ce;
+    }
+
+    [data-theme="light"] .pill-amber {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    /* Trigger Right Actions (Chevron + Copy Link) */
+    .faq-trigger-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .faq-copy-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      opacity: 0;
+      transition: all 0.2s ease;
+    }
+
+    .faq-item:hover .faq-copy-btn {
+      opacity: 0.7;
+    }
+
+    .faq-copy-btn:hover {
+      opacity: 1;
+      background: var(--bg-surface);
+      border-color: var(--border-subtle);
+      color: var(--primary);
+    }
+
+    .faq-chevron-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+
+    .faq-chevron-icon {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.25s ease;
+    }
+
+    .faq-item.active .faq-chevron-circle {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    [data-theme="dark"] .faq-item.active .faq-chevron-circle {
+      color: #080C14;
+    }
+
+    .faq-item.active .faq-chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    /* FAQ Content Body */
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.25s ease;
+      padding: 0 18px;
+    }
+
+    .faq-item.active .faq-content {
+      max-height: 1200px;
+      padding: 4px 18px 18px 62px;
+    }
+
+    @media (max-width: 600px) {
+      .faq-item.active .faq-content {
+        padding: 4px 14px 16px 14px;
+      }
+    }
+
+    .faq-content p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0 0 10px;
+    }
+
+    .faq-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-content strong {
+      color: var(--text-main);
+    }
+
+    .faq-content code {
+      background: rgba(30, 41, 59, 0.7);
+      padding: 2px 7px;
+      border-radius: 6px;
+      color: #38bdf8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84em;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      font-weight: 600;
+    }
+
+    [data-theme="light"] .faq-content code {
+      background: #e0f2fe !important;
+      color: #0369a1 !important;
+      border-color: #7dd3fc !important;
+    }
+
+    /* --------------------------------------------------------------------------
+       RICH VISUAL COMPONENTS (Ported from PlansPage.jsx)
+       -------------------------------------------------------------------------- */
+    /* 3-Step Milestone Visual */
+    .trial-milestone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 12px 0 6px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.35);
+      border: 1px solid var(--border-subtle);
+    }
+
+    [data-theme="light"] .trial-milestone-grid {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+    }
+
+    @media (max-width: 650px) {
+      .trial-milestone-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .milestone-step-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .milestone-step-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tag-emerald {
+      color: #10b981;
+    }
+
+    .tag-primary {
+      color: var(--primary);
+    }
+
+    .tag-muted {
+      color: var(--text-muted);
+    }
+
+    [data-theme="light"] .tag-emerald {
+      color: #15803d;
+    }
+
+    [data-theme="light"] .tag-primary {
+      color: #0284c7;
+    }
+
+    [data-theme="light"] .tag-muted {
+      color: #475569;
+    }
+
+    .milestone-step-title {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .milestone-step-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* 2-Option Cancellation Cards */
+    .cancel-options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 12px 0 6px;
+    }
+
+    @media (max-width: 650px) {
+      .cancel-options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cancel-option-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    [data-theme="light"] .milestone-step-card,
+    [data-theme="light"] .cancel-option-card {
+      background: #ffffff;
+      border-color: rgba(15, 23, 42, 0.12);
+    }
+
+    .cancel-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .cancel-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Callout Containers (Emerald, Amber, Blue) */
+    .callout-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin: 10px 0 4px;
+    }
+
+    .callout-emerald {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .callout-amber {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .callout-blue {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    [data-theme="light"] .callout-emerald {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+
+    [data-theme="light"] .callout-amber {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    [data-theme="light"] .callout-blue {
+      background: #f0f9ff;
+      border-color: #7dd3fc;
+    }
+
+    .callout-icon {
+      font-size: 1.1rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      flex: 1;
+    }
+
+    .callout-title {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 3px;
+    }
+
+    .callout-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Comparison Table Card (AI Groq Isolation) */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0 6px;
+    }
+
+    @media (max-width: 650px) {
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .compare-box {
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .compare-allowed {
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .compare-blocked {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    [data-theme="light"] .compare-allowed {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+
+    [data-theme="light"] .compare-blocked {
+      background: #fef2f2;
+      border-color: #fca5a5;
+    }
+
+    .compare-box-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .compare-allowed .compare-box-title {
+      color: #10b981;
+    }
+
+    .compare-blocked .compare-box-title {
+      color: #ef4444;
+    }
+
+    [data-theme="light"] .compare-allowed .compare-box-title {
+      color: #15803d;
+    }
+
+    [data-theme="light"] .compare-blocked .compare-box-title {
+      color: #dc2626;
+    }
+
+    .compare-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Empty State for Search */
+    .faq-empty-state {
+      display: none;
+      text-align: center;
+      padding: 48px 16px;
+      background: var(--bg-card);
+      border: 1px dashed var(--border-subtle);
+      border-radius: 16px;
+      margin: 20px 0;
+    }
+
+    .faq-empty-state.visible {
+      display: block;
+    }
+
+    /* Toast Notification for Deep Link Copy */
+    .faq-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--primary);
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .faq-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Print Stylesheet Overrides */
     @media print {
-      .site-header, .site-footer, .faq-category-nav, .print-actions, .ambient-glow {
+
+      .site-header,
+      .site-footer,
+      .faq-category-nav,
+      .faq-toolbar,
+      .ambient-glow,
+      .trust-grid,
+      .faq-toast,
+      .faq-copy-btn {
         display: none !important;
       }
+
       body {
         background: #ffffff !important;
         color: #000000 !important;
       }
+
       .faq-content {
         display: block !important;
         max-height: none !important;
         padding-top: 8px !important;
       }
+
       .faq-item {
         break-inside: avoid;
         border: 1px solid #ddd !important;
@@ -122,7 +1353,8 @@
       <a href="index.html" class="brand-logo">
         <div class="logo-icon-box">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#logo_grad)" stroke="#38BDF8" stroke-width="1.5" stroke-linejoin="round" />
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#logo_grad)" stroke="#38BDF8" stroke-width="1.5"
+              stroke-linejoin="round" />
             <defs>
               <linearGradient id="logo_grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#38BDF8" />
@@ -133,15 +1365,16 @@
         </div>
         <div class="brand-text-group">
           <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
-          <span class="brand-tagline">Interactive Data Cubes for Sheets</span>
+          <span class="brand-tagline">Interactive Pivot Dashboards</span>
         </div>
       </a>
 
       <nav class="nav-menu" id="navMenu">
-        <a href="index.html#problem" class="nav-link">The Problem</a>
-        <a href="index.html#demo" class="nav-link">Live Demo</a>
+        <a href="index.html#demo" class="nav-link">Product Tour</a>
+        <a href="index.html#problem" class="nav-link">Why Qbonic</a>
         <a href="pricing.html" class="nav-link">Pricing</a>
-        <a href="detailed_faqs.html" class="nav-link active" style="color: var(--primary); font-weight: 700;">Security & FAQs</a>
+        <a href="detailed_faqs.html" class="nav-link active" style="color: var(--primary); font-weight: 700;">Security &
+          FAQs</a>
         <a href="index.html#about" class="nav-link">About Us</a>
         <a href="index.html#contact" class="nav-link">Contact Us</a>
       </nav>
@@ -155,7 +1388,8 @@
           </label>
           <span class="theme-switch-icon">☀️</span>
         </div>
-        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
+        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm"
+          id="navLoginBtn">Login</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
           <span class="burger-bar"></span>
           <span class="burger-bar"></span>
@@ -180,8 +1414,8 @@
         <a href="pricing.html" class="drawer-link">Pricing</a>
         <a href="detailed_faqs.html" class="drawer-link">Security & FAQs</a>
         <a href="index.html#about" class="drawer-link">About Us</a>
-        <a href="index.html#contact" class="drawer-link">Contact Us</a>
-        <a href="http://localhost:5173/?auth=signin" onclick="redirectToLogin(event)" class="drawer-link btn btn-primary mt-4" id="drawerLoginBtn">Login</a>
+        <a href="index.html#signup" class="drawer-link btn btn-primary mt-4" id="drawerSignupBtn">Claim Founding Beta
+          Seat</a>
       </nav>
     </div>
   </div>
@@ -189,350 +1423,1133 @@
   <main class="container container-narrow" style="padding-bottom: 80px;">
     <!-- Page Header -->
     <section class="faq-page-header">
-      <span class="section-tag" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">SECURITY, PRIVACY & ARCHITECTURE WHITEPAPER</span>
-      <h1 class="section-title" style="font-size: 2.5rem; margin-top: 10px;">Frequently Asked Questions & Technical Specifications</h1>
+      <span class="section-tag" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">SECURITY, PRIVACY &
+        ARCHITECTURE WHITEPAPER</span>
+      <h1 class="section-title" style="font-size: 2.35rem; margin-top: 10px;">Security, Privacy & Technical FAQs</h1>
       <p class="section-subtitle" style="max-width: 680px; margin: 10px auto 0;">
-        Detailed breakdown of Qbonic’s 100% in-browser memory model, Groq AI metadata isolation, GDPR/CCPA compliance, telemetry, and payment security.
+        Clear, comprehensive answers regarding our 100% in-browser memory model, Groq AI metadata isolation, GDPR/CCPA
+        compliance, and Paddle payment protection.
       </p>
 
-      <!-- Print Button -->
-      <div class="print-actions">
-        <button onclick="window.print()" class="btn btn-outline btn-sm font-bold" style="border-radius: 999px; gap: 8px;">
-          🖨️ Print / Save as PDF
-        </button>
+      <!-- 4-Card Trust Anchor Banner (Global B2C Reassurance) -->
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-card-header">
+            <div class="trust-icon-box trust-icon-emerald">🛡️</div>
+            <h3 class="trust-card-title">Zero Server Upload</h3>
+          </div>
+          <p class="trust-card-desc">100% in-browser RAM processing. Raw spreadsheet rows never reach any cloud server.
+          </p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-card-header">
+            <div class="trust-icon-box trust-icon-blue">🤖</div>
+            <h3 class="trust-card-title">AI Metadata Isolation</h3>
+          </div>
+          <p class="trust-card-desc">Groq AI only sees column headers for smart suggestions. Zero cell values shared.
+          </p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-card-header">
+            <div class="trust-icon-box trust-icon-purple">💳</div>
+            <h3 class="trust-card-title">PCI-DSS Level 1</h3>
+          </div>
+          <p class="trust-card-desc">Handled by Paddle Merchant of Record. Qbonic never sees or stores card numbers.</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-card-header">
+            <div class="trust-icon-box trust-icon-amber">⚖️</div>
+            <h3 class="trust-card-title">Privacy by Design</h3>
+          </div>
+          <p class="trust-card-desc">GDPR & CCPA compliant. Zero cross-site advertising cookies or behavioral trackers.
+          </p>
+        </div>
       </div>
 
-      <!-- Category Filter Tabs -->
-      <div class="faq-category-nav">
-        <button class="cat-btn active" onclick="filterFaqCategory('all')">All Questions</button>
-        <button class="cat-btn" onclick="filterFaqCategory('cat1')">1. In-Browser Privacy</button>
-        <button class="cat-btn" onclick="filterFaqCategory('cat2')">2. AI & Groq Security</button>
-        <button class="cat-btn" onclick="filterFaqCategory('cat3')">3. GDPR & Compliance</button>
-        <button class="cat-btn" onclick="filterFaqCategory('cat4')">4. Product Telemetry</button>
-        <button class="cat-btn" onclick="filterFaqCategory('cat5')">5. Auth & Accounts</button>
-        <button class="cat-btn" onclick="filterFaqCategory('cat6')">6. Payments & Paddle</button>
-        <button class="cat-btn" onclick="filterFaqCategory('cat7')">7. Browser Storage</button>
-        <button class="cat-btn" onclick="filterFaqCategory('cat8')">8. Enterprise</button>
+      <!-- Live Search & Toolbar -->
+      <div class="faq-toolbar">
+        <div class="faq-search-wrapper">
+          <span class="faq-search-icon">🔍</span>
+          <input type="text" id="faqSearchInput" class="faq-search-input"
+            placeholder="Search security, privacy, HIPAA, Groq AI, Paddle billing, offline mode..."
+            aria-label="Search FAQs" autocomplete="off" />
+          <button id="faqSearchClear" class="faq-search-clear" aria-label="Clear search">&times;</button>
+        </div>
+
+        <div class="faq-meta-actions">
+          <span id="faqCountBadge" class="faq-count-badge">Showing 29 questions</span>
+          <div class="faq-action-group">
+            <button id="toggleAllFaqBtn" class="btn-tool" onclick="toggleAllFaqs()">
+              <span id="toggleAllIcon">⤢</span>
+              <span id="toggleAllText">Expand All</span>
+            </button>
+            <button onclick="window.print()" class="btn-tool" title="Print or save as clean PDF">
+              <span>🖨️</span>
+              <span>Print PDF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs — Responsive Hybrid (Wrap on Desktop, Swipe on Mobile) -->
+      <div class="faq-category-nav-wrapper">
+        <button class="cat-nav-arrow cat-nav-arrow-left" id="catNavLeft" aria-label="Scroll categories left" type="button">&lsaquo;</button>
+        <div class="faq-category-nav" id="faqCatNav" role="tablist">
+          <button class="cat-btn active" onclick="filterFaqCategory('all', this)">All Questions</button>
+          <button class="cat-btn" onclick="filterFaqCategory('cat1', this)">🛡️ 1. In-Browser Privacy</button>
+          <button class="cat-btn" onclick="filterFaqCategory('cat2', this)">🤖 2. AI & Groq Security</button>
+          <button class="cat-btn" onclick="filterFaqCategory('cat3', this)">⚖️ 3. GDPR & Compliance</button>
+          <button class="cat-btn" onclick="filterFaqCategory('cat4', this)">📊 4. Telemetry</button>
+          <button class="cat-btn" onclick="filterFaqCategory('cat5', this)">🔐 5. Auth & Sync</button>
+          <button class="cat-btn" onclick="filterFaqCategory('cat6', this)">💳 6. Payments & Paddle</button>
+          <button class="cat-btn" onclick="filterFaqCategory('cat7', this)">💾 7. Storage & Offline</button>
+          <button class="cat-btn" onclick="filterFaqCategory('cat8', this)">🏢 8. Enterprise</button>
+        </div>
+        <button class="cat-nav-arrow cat-nav-arrow-right" id="catNavRight" aria-label="Scroll categories right" type="button">&rsaquo;</button>
       </div>
     </section>
 
-    <!-- Category 1: In-Browser Privacy -->
+    <!-- Empty State for Search -->
+    <div id="faqEmptyState" class="faq-empty-state">
+      <div style="font-size: 2.2rem; margin-bottom: 8px;">🔍</div>
+      <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--text-main); margin-bottom: 4px;">No
+        matching questions found</h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 420px; margin: 0 auto 16px;">
+        We couldn't find any FAQs matching your query. Try searching for terms like "HIPAA", "Groq", "Paddle",
+        "Offline", or "Cancel".
+      </p>
+      <button onclick="resetFaqSearch()" class="btn-tool" style="border-color: var(--primary); color: var(--primary);">
+        Reset Search Filter
+      </button>
+    </div>
+
+    <!-- ========================================================================
+         CATEGORY 1: IN-BROWSER PRIVACY
+         ======================================================================== -->
     <section class="faq-category-section" id="cat1">
-      <h2 class="faq-cat-title">🛡️ 1. Core Data Privacy & Zero-Server-Upload Architecture</h2>
+      <h2 class="faq-cat-title">
+        <span>🛡️ 1. Core Data Privacy & Zero-Server-Upload Architecture</span>
+        <span class="faq-cat-badge">Zero Cloud Retention</span>
+      </h2>
       <div class="faq-accordion">
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Where does my spreadsheet data go? Does Qbonic upload files to any server?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-where-data-goes">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">🛡️</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Where does my spreadsheet data go? Does Qbonic upload files to any
+                  server?</span>
+                <span class="reassurance-pill pill-emerald">100% In-Browser RAM</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-where-data-goes', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p><strong>100% in-browser processing.</strong> Raw CSV, TSV, and Excel data is parsed directly inside your device's local memory (RAM / Web Workers). Zero raw spreadsheet cell values or customer records are ever uploaded to remote servers or third-party cloud databases.</p>
+            <p><strong>100% in-browser processing.</strong> Raw CSV, TSV, and Excel data is parsed directly inside your
+              device's local memory (RAM / Web Workers). Zero raw spreadsheet cell values or customer records are ever
+              uploaded to remote servers or third-party cloud databases.</p>
+            <div class="callout-box callout-emerald">
+              <span class="callout-icon">✨</span>
+              <div class="callout-body">
+                <div class="callout-title">Client-Side Isolation Guarantee</div>
+                <p class="callout-text">Your datasets exist exclusively within your browser sandbox. Even if our servers
+                  are completely offline, your data pivoting and formula calculations function seamlessly.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Does Qbonic, its developers, or any backend server ever store or cache my sales data?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-server-cache">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">🔒</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Does Qbonic, its developers, or any backend server ever store or cache my sales
+                  data?</span>
+                <span class="reassurance-pill pill-emerald">Zero Data Storage</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-server-cache', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>No. We operate on a strict Zero-Data Architecture. We have no database tables or storage buckets capable of holding your spreadsheet rows.</p>
+            <p><strong>No.</strong> We operate on a strict Zero-Data Architecture. We have no database tables, object
+              storage buckets (S3/GCS), or caching layers capable of holding your spreadsheet rows.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>How can I verify that my data never leaves my browser?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-verify-network">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">🔍</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">How can I verify that my data never leaves my browser?</span>
+                <span class="reassurance-pill pill-blue">Auditable in DevTools</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-verify-network', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>You can open your browser Developer Tools (F12) &rarr; Network tab while loading files and pivoting data. You will observe zero file payloads or raw cell data uploaded over the network.</p>
+            <p>You can independently verify this in seconds: open your browser <strong>Developer Tools (F12 or
+                Cmd+Option+I) &rarr; Network tab</strong> while loading files and pivoting data. You will observe zero
+              file payloads or raw cell data uploaded over the network.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>When I connect a Google Sheet via URL, does Qbonic proxy it through a server?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-google-sheet-proxy">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">📄</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">When I connect a Google Sheet via URL, does Qbonic proxy it through a
+                  server?</span>
+                <span class="reassurance-pill pill-blue">Direct HTTPS Fetch</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-google-sheet-proxy', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>No. Your browser makes a direct client-side HTTPS fetch to Google's public CSV export endpoint. Qbonic's servers never touch the connection.</p>
+            <p><strong>No.</strong> Your browser makes a direct client-side HTTPS fetch to Google's public CSV export
+              endpoint. Qbonic's servers never touch the connection, inspect the headers, or proxy the stream.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>What happens to my data in memory when I close the browser tab?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-tab-close-ram">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-amber">⚡</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">What happens to my data in memory when I close the browser tab?</span>
+                <span class="reassurance-pill pill-amber">Instantly Garbage-Collected</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-tab-close-ram', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>All in-memory parsed rows are immediately wiped and garbage-collected by your browser's JavaScript runtime engine.</p>
+            <p>All in-memory parsed rows are immediately wiped and garbage-collected by your browser's JavaScript
+              V8/WebKit runtime engine. Zero unencrypted traces remain in device memory.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Are any third-party CDNs or scripts able to read my in-memory dataset?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-third-party-cdns">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">🛡️</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Are any third-party CDNs or scripts able to read my in-memory dataset?</span>
+                <span class="reassurance-pill pill-emerald">Isolated Scope</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-third-party-cdns', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>No. Qbonic runs in an isolated client-side React scope. We do not load third-party ad trackers, tag managers, or invasive session-replay scripts.</p>
+            <p><strong>No.</strong> Qbonic executes in an isolated client-side React scope. We do not load third-party
+              ad trackers, tag managers, or invasive session-replay scripts (like FullStory or Hotjar) that could
+              capture DOM text.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Can Qbonic see the content of my pivot cubes, charts, or generated dashboard summaries?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-see-cubes-charts">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">📊</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Can Qbonic see the content of my pivot cubes, charts, or generated dashboard
+                  summaries?</span>
+                <span class="reassurance-pill pill-blue">Local DOM Rendering</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-see-cubes-charts', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>No. All aggregation sums, sparkline trends, and pivot table cells are rendered locally in your browser DOM.</p>
+            <p><strong>No.</strong> All aggregation sums, sparkline trends, KPI formula results, and pivot table cells
+              are calculated and rendered locally in your browser's Document Object Model (DOM).</p>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Category 2: AI & Groq -->
+    <!-- ========================================================================
+         CATEGORY 2: AI & GROQ SECURITY
+         ======================================================================== -->
     <section class="faq-category-section" id="cat2">
-      <h2 class="faq-cat-title">🤖 2. AI Classification & Groq API Key Security</h2>
+      <h2 class="faq-cat-title">
+        <span>🤖 2. AI Classification & Groq API Key Security</span>
+        <span class="faq-cat-badge">Metadata-Only Isolation</span>
+      </h2>
       <div class="faq-accordion">
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Does AI (Groq) see my actual customer rows, sales numbers, or private data?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-groq-see-rows">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">🤖</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Does AI (Groq) see my actual customer rows, sales numbers, or private
+                  data?</span>
+                <span class="reassurance-pill pill-emerald">Zero Row Upload</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-groq-see-rows', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p><strong>No.</strong> Groq AI only receives high-level column metadata (header names, inferred data types, distinct value counts, and up to 3 anonymized sample values) to suggest smart classifications and formulas. Your full dataset, customer tables, and financial records are never uploaded or shared with external AI servers.</p>
+            <p><strong>No.</strong> Groq AI only receives high-level column metadata to suggest smart classifications
+              and formulas. Your full dataset, customer tables, and financial records are never uploaded or shared with
+              external AI servers.</p>
+
+            <!-- Side-by-Side Comparison Card -->
+            <div class="compare-grid">
+              <div class="compare-box compare-allowed">
+                <div class="compare-box-title">
+                  <span>✅</span>
+                  <span>Sent for AI Suggestions</span>
+                </div>
+                <ul class="compare-list">
+                  <li>• Column header names (e.g. <code>"Order Date"</code>, <code>"ARR"</code>)</li>
+                  <li>• Inferred column data types (e.g. <code>Number</code>, <code>Date</code>)</li>
+                  <li>• Distinct value counts & up to 3 anonymized samples</li>
+                </ul>
+              </div>
+
+              <div class="compare-box compare-blocked">
+                <div class="compare-box-title">
+                  <span>❌</span>
+                  <span>Strictly Never Shared</span>
+                </div>
+                <ul class="compare-list">
+                  <li>• Raw customer rows and PII</li>
+                  <li>• Financial numbers & transaction records</li>
+                  <li>• Complete spreadsheet tables</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Can I use Qbonic without creating a Groq AI account or entering an API key?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-use-without-ai">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">⚡</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Can I use Qbonic without creating a Groq AI account or entering an API
+                  key?</span>
+                <span class="reassurance-pill pill-emerald">100% Optional</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-use-without-ai', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p><strong>Absolutely.</strong> Qbonic includes an intelligent built-in rule heuristics engine that works out of the box with zero API key or configuration required. Because spreadsheets vary across business domains, automated classifications (both rule-based and AI) serve as smart starting points—we recommend reviewing the interactive Configuration page to fine-tune column types, unit formats (Currency, %, Count), and custom KPI formulas for your exact use case.</p>
+            <p><strong>Absolutely.</strong> Qbonic includes an intelligent built-in rule heuristics engine that works
+              out of the box with zero API key or external account required.</p>
+            <p>Because spreadsheets vary across business domains, automated classifications (both rule-based and AI)
+              serve as smart starting points. We recommend reviewing the interactive Configuration page to fine-tune
+              column types, unit formats (Currency, %, Count), and custom KPI formulas for your exact use case.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Where is my Groq API Key stored?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-groq-key-storage">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-amber">🔑</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Where is my Groq API Key stored?</span>
+                <span class="reassurance-pill pill-amber">Local Storage Only</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-groq-key-storage', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Your Groq API key is stored exclusively in your browser's private `localStorage` (`qbonic_groq_api_key`). It is never transmitted to Qbonic servers or telemetry.</p>
+            <p>Your Groq API key is stored exclusively in your browser's private <code>localStorage</code> (key:
+              <code>qbonic_groq_api_key</code>). It is never transmitted to Qbonic servers, telemetry endpoints, or
+              third-party loggers.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Does Groq use my column headers to train foundational models?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-groq-model-training">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">🛡️</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Does Groq use my column headers to train foundational models?</span>
+                <span class="reassurance-pill pill-blue">Zero Model Training</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-groq-model-training', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Under Groq's API terms of service, data sent via API is processed for inference and is not used to train foundational AI models.</p>
+            <p><strong>No.</strong> Under Groq's Commercial API terms of service, data submitted via their inference
+              endpoints is processed strictly in volatile GPU memory and is <strong>never used to train foundational AI
+                models</strong>.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>How can I delete or rotate my Groq API Key?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-groq-delete-key">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-purple">🗑️</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">How can I delete or rotate my Groq API Key?</span>
+                <span class="reassurance-pill pill-purple">1-Click Local Purge</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-groq-delete-key', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Navigate to Settings &rarr; AI Configuration and click "Remove Key". It is instantly purged from your browser storage.</p>
+            <p>Navigate to <strong>Settings &rarr; AI Configuration</strong> and click <strong>"Remove Key"</strong>. It
+              is immediately purged from your browser storage with zero residual backups.</p>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Category 3: GDPR & Compliance -->
+    <!-- ========================================================================
+         CATEGORY 3: REGULATORY & COMPLIANCE
+         ======================================================================== -->
     <section class="faq-category-section" id="cat3">
-      <h2 class="faq-cat-title">⚖️ 3. Regulatory & Legal Compliance (GDPR, CCPA, HIPAA)</h2>
+      <h2 class="faq-cat-title">
+        <span>⚖️ 3. Regulatory & Legal Compliance (GDPR, CCPA, HIPAA)</span>
+        <span class="faq-cat-badge">Privacy by Design</span>
+      </h2>
       <div class="faq-accordion">
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Is Qbonic compliant with GDPR (Europe) and CCPA (US)?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-gdpr-ccpa">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">⚖️</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Is Qbonic compliant with GDPR (Europe) and CCPA (US)?</span>
+                <span class="reassurance-pill pill-emerald">Article 25 Compliant</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-gdpr-ccpa', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p><strong>Yes.</strong> Qbonic is engineered on strict <em>"Privacy-by-Design"</em> principles (GDPR Article 25). Because raw dataset rows never leave your computer, there is zero persistent cloud data retention and zero invasive third-party cross-site advertising cookies.</p>
+            <p><strong>Yes.</strong> Qbonic is engineered on strict <em>"Privacy-by-Design and by Default"</em>
+              principles (GDPR Article 25). Because raw dataset rows never leave your computer, there is zero persistent
+              cloud data retention and zero cross-site behavioral tracking.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Can healthcare teams safely analyze clinical data on Qbonic under HIPAA?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-hipaa-healthcare">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">🏥</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Can healthcare teams safely analyze clinical data on Qbonic under HIPAA?</span>
+                <span class="reassurance-pill pill-blue">Zero PHI Transmission</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-hipaa-healthcare', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Because processing occurs entirely on the user's local hardware without uploading Protected Health Information (PHI) to cloud servers, Qbonic supports secure local healthcare data analysis.</p>
+            <p>Because computation occurs entirely on the user's local hardware without transmitting Protected Health
+              Information (PHI) to cloud servers, Qbonic supports secure in-browser healthcare data exploration without
+              breaching HIPAA server storage rules.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>How does Qbonic handle GDPR "Right to be Forgotten" (Data Erasure)?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-gdpr-erasure">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-purple">📝</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">How does Qbonic handle GDPR "Right to be Forgotten" (Data Erasure)?</span>
+                <span class="reassurance-pill pill-purple">30-Day SLA</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-gdpr-erasure', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>You can request permanent account deletion by emailing `admin@qbonic.com`. All account metadata in Firestore is wiped within 30 days. No raw dataset rows exist to erase.</p>
+            <p>You can request permanent account deletion at any time by emailing <code>admin@qbonic.com</code>. All
+              authentication profile metadata in Firestore is wiped within 30 days. No raw dataset rows exist on our
+              servers to erase.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Does Qbonic use third-party advertising cookies or cross-site tracking pixels?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-advertising-cookies">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">🍪</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Does Qbonic use third-party advertising cookies or cross-site tracking
+                  pixels?</span>
+                <span class="reassurance-pill pill-emerald">Zero Ad Trackers</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-advertising-cookies', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>No. We do not use Meta Pixel, Google Ads remarketing pixels, or third-party behavioral advertising cookies.</p>
+            <p><strong>No.</strong> We do not use Meta Pixel, Google Ads remarketing pixels, or third-party behavioral
+              advertising cookies. Your analytical workflow is completely private.</p>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Category 4: Telemetry -->
+    <!-- ========================================================================
+         CATEGORY 4: TELEMETRY & ERROR LOGGING
+         ======================================================================== -->
     <section class="faq-category-section" id="cat4">
-      <h2 class="faq-cat-title">📊 4. Product Usage Telemetry & Error Logging</h2>
+      <h2 class="faq-cat-title">
+        <span>📊 4. Product Usage Telemetry & Error Logging</span>
+        <span class="faq-cat-badge">Pseudonymous Logging</span>
+      </h2>
       <div class="faq-accordion">
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>What telemetry does Qbonic collect?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-telemetry-collected">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">📊</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">What telemetry does Qbonic collect?</span>
+                <span class="reassurance-pill pill-blue">Operational Events</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-telemetry-collected', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>We collect lightweight milestone event logs: event name (e.g. `DATASET_LOADED`, `REPORT_SAVED`), pseudonymous `User_UID`, device type, browser, screen resolution, and unhandled error stack traces.</p>
+            <p>We collect lightweight milestone event logs: event name (e.g. <code>DATASET_LOADED</code>,
+              <code>REPORT_SAVED</code>), pseudonymous <code>User_UID</code>, device type, browser, screen resolution,
+              and unhandled error stack traces for application reliability.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Why does Qbonic use a pseudonymous User_UID instead of email?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-pseudonymous-uid">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-purple">🆔</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Why does Qbonic use a pseudonymous User_UID instead of email?</span>
+                <span class="reassurance-pill pill-purple">PII De-Identification</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-pseudonymous-uid', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>In accordance with GDPR Article 25 (Privacy by Design), using pseudonymous business IDs (e.g., `SHP1000001` or guest session hash) prevents PII (email addresses) from proliferating into operational telemetry logs.</p>
+            <p>In accordance with GDPR Article 25 (Privacy by Design), using pseudonymous business IDs (e.g.,
+              <code>SHP1000001</code> or guest session hash) prevents Personally Identifiable Information (PII) like
+              email addresses from proliferating into operational telemetry logs.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Does product telemetry ever log cell values or financial numbers?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-telemetry-cell-values">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">🛡️</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Does product telemetry ever log cell values or financial numbers?</span>
+                <span class="reassurance-pill pill-emerald">Strictly Zero</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-telemetry-cell-values', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Strictly zero. Telemetry only captures high-level counts (e.g., row count tier `10K-30K`, total dimensions `4`). Cell values and financial amounts are never captured.</p>
+            <p><strong>Strictly zero.</strong> Telemetry only captures high-level structural counts (e.g., row count
+              tier <code>10K-30K</code>, total dimensions <code>4</code>). Specific cell values, column contents, and
+              financial amounts are never captured.</p>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Category 5: Auth & Accounts -->
+    <!-- ========================================================================
+         CATEGORY 5: AUTHENTICATION & SYNC
+         ======================================================================== -->
     <section class="faq-category-section" id="cat5">
-      <h2 class="faq-cat-title">🔐 5. User Authentication & Cloud Sync</h2>
+      <h2 class="faq-cat-title">
+        <span>🔐 5. User Authentication & Cloud Sync</span>
+        <span class="faq-cat-badge">Minimal Scope</span>
+      </h2>
       <div class="faq-accordion">
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>What permissions does Qbonic request when I sign in with Google SSO?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-google-sso-permissions">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">🔑</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">What permissions does Qbonic request when I sign in with Google SSO?</span>
+                <span class="reassurance-pill pill-blue">Zero Drive Access</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-google-sso-permissions', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Only basic profile identity (`email`, `name`, `photoURL`). Qbonic requests zero access to your Google Drive, Gmail, or Google Contacts.</p>
+            <p>Only basic profile identity (<code>email</code>, <code>name</code>, <code>photoURL</code>). Qbonic
+              requests <strong>zero access</strong> to your Google Drive, Gmail, or Google Contacts.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Are my saved report configurations stored in the cloud or locally?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-saved-reports-sync">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-amber">💾</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Are my saved report configurations stored in the cloud or locally?</span>
+                <span class="reassurance-pill pill-amber">Never Deleted</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-saved-reports-sync', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Saved report workspaces (column layouts, formulas, aliases) are stored locally in your browser's `localStorage` / `IndexedDB` for 100% privacy.</p>
+            <p>Saved report workspaces (column layouts, formulas, aliases) are stored locally in your browser's
+              <code>localStorage</code> / <code>IndexedDB</code> for 100% privacy.</p>
+            <div class="callout-box callout-amber">
+              <span class="callout-icon">💾</span>
+              <div class="callout-body">
+                <div class="callout-title">Persistent Local Templates</div>
+                <p class="callout-text">Even if you downgrade or switch plans, your saved metric definitions and column
+                  mappings remain intact on your computer.</p>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Category 6: Payments & Paddle -->
+    <!-- ========================================================================
+         CATEGORY 6: PAYMENTS & PADDLE (HIGH B2C CONVERSION VALUE)
+         ======================================================================== -->
     <section class="faq-category-section" id="cat6">
-      <h2 class="faq-cat-title">💳 6. Payment Security, Billing & Merchant of Record</h2>
+      <h2 class="faq-cat-title">
+        <span>💳 6. Payment Security, Billing & Merchant of Record</span>
+        <span class="faq-cat-badge">Paddle Protected</span>
+      </h2>
       <div class="faq-accordion">
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>How much does Qbonic cost, and can I cancel anytime?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-pricing-plans">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">💳</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">How much does Qbonic cost, and can I cancel anytime?</span>
+                <span class="reassurance-pill pill-emerald">Free &amp; Pro Plans</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-pricing-plans', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>You can start with our Free Plan ($0) or upgrade to <strong>Pro with a <span data-bind="pro-trial-days">7</span>-Day Free Trial (<span data-bind="pro-price-monthly">$5.99</span>/month or <span data-bind="pro-price-yearly">$49</span>/year, saving <span data-bind="pro-discount">32%</span>)</strong> for <span data-bind="pro-max-rows">30,000+</span> rows, unlimited dimensions, and custom KPI formulas. View our full <a href="pricing.html" style="color: var(--primary); font-weight: 700; text-decoration: underline;">Pricing Page</a>. Powered by Paddle with instant 1-click self-serve cancellation.</p>
+            <p>You can start with our <strong>Free Plan ($0)</strong> or upgrade to <strong>Pro with a <span
+                  data-bind="pro-trial-days">7</span>-Day Free Trial (<span
+                  data-bind="pro-price-monthly">$5.99</span>/month or <span
+                  data-bind="pro-price-yearly">$49</span>/year, saving <span
+                  data-bind="pro-discount">32%</span>)</strong> for <span data-bind="pro-max-rows">30,000+</span> rows,
+              unlimited dimensions, and custom KPI formulas.</p>
+            <p>Visit our complete <a href="pricing.html"
+                style="color: var(--primary); font-weight: 700; text-decoration: underline;">Interactive Pricing
+                Page</a>. All subscriptions are powered by Paddle with instant 1-click self-serve cancellation.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Does Qbonic store or process credit card numbers?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-card-security-pci">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">🛡️</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Does Qbonic store or process credit card numbers?</span>
+                <span class="reassurance-pill pill-emerald">PCI-DSS Level 1</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-card-security-pci', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>No. All transactions are securely handled by Paddle (our Merchant of Record) using PCI-DSS Level 1 compliant tokenization. We never see or store your raw card details.</p>
+            <p><strong>No, never.</strong> All transactions are securely handled by Paddle, our Merchant of Record,
+              utilizing certified <strong>PCI-DSS Level 1</strong> compliant tokenization.</p>
+            <div class="callout-box callout-emerald">
+              <span class="callout-icon">🔒</span>
+              <div class="callout-body">
+                <div class="callout-title">Paddle Merchant of Record Protection</div>
+                <p class="callout-text">Qbonic never sees, handles, or stores your raw card numbers or billing
+                  credentials. Payments are shielded with 256-bit SSL encryption and 3D Secure verification.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>How does the 7-day free trial and cancellation work?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-trial-and-cancellation">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">⚡</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">How does the 7-day free trial and cancellation work?</span>
+                <span class="reassurance-pill pill-blue">$0.00 Today • 1-Click Cancel</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-trial-and-cancellation', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Your card is authorized at $0.00 today. You have full 7 days of Pro access. You can cancel anytime with 1 click before Day 7 to avoid any charges.</p>
+            <p><strong>Zero upfront charge.</strong> Your card is authorized at <strong>$0.00 today</strong>. You get 7
+              full days of Pro access completely free. Your first charge will only occur at the end of Day 7 if you
+              choose to continue.</p>
+
+            <!-- 3-Step Milestone Timeline Card (PlansPage.jsx Pattern) -->
+            <div class="trial-milestone-grid">
+              <div class="milestone-step-card">
+                <span class="milestone-step-tag tag-emerald">Step 1 • Today</span>
+                <div class="milestone-step-title">$0.00 Charged</div>
+                <p class="milestone-step-desc">Card verified at $0.00 today. Zero upfront cost.</p>
+              </div>
+
+              <div class="milestone-step-card">
+                <span class="milestone-step-tag tag-primary">Step 2 • Days 1–7</span>
+                <div class="milestone-step-title">Full Pro Access</div>
+                <p class="milestone-step-desc">Analyze 30k+ rows, custom KPI formulas, and unlimited dimensions.</p>
+              </div>
+
+              <div class="milestone-step-card">
+                <span class="milestone-step-tag tag-muted">Step 3 • Day 7 End</span>
+                <div class="milestone-step-title">Keep or Cancel</div>
+                <p class="milestone-step-desc">First charge occurs only if kept. Cancel anytime with 1 click.</p>
+              </div>
+            </div>
+
+            <p style="margin-top: 14px; font-weight: 700; color: var(--text-main);">Two Easy Self-Serve Cancellation
+              Options:</p>
+
+            <!-- 2-Option Side-by-Side Cards -->
+            <div class="cancel-options-grid">
+              <div class="cancel-option-card">
+                <div class="cancel-card-header">
+                  <span>🖥️</span>
+                  <span>Option 1: Directly on Qbonic Plans Page</span>
+                </div>
+                <p class="cancel-card-desc">
+                  Navigate to the Plans page inside Qbonic and click <strong>"Cancel Free Trial"</strong> (cancels
+                  immediately with $0 charged) or <strong>"Cancel Subscription"</strong>.
+                </p>
+              </div>
+
+              <div class="cancel-option-card">
+                <div class="cancel-card-header">
+                  <span>✉️</span>
+                  <span>Option 2: Via Paddle Customer Portal</span>
+                </div>
+                <p class="cancel-card-desc">
+                  Every confirmation email and receipt from Paddle includes a direct <strong>"Manage / Cancel
+                    Subscription"</strong> self-serve link.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Category 7: Browser Storage -->
+    <!-- ========================================================================
+         CATEGORY 7: BROWSER STORAGE & OFFLINE MODE
+         ======================================================================== -->
     <section class="faq-category-section" id="cat7">
-      <h2 class="faq-cat-title">💾 7. Browser Storage, File Limits & Offline Mode</h2>
+      <h2 class="faq-cat-title">
+        <span>💾 7. Browser Storage, File Limits & Offline Mode</span>
+        <span class="faq-cat-badge">Offline Capable</span>
+      </h2>
       <div class="faq-accordion">
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>What file formats and row limits are supported?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-file-formats-limits">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">📁</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">What file formats and row limits are supported?</span>
+                <span class="reassurance-pill pill-blue">CSV, Excel, Sheets</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-file-formats-limits', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Connect Google Sheets, Zoho Sheets, or drag-and-drop <code>.csv</code>, <code>.tsv</code>, <code>.xlsx</code>, and <code>.xls</code> files. The engine processes up to <strong data-bind="free-max-rows">1,000 rows</strong> on the Free Plan and up to <strong data-bind="pro-max-rows">30,000+ rows</strong> on the Pro Plan directly in your browser's local memory.</p>
+            <p>Connect Google Sheets, Zoho Sheets, or drag-and-drop <code>.csv</code>, <code>.tsv</code>,
+              <code>.xlsx</code>, and <code>.xls</code> files. The engine processes up to <strong
+                data-bind="free-max-rows">1,000 rows</strong> on the Free Plan and up to <strong
+                data-bind="pro-max-rows">30,000+ rows</strong> on the Pro Plan directly in your browser's local memory.
+            </p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Does Qbonic work offline?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-offline-mode">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-emerald">📶</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Does Qbonic work offline?</span>
+                <span class="reassurance-pill pill-emerald">100% Local DOM</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-offline-mode', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p><strong>Yes!</strong> All pivot cube aggregations, sparklines, tables, and multi-dimension cross-filters run 100% locally in your browser DOM without requiring an active internet connection. Background product telemetry requests fail silently when offline with zero interruption to your analysis.</p>
+            <p><strong>Yes!</strong> All pivot cube aggregations, sparklines, tables, and multi-dimension cross-filters
+              run 100% locally in your browser DOM without requiring an active internet connection.</p>
+            <div class="callout-box callout-emerald">
+              <span class="callout-icon">✈️</span>
+              <div class="callout-body">
+                <div class="callout-title">Airplane Mode Ready</div>
+                <p class="callout-text">Once the web app loads, background telemetry requests fail silently when offline
+                  with zero interruption to your dataset analysis.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>What should I do on a shared or public computer?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-shared-computer">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-amber">💻</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">What should I do on a shared or public computer?</span>
+                <span class="reassurance-pill pill-amber">Incognito / Reset</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-shared-computer', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>Simply use Incognito / Private Browsing mode, or click "Reset Saved Reports & Local Storage" from the Error Boundary / Settings before closing the browser.</p>
+            <p>Simply use <strong>Incognito / Private Browsing mode</strong>, or click <strong>"Reset Saved Reports &
+                Local Storage"</strong> from Settings before closing the browser to ensure all local workspace cache is
+              wiped.</p>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Category 8: Enterprise -->
+    <!-- ========================================================================
+         CATEGORY 8: ENTERPRISE & GOVERNANCE
+         ======================================================================== -->
     <section class="faq-category-section" id="cat8">
-      <h2 class="faq-cat-title">🏢 8. Enterprise Governance & Security</h2>
+      <h2 class="faq-cat-title">
+        <span>🏢 8. Enterprise Governance & Security</span>
+        <span class="faq-cat-badge">Enterprise Ready</span>
+      </h2>
       <div class="faq-accordion">
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>Can I export or download data from Qbonic?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-export-download">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-blue">📥</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">Can I export or download data from Qbonic?</span>
+                <span class="reassurance-pill pill-blue">Interactive Exploration</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-export-download', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>In the current MVP release, Qbonic focuses exclusively on real-time interactive in-browser dashboard exploration, filtering, and metric calculation. File exports (such as downloading modified CSVs or PDF reports) are not currently supported; your source files remain untouched on your device, and saved dashboard views are stored privately in your local browser storage.</p>
+            <p>In the current MVP release, Qbonic focuses exclusively on real-time interactive in-browser dashboard
+              exploration, filtering, and metric calculation. File exports (such as downloading modified CSVs or PDF
+              reports) are not currently supported; your source files remain untouched on your device, and saved
+              dashboard views are stored privately in your local browser storage.</p>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-trigger" aria-expanded="false">
-            <span>How do I report a security vulnerability?</span>
-            <span class="faq-icon">+</span>
-          </button>
+
+        <div class="faq-item" id="faq-security-vulnerability">
+          <div class="faq-trigger" role="button" tabindex="0" aria-expanded="false">
+            <div class="faq-trigger-left">
+              <div class="faq-item-icon-box icon-box-purple">🚨</div>
+              <div class="faq-title-wrap">
+                <span class="faq-q-text">How do I report a security vulnerability?</span>
+                <span class="reassurance-pill pill-purple">Responsible Disclosure</span>
+              </div>
+            </div>
+            <div class="faq-trigger-right">
+              <button class="faq-copy-btn" title="Copy direct link"
+                onclick="copyFaqLink('faq-security-vulnerability', event)">🔗</button>
+              <div class="faq-chevron-circle">
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="faq-content">
-            <p>We maintain a responsible disclosure program. Please report any security findings to `security@qbonic.com` or `admin@qbonic.com`.</p>
+            <p>We maintain an active responsible disclosure program. Please report any potential security
+              vulnerabilities directly to <code>security@qbonic.com</code> or <code>admin@qbonic.com</code>. We
+              acknowledge all reports within 24 hours.</p>
           </div>
         </div>
+
       </div>
     </section>
   </main>
+
+  <!-- Toast Notification for Deep Link Copy -->
+  <div id="faqToast" class="faq-toast" aria-live="polite">
+    <span>🔗</span>
+    <span id="faqToastMsg">Direct link copied to clipboard!</span>
+  </div>
+
+  <!-- Floating Sticky Founding Cohort Bar -->
+  <div id="faqFloatingBar" class="faq-floating-cta-bar" role="complementary" aria-label="Founding Member Cohort Invitation">
+    <div class="floating-bar-info">
+      <span class="floating-bar-badge">⚡ Founding Cohort</span>
+      <span class="floating-bar-text"><strong>Batch #1 Open</strong> • 1 Full Year of Pro Free Included</span>
+    </div>
+    <div class="floating-bar-actions">
+      <a href="index.html#signup" class="floating-bar-btn">
+        <span>Claim Founding Spot</span>
+        <span>→</span>
+      </a>
+      <button class="floating-bar-close" id="closeFloatingBar" aria-label="Dismiss banner">&times;</button>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="site-footer">
@@ -540,7 +2557,7 @@
       <div class="footer-top-row">
         <div class="footer-brand">
           <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
-          <p class="footer-tagline">Interactive Data Cubes for Sheets</p>
+          <p class="footer-tagline">Interactive Pivot Dashboards</p>
         </div>
 
         <nav class="footer-links" aria-label="Footer navigation">
@@ -555,27 +2572,311 @@
 
       <div class="footer-bottom">
         <p class="copyright-text">&copy; 2026 Qbonic. All rights reserved.</p>
-        <p class="company-attribution">Crafted with ❤️ in India by <strong>VitanuGenAI Technology Pvt Ltd 🇮🇳</strong></p>
+        <p class="company-attribution">Crafted with ❤️ in India by <strong>VitanuGenAI Technology Pvt Ltd 🇮🇳</strong>
+        </p>
       </div>
     </div>
   </footer>
 
   <script src="app.js"></script>
   <script>
-    function filterFaqCategory(catId) {
+    /* --------------------------------------------------------------------------
+       DETAILED FAQS PAGE — CLIENTSIDE LOGIC & USABILITY ENGINE
+       -------------------------------------------------------------------------- */
+    let currentCategory = 'all';
+    let isAllExpanded = false;
+
+    // 1. Accordion Toggle Handler (Keyboard + Click Accessible)
+    function setupDetailedFaqAccordions() {
+      const items = document.querySelectorAll('.faq-item');
+      items.forEach(item => {
+        const trigger = item.querySelector('.faq-trigger');
+        if (!trigger) return;
+
+        // Ensure triggers toggle reliably
+        trigger.addEventListener('click', (e) => {
+          // If copy button clicked, don't toggle
+          if (e.target.closest('.faq-copy-btn')) return;
+
+          const isActive = item.classList.contains('active');
+          if (isActive) {
+            item.classList.remove('active');
+            trigger.setAttribute('aria-expanded', 'false');
+          } else {
+            item.classList.add('active');
+            trigger.setAttribute('aria-expanded', 'true');
+          }
+        });
+
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            trigger.click();
+          }
+        });
+      });
+    }
+
+    // 2. Category Filtering with Horizontal Tab Animation
+    function filterFaqCategory(catId, btnElement) {
+      currentCategory = catId;
       const catBtns = document.querySelectorAll('.cat-btn');
       catBtns.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+      if (btnElement) {
+        btnElement.classList.add('active');
+        btnElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
 
+      applySearchAndCategoryFilters();
+    }
+
+    // 3. Live Keyword Search Filter
+    const searchInput = document.getElementById('faqSearchInput');
+    const searchClear = document.getElementById('faqSearchClear');
+    const countBadge = document.getElementById('faqCountBadge');
+    const emptyState = document.getElementById('faqEmptyState');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const val = searchInput.value.trim().toLowerCase();
+        if (val.length > 0) {
+          searchClear.style.display = 'block';
+        } else {
+          searchClear.style.display = 'none';
+        }
+        applySearchAndCategoryFilters();
+      });
+    }
+
+    if (searchClear) {
+      searchClear.addEventListener('click', () => {
+        resetFaqSearch();
+      });
+    }
+
+    function resetFaqSearch() {
+      if (searchInput) searchInput.value = '';
+      if (searchClear) searchClear.style.display = 'none';
+      applySearchAndCategoryFilters();
+      if (searchInput) searchInput.focus();
+    }
+
+    function applySearchAndCategoryFilters() {
+      const query = (searchInput ? searchInput.value.trim().toLowerCase() : '');
       const sections = document.querySelectorAll('.faq-category-section');
+      let visibleQuestions = 0;
+      let totalQuestions = 0;
+
       sections.forEach(sec => {
-        if (catId === 'all' || sec.id === catId) {
+        const isCatMatch = (currentCategory === 'all' || sec.id === currentCategory);
+        const items = sec.querySelectorAll('.faq-item');
+        let secVisibleCount = 0;
+
+        items.forEach(item => {
+          totalQuestions++;
+          const text = item.innerText.toLowerCase();
+          const matchesQuery = !query || text.includes(query);
+
+          if (isCatMatch && matchesQuery) {
+            item.style.display = 'block';
+            secVisibleCount++;
+            visibleQuestions++;
+            // Auto-expand on search match if query length >= 3
+            if (query.length >= 3) {
+              item.classList.add('active');
+              const tr = item.querySelector('.faq-trigger');
+              if (tr) tr.setAttribute('aria-expanded', 'true');
+            }
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        // Show/hide entire category section
+        if (isCatMatch && secVisibleCount > 0) {
           sec.style.display = 'block';
         } else {
           sec.style.display = 'none';
         }
       });
+
+      // Update Live Count Badge
+      if (countBadge) {
+        if (query) {
+          countBadge.textContent = `${visibleQuestions} of ${totalQuestions} questions matching "${query}"`;
+        } else if (currentCategory !== 'all') {
+          countBadge.textContent = `Showing ${visibleQuestions} questions`;
+        } else {
+          countBadge.textContent = `Showing all ${totalQuestions} questions`;
+        }
+      }
+
+      // Show/hide empty state
+      if (emptyState) {
+        if (visibleQuestions === 0) {
+          emptyState.classList.add('visible');
+        } else {
+          emptyState.classList.remove('visible');
+        }
+      }
     }
+
+    // 4. Expand All / Collapse All Toggle
+    function toggleAllFaqs() {
+      const items = document.querySelectorAll('.faq-item');
+      const toggleText = document.getElementById('toggleAllText');
+      const toggleIcon = document.getElementById('toggleAllIcon');
+
+      isAllExpanded = !isAllExpanded;
+
+      items.forEach(item => {
+        const trigger = item.querySelector('.faq-trigger');
+        if (isAllExpanded) {
+          item.classList.add('active');
+          if (trigger) trigger.setAttribute('aria-expanded', 'true');
+        } else {
+          item.classList.remove('active');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      if (toggleText) toggleText.textContent = isAllExpanded ? 'Collapse All' : 'Expand All';
+      if (toggleIcon) toggleIcon.textContent = isAllExpanded ? '⤡' : '⤢';
+    }
+
+    // 5. Deep-Link Support & Copy Link Action
+    function copyFaqLink(faqId, event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const url = window.location.origin + window.location.pathname + '#' + faqId;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('Direct link copied to clipboard!');
+        }).catch(() => {
+          showToast('Link copied: ' + url);
+        });
+      } else {
+        showToast('Link: ' + url);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('faqToast');
+      const toastMsg = document.getElementById('faqToastMsg');
+      if (!toast) return;
+      if (toastMsg) toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // 6. Handle URL Hash on Page Load (Auto-open and scroll to target question)
+    function handleInitialHash() {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#faq-')) {
+        const target = document.querySelector(hash);
+        if (target) {
+          // Find parent category section and ensure it's visible
+          const parentSec = target.closest('.faq-category-section');
+          if (parentSec) {
+            parentSec.style.display = 'block';
+          }
+          target.classList.add('active');
+          const trigger = target.querySelector('.faq-trigger');
+          if (trigger) trigger.setAttribute('aria-expanded', 'true');
+
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            target.style.transition = 'box-shadow 0.4s ease';
+            target.style.boxShadow = '0 0 0 3px rgba(56, 189, 248, 0.5)';
+            setTimeout(() => {
+              target.style.boxShadow = '';
+            }, 1800);
+          }, 350);
+        }
+      }
+    }
+
+    // 7. Floating Sticky Beta Bar Logic
+    function setupFloatingBar() {
+      const bar = document.getElementById('faqFloatingBar');
+      const closeBtn = document.getElementById('closeFloatingBar');
+      if (!bar) return;
+
+      if (sessionStorage.getItem('qbonic_faq_bar_dismissed') === '1') {
+        return;
+      }
+
+      let isVisible = false;
+      const onScroll = () => {
+        const scrolled = window.scrollY || document.documentElement.scrollTop;
+        if (scrolled > 450) {
+          if (!isVisible) {
+            bar.classList.add('is-visible');
+            isVisible = true;
+          }
+        } else {
+          if (isVisible) {
+            bar.classList.remove('is-visible');
+            isVisible = false;
+          }
+        }
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          bar.classList.remove('is-visible');
+          sessionStorage.setItem('qbonic_faq_bar_dismissed', '1');
+          window.removeEventListener('scroll', onScroll);
+        });
+      }
+    }
+
+    // 8. Category Navigation Controls & Arrow Buttons
+    function setupCategoryNavControls() {
+      const nav = document.getElementById('faqCatNav');
+      const leftBtn = document.getElementById('catNavLeft');
+      const rightBtn = document.getElementById('catNavRight');
+      if (!nav || !leftBtn || !rightBtn) return;
+
+      const updateArrows = () => {
+        const isOverflowing = nav.scrollWidth > nav.clientWidth + 2;
+        if (!isOverflowing) {
+          leftBtn.disabled = true;
+          rightBtn.disabled = true;
+          return;
+        }
+
+        leftBtn.disabled = (nav.scrollLeft <= 4);
+        rightBtn.disabled = (nav.scrollLeft >= nav.scrollWidth - nav.clientWidth - 4);
+      };
+
+      leftBtn.addEventListener('click', () => {
+        nav.scrollBy({ left: -220, behavior: 'smooth' });
+      });
+
+      rightBtn.addEventListener('click', () => {
+        nav.scrollBy({ left: 220, behavior: 'smooth' });
+      });
+
+      nav.addEventListener('scroll', updateArrows, { passive: true });
+      window.addEventListener('resize', updateArrows, { passive: true });
+      setTimeout(updateArrows, 100);
+    }
+
+    // Initialize once DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      setupDetailedFaqAccordions();
+      setupCategoryNavControls();
+      setupFloatingBar();
+      handleInitialHash();
+    });
   </script>
 </body>
 
