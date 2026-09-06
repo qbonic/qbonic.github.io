@@ -26,45 +26,19 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#080C14">
 
-  <!-- Instant Synchronous Theme & Login Redirect Initializer -->
+  <!-- Synchronous theme init — must run in <head> to prevent flash-of-wrong-theme (FOWT) -->
   <script>
     (function() {
-      var urlParams = new URLSearchParams(window.location.search);
-      var urlTheme = urlParams.get('theme');
-      var savedTheme = urlTheme || localStorage.getItem('qbonic_theme');
-      var isLight = savedTheme === 'light' || savedTheme === 'qbonic-light';
-      var finalTheme = isLight ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', finalTheme);
       try {
-        localStorage.setItem('qbonic_theme', finalTheme);
+        var p = new URLSearchParams(window.location.search);
+        var t = p.get('theme') || localStorage.getItem('qbonic_theme');
+        document.documentElement.setAttribute('data-theme', (t === 'light' || t === 'qbonic-light') ? 'light' : 'dark');
+        if (t) localStorage.setItem('qbonic_theme', (t === 'light' || t === 'qbonic-light') ? 'light' : 'dark');
       } catch(e) {}
     })();
-
-    function redirectToLogin(e) {
-      if (e) e.preventDefault();
-      var docTheme = document.documentElement.getAttribute('data-theme');
-      var themeToggle = document.getElementById('themeToggle');
-      var currentTheme = 'dark';
-
-      if (docTheme === 'light' || docTheme === 'qbonic-light') {
-        currentTheme = 'light';
-      } else if (docTheme === 'dark' || docTheme === 'qbonic-dark') {
-        currentTheme = 'dark';
-      } else if (themeToggle) {
-        currentTheme = themeToggle.checked ? 'light' : 'dark';
-      } else {
-        var saved = localStorage.getItem('qbonic_theme');
-        if (saved === 'light' || saved === 'qbonic-light') currentTheme = 'light';
-      }
-
-      var baseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-        ? "http://localhost:5173/?auth=signin"
-        : "https://console.qbonic.com/?auth=signin";
-
-      var targetUrl = baseUrl + "&theme=" + currentTheme;
-      window.location.href = targetUrl;
-    }
   </script>
+
+
 
   <!-- Favicon Icons -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -427,8 +401,8 @@
       <nav class="nav-menu" id="navMenu">
         <a href="#demo" class="nav-link">Product Tour</a>
         <a href="#problem" class="nav-link">Why Qbonic</a>
-        <a href="pricing.html" class="nav-link">Pricing</a>
-        <a href="detailed_faqs.html" class="nav-link">Security & FAQs</a>
+        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="nav-link" id="navPricingBtn">Pricing</a>
+        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="nav-link" id="navFaqsBtn">Security & FAQs</a>
         <a href="#about" class="nav-link">About Us</a>
         <a href="#contact" class="nav-link">Contact Us</a>
       </nav>
@@ -441,6 +415,7 @@
           </label>
           <span class="theme-switch-icon">☀️</span>
         </div>
+        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="btn btn-secondary btn-sm nav-demo-btn" id="navDemoBtn"><span class="demo-bolt">⚡</span> Try Live Demo</a>
         <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
           <span class="burger-bar"></span>
@@ -463,11 +438,12 @@
       <nav class="drawer-nav">
         <a href="#demo" class="drawer-link">Product Tour</a>
         <a href="#problem" class="drawer-link">Why Qbonic</a>
-        <a href="pricing.html" class="drawer-link">Pricing</a>
-        <a href="detailed_faqs.html" class="drawer-link">Security & FAQs</a>
+        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="drawer-link" id="drawerPricingBtn">Pricing</a>
+        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="drawer-link" id="drawerFaqsBtn">Security & FAQs</a>
         <a href="#about" class="drawer-link">About Us</a>
         <a href="#contact" class="drawer-link">Contact Us</a>
-        <a href="#signup" class="drawer-link btn btn-primary mt-4" id="drawerSignupBtn">Claim Founding Beta Seat</a>
+        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="drawer-link btn btn-secondary mt-3" id="drawerDemoBtn">⚡ Try Live Demo (Zero Signup)</a>
+        <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)" class="drawer-link btn btn-primary mt-2" id="drawerSignupBtn">Create Free Account &rarr;</a>
       </nav>
     </div>
   </div>
@@ -493,9 +469,18 @@
         </p>
 
         <div class="hero-cta-group">
-          <a href="#signup" class="btn btn-primary btn-lg glow-button">Claim 1 of 10 Founding Seats</a>
-          <a href="#demo" class="btn btn-secondary btn-lg" id="heroWatchDemoBtn">
-            <span style="margin-right: 6px;">▶</span> Watch 40-Sec Product Tour
+          <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="btn btn-primary btn-lg glow-button hero-demo-btn" id="heroTryDemoBtn">
+            <span>⚡ Try Live Demo</span>
+            <span class="demo-cta-pill">Zero Signup</span>
+          </a>
+          <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)" class="btn btn-secondary btn-lg" id="heroGetStartedBtn">
+            <span>Create Free Account</span>
+            <span style="margin-left: 6px;">&rarr;</span>
+          </a>
+        </div>
+        <div class="hero-tour-sublink-wrapper">
+          <a href="#demo" class="hero-tour-sublink" id="heroWatchDemoLink">
+            <span>▶</span> Watch 40-Sec Product Video Tour
           </a>
         </div>
 
@@ -630,148 +615,41 @@
         </div>
       </div>
     </section>
-    <!-- FOUNDING MEMBER COHORT (BATCH #1) INFO SECTION -->
-    <section class="section beta-info-section" id="beta">
-      <div class="container container-narrow">
-        <div class="paid-beta-card glow-border text-center">
-          <span class="beta-card-badge">⚡ FOUNDING MEMBER COHORT • STRICTLY LIMITED TO 100 USERS</span>
-          <h2 class="beta-card-title">Join Founding Cohort (Batch #1 Open)</h2>
-          <p class="beta-card-desc">
-            We are accepting our first 10 data-driven analysts, marketers, and business owners for hands-on, 1-on-1 founder onboarding.<br>
-            In exchange for bi-weekly feedback, all Batch #1 early adopters receive <strong>1 Full Year of Qbonic Pro ($49/year value) 100% complimentary</strong>.
-          </p>
-
-          <div class="founding-perks-strip">
-            <div class="founding-perk-card">
-              <span style="font-size: 1.5rem;">🌟</span>
-              <h4 class="founding-perk-title">1-on-1 Founder Onboarding</h4>
-              <p class="founding-perk-desc">Direct Slack & email line to our engineering team for instant support.</p>
-            </div>
-            <div class="founding-perk-card">
-              <span style="font-size: 1.5rem;">🚀</span>
-              <h4 class="founding-perk-title">48-Hour Priority Features</h4>
-              <p class="founding-perk-desc">Need a specific KPI formula or file format? We build it directly into the next sprint.</p>
-            </div>
-            <div class="founding-perk-card">
-              <span style="font-size: 1.5rem;">🎁</span>
-              <h4 class="founding-perk-title">1 Year Free Pro Access</h4>
-              <p class="founding-perk-desc">Enjoy full 30,000+ row support, unlimited workspaces, and custom metrics on us.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BETA SIGN-UP FORM SECTION -->
+    <!-- READY TO GET STARTED / BOTTOM CONVERSION SECTION -->
     <section class="section signup-section" id="signup">
       <div class="container container-narrow">
-        <div class="signup-card-wrapper glow-border">
-          <div class="signup-content">
-            <div class="signup-badge">
-              <span class="badge-dot"></span> Batch #1 Open: <strong class="badge-highlight">7 of 10 Seats Remaining</strong>
+        <div class="signup-card-wrapper glow-border final-cta-wrapper text-center">
+          <div class="signup-content" style="padding: 1.5rem 1rem;">
+            <div class="signup-badge" style="margin-bottom: 1.2rem;">
+              <span class="badge-dot"></span> Private Beta Cohort 1 • Batch #1 Open
             </div>
-            <h2 class="signup-title">Apply for Batch #1 Access</h2>
-            <p class="signup-subtitle">
-              Takes 30 seconds. We review applications within 4 hours and send direct invite keys to selected Founding Cohort members.
+            <h2 class="signup-title" style="margin-bottom: 1rem;">
+              Ready to Build Your First Private Dashboard?
+            </h2>
+            <p class="signup-subtitle" style="max-width: 620px; margin: 0 auto 2rem; font-size: 1.05rem; line-height: 1.6;">
+              Drop in your CSV or Google Sheet to explore, filter, and summarize your data with <strong>100% in-browser privacy</strong>. Your raw records never touch any cloud server.
             </p>
 
-            <form class="beta-form" id="betaForm" novalidate>
-              <div id="betaFormFeedback" style="display: none; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; font-size: 0.9rem; font-weight: 600;"></div>
-              <div class="form-grid">
-                <!-- Full Name -->
-                <div class="form-group">
-                  <label for="fullName" class="form-label">Full Name <span class="req">*</span></label>
-                  <input type="text" id="fullName" class="form-input" placeholder="Alex Morgan" required>
-                  <span class="form-error">Please enter your name.</span>
-                </div>
+            <div class="hero-cta-group" style="margin-bottom: 1.2rem; justify-content: center;">
+              <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)" class="btn btn-primary btn-lg glow-button" id="bottomGetStartedBtn" style="padding: 0.9rem 2.5rem; font-size: 1.08rem;">
+                <span>Create Free Account</span>
+                <span style="margin-left: 6px;">&rarr;</span>
+              </a>
+            </div>
 
-                <!-- Work Email -->
-                <div class="form-group">
-                  <label for="workEmail" class="form-label">Work Email <span class="req">*</span></label>
-                  <input type="email" id="workEmail" class="form-input" placeholder="alex@company.com" required>
-                  <span class="form-error">Please enter a valid email address.</span>
-                </div>
+            <div style="margin-bottom: 2rem;">
+              <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="hero-tour-sublink" id="bottomTryDemoBtn">
+                <span>⚡</span> Or test drive first with 51k-row sample data (No signup) &rarr;
+              </a>
+            </div>
 
-                <!-- Primary Role -->
-                <div class="form-group">
-                  <label for="userRole" class="form-label">Primary Role <span class="req">*</span></label>
-                  <select id="userRole" class="form-select" required>
-                    <option value="" disabled selected>Select your role...</option>
-                    <option value="ecom">E-Commerce Lead / Owner</option>
-                    <option value="analyst">Data Analyst / BI Lead</option>
-                    <option value="marketing">Marketer / Growth Lead</option>
-                    <option value="agency">Agency Founder / Client Manager</option>
-                    <option value="freelance">Freelancer / Consultant</option>
-                    <option value="other">Other Professional</option>
-                  </select>
-                  <span class="form-error">Please select your role.</span>
-                </div>
-
-                <!-- Country -->
-                <div class="form-group">
-                  <label for="userCountry" class="form-label">Country <span class="req">*</span></label>
-                  <select id="userCountry" class="form-select" required>
-                    <option value="" disabled selected>Select your country...</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="DE">Germany</option>
-                    <option value="AU">Australia</option>
-                    <option value="FR">France</option>
-                    <option value="NL">Netherlands</option>
-                    <option value="SE">Sweden / Nordics</option>
-                    <option value="IN">India</option>
-                    <option value="OTHER">Other Country</option>
-                  </select>
-                  <span class="form-error">Please select your country.</span>
-                </div>
-
-                <!-- Data Source / Use Case -->
-                <div class="form-group">
-                  <label for="dataTool" class="form-label">Primary Data Source / Use Case</label>
-                  <select id="dataTool" class="form-select">
-                    <option value="shopify">Shopify / WooCommerce Sales Data</option>
-                    <option value="ads">Meta & Google Ads Campaign Reports</option>
-                    <option value="stripe">Stripe / Payment Subscription CSVs</option>
-                    <option value="excel">Microsoft Excel / Spreadsheet Exports</option>
-                    <option value="crm">HubSpot / Salesforce CRM Exports</option>
-                  </select>
-                </div>
-
-                <!-- Primary Frustration -->
-                <div class="form-group">
-                  <label for="primaryFrustration" class="form-label">Primary Frustration <span class="req">*</span></label>
-                  <select id="primaryFrustration" class="form-select" required>
-                    <option value="" disabled selected>Select your primary frustration...</option>
-                    <option value="privacy">🔒 Data Privacy & GDPR (Cannot upload CSVs to cloud servers)</option>
-                    <option value="cost">💸 High BI Cost (Current BI software is too expensive)</option>
-                    <option value="speed">⚡ Slow Setup & Complexity (Want instant charts without data engineering hassle)</option>
-                    <option value="excel">📊 Excel / Spreadsheet Fatigue (Manual chart building is tedious)</option>
-                    <option value="other">💡 Other / Curious about in-browser reporting</option>
-                  </select>
-                  <span class="form-error">Please select your primary frustration.</span>
-                </div>
-              </div>
-
-              <div class="form-group checkbox-group mt-2">
-                <label class="custom-checkbox">
-                  <input type="checkbox" id="founderInterviewOptIn" checked>
-                  <span class="checkmark"></span>
-                  <span class="checkbox-label"><strong>Open to a quick 15-minute feedback chat with the
-                      founder</strong></span>
-                </label>
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-block btn-lg glow-button mt-4" id="submitBtn">
-                <span id="submitBtnText">Apply for Batch #1 Access (7 Spots Left) &rarr;</span>
-                <div class="spinner" id="submitSpinner" aria-hidden="true"></div>
-              </button>
-
-              <p class="form-privacy-note text-center mt-4">
-                🔒 <strong>100% Privacy Guarantee</strong>: Zero spam. We process applications strictly per GDPR, CCPA & DPDP.
-                Read our <a href="privacy.html" class="privacy-link">Privacy Policy</a>.
-              </p>
-            </form>
+            <!-- Trust Badges -->
+            <div class="cta-trust-tags">
+              <span class="cta-trust-tag">🔒 100% In-Browser Memory</span>
+              <span class="cta-trust-tag">⚡ 0 Bytes Uploaded to Cloud</span>
+              <span class="cta-trust-tag">✨ Free Tier Included</span>
+              <span class="cta-trust-tag">💻 Works 100% Offline</span>
+            </div>
           </div>
         </div>
       </div>
@@ -992,7 +870,7 @@
             </button>
             <div class="faq-content">
               <p>
-                You can start with our Free Plan ($0) or upgrade to <strong>Pro with a <span data-bind="pro-trial-days">7</span>-Day Free Trial (<span data-bind="pro-price-monthly">$5.99</span>/month or <span data-bind="pro-price-yearly">$49</span>/year, saving <span data-bind="pro-discount">32%</span>)</strong> for <span data-bind="pro-max-rows">30,000+</span> rows, unlimited dimensions, and custom KPI formulas. View our full <a href="pricing.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Pricing & Feature Comparison Page</a>. Powered by Paddle with instant 1-click self-serve cancellation.
+                You can start with our Free Plan ($0) or upgrade to <strong>Pro with a <span data-bind="pro-trial-days">7</span>-Day Free Trial (<span data-bind="pro-price-monthly">$5.99</span>/month or <span data-bind="pro-price-yearly">$49</span>/year, saving <span data-bind="pro-discount">32%</span>)</strong> for <span data-bind="pro-max-rows">30,000+</span> rows, unlimited dimensions, and custom KPI formulas. View our full <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Pricing & Feature Comparison Page</a>. Powered by Paddle with instant 1-click self-serve cancellation.
               </p>
             </div>
           </div>
@@ -1034,7 +912,7 @@
               </p>
             </div>
           </div>
-          <a href="detailed_faqs.html" class="btn btn-primary btn-sm" style="white-space: nowrap; font-weight: 700; border-radius: 999px; padding: 10px 22px;">
+          <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="btn btn-primary btn-sm" id="whitepaperFaqsBtn" style="white-space: nowrap; font-weight: 700; border-radius: 999px; padding: 10px 22px;">
             View All 29 Detailed FAQs &rarr;
           </a>
         </div>
@@ -1208,11 +1086,11 @@
         </div>
 
         <nav class="footer-links" aria-label="Footer navigation">
-          <a href="pricing.html">Pricing</a>
-          <a href="detailed_faqs.html">Security & FAQs</a>
-          <a href="terms.html">Terms of Service</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="refund.html">Refund Policy</a>
+          <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" id="footerPricingBtn">Pricing</a>
+          <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" id="footerFaqsBtn">Security & FAQs</a>
+          <a href="https://console.qbonic.com/terms.html" onclick="redirectToTerms(event)" id="footerTermsBtn">Terms of Service</a>
+          <a href="https://console.qbonic.com/privacy.html" onclick="redirectToPrivacy(event)" id="footerPrivacyBtn">Privacy Policy</a>
+          <a href="https://console.qbonic.com/refund.html" onclick="redirectToRefund(event)" id="footerRefundBtn">Refund Policy</a>
           <a href="index.html#contact">Contact Us</a>
         </nav>
       </div>
@@ -1246,6 +1124,7 @@
     </div>
   </div>
 
+  <script src="site-core.js" defer></script>
   <script src="app.js"></script>
 </body>
 
