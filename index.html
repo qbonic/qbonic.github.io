@@ -9,7 +9,10 @@
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
-    gtag('config', 'G-P4YG3984FX');
+    gtag('config', 'G-P4YG3984FX', {
+      'client_storage': 'none',
+      'anonymize_ip': true
+    });
   </script>
 
   <meta charset="UTF-8">
@@ -465,7 +468,7 @@
         </h1>
 
         <p class="hero-subtitle">
-          Explore, filter, and summarize millions of rows with zero formulas. <strong>100% in-browser privacy</strong> — your raw financial records and customer rows never leave your computer or touch the cloud.
+          Explore, filter, and summarize 50,000+ rows in under 2 seconds with zero formulas. <strong>100% in-browser privacy</strong> — your raw financial records and customer rows never leave your computer or touch the cloud.
         </p>
 
         <div class="hero-cta-group">
@@ -540,7 +543,7 @@
           <div class="video-showcase-footer">
             <div class="footer-stat">
               <span class="stat-dot green"></span>
-              <span><strong>Client-Side DuckDB-WASM:</strong> Zero server latency</span>
+              <span><strong>In-Browser Memory Engine:</strong> Zero server latency</span>
             </div>
             <div class="footer-stat">
               <span class="stat-dot blue"></span>
@@ -1085,14 +1088,22 @@
           <p class="footer-tagline">Interactive Pivot Dashboards</p>
         </div>
 
-        <nav class="footer-links" aria-label="Footer navigation">
-          <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" id="footerPricingBtn">Pricing</a>
-          <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" id="footerFaqsBtn">Security & FAQs</a>
-          <a href="https://console.qbonic.com/terms.html" onclick="redirectToTerms(event)" id="footerTermsBtn">Terms of Service</a>
-          <a href="https://console.qbonic.com/privacy.html" onclick="redirectToPrivacy(event)" id="footerPrivacyBtn">Privacy Policy</a>
-          <a href="https://console.qbonic.com/refund.html" onclick="redirectToRefund(event)" id="footerRefundBtn">Refund Policy</a>
-          <a href="index.html#contact">Contact Us</a>
-        </nav>
+        <div class="footer-links-wrapper" style="display: flex; flex-direction: column; gap: 12px; align-items: flex-end;">
+          <nav class="footer-links" aria-label="Footer navigation">
+            <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" id="footerPricingBtn">Pricing</a>
+            <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" id="footerFaqsBtn">Security & FAQs</a>
+            <a href="https://console.qbonic.com/terms.html" onclick="redirectToTerms(event)" id="footerTermsBtn">Terms of Service</a>
+            <a href="https://console.qbonic.com/privacy.html" onclick="redirectToPrivacy(event)" id="footerPrivacyBtn">Privacy Policy</a>
+            <a href="https://console.qbonic.com/refund.html" onclick="redirectToRefund(event)" id="footerRefundBtn">Refund Policy</a>
+            <a href="index.html#contact">Contact Us</a>
+          </nav>
+          <nav class="footer-links footer-seo-links" aria-label="Product Comparisons" style="font-size: 0.85rem;">
+            <span style="color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Comparisons:</span>
+            <a href="vs/powerbi-local.html">Power BI vs Qbonic</a>
+            <a href="vs/excel-pivots.html">Excel Pivots vs Qbonic</a>
+            <a href="alternatives/privacy-first-bi.html">Privacy-First BI</a>
+          </nav>
+        </div>
       </div>
 
       <div class="footer-bottom">

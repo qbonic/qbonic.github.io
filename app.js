@@ -127,6 +127,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e) e.preventDefault();
     if (!videoModal || !youtubePlayer) return;
 
+    if (typeof window.gtag === 'function') {
+      try {
+        window.gtag('event', 'video_tour_played', {
+          event_category: 'engagement',
+          event_label: 'youtube_tour_modal'
+        });
+      } catch (err) { /* non-critical */ }
+    }
+
     const src = youtubePlayer.getAttribute('data-src');
     if (src) {
       youtubePlayer.src = src;

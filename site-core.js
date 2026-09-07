@@ -83,38 +83,52 @@ const AuthRouter = (() => {
     return `${url}${separator}theme=${ThemeManager.getTheme()}`;
   }
 
+  function _trackAnalytics(eventName, eventParams) {
+    if (typeof window.gtag === 'function') {
+      try {
+        window.gtag('event', eventName, {
+          event_category: 'engagement',
+          theme: ThemeManager.getTheme(),
+          ...eventParams
+        });
+      } catch (err) { /* non-critical */ }
+    }
+  }
+
   function redirectToLogin(e) {
     if (e) e.preventDefault();
+    const trigger = (e && e.currentTarget && e.currentTarget.id) || 'login_btn';
+    _trackAnalytics('login_intent', { trigger_location: trigger });
     window.location.href = _themed(_baseUrl('?auth=signin'));
   }
 
   function redirectToSignup(e, plan) {
     if (e) e.preventDefault();
+    const trigger = (e && e.currentTarget && e.currentTarget.id) || 'signup_btn';
     const planParam = plan ? `&plan=${plan}` : '';
+    _trackAnalytics('signup_intent', { trigger_location: trigger, selected_plan: plan || 'free' });
     window.location.href = _themed(_baseUrl(`?auth=signup${planParam}`));
   }
 
   function redirectToDemo(e) {
     if (e) e.preventDefault();
-    if (typeof window.gtag === 'function') {
-      try {
-        window.gtag('event', 'try_demo_click', {
-          event_category: 'engagement',
-          event_label: (e && e.currentTarget && e.currentTarget.id) || 'website_cta',
-          theme: ThemeManager.getTheme()
-        });
-      } catch (err) { /* non-critical */ }
-    }
+    const trigger = (e && e.currentTarget && e.currentTarget.id) || 'website_cta';
+    _trackAnalytics('demo_launched', { trigger_location: trigger });
+    _trackAnalytics('try_demo_click', { event_label: trigger }); // backwards compatibility
     window.location.href = _themed(_baseUrl('?demo=true'));
   }
 
   function redirectToPricing(e) {
     if (e) e.preventDefault();
+    const trigger = (e && e.currentTarget && e.currentTarget.id) || 'pricing_nav';
+    _trackAnalytics('pricing_viewed', { trigger_location: trigger });
     window.location.href = _themed(_baseUrl('pricing.html'));
   }
 
   function redirectToFaqs(e) {
     if (e) e.preventDefault();
+    const trigger = (e && e.currentTarget && e.currentTarget.id) || 'faqs_nav';
+    _trackAnalytics('faqs_viewed', { trigger_location: trigger });
     window.location.href = _themed(_baseUrl('detailed_faqs.html'));
   }
 
@@ -357,6 +371,103 @@ const NavButtons = (() => {
 })();
 
 /* ==========================================================================
+   9. PRICING DATA BINDER (FIRESTORE LIVE SOURCE OF TRUTH)
+   Synchronizes with Cloud Firestore (`app_config/plans`) via public REST API
+   and hydrates [data-bind] and [data-plan-field] elements across all pages.
+   Matches the single source of truth architecture from reporting-app (pricing.js).
+   ========================================================================== */
+const PricingManager = (() => {
+  const DEFAULTS = {
+    freeMaxRows:      '1,000 rows',
+    proMaxRows:       '30,000+ rows',
+    proPriceMonthly:  '$5.99',
+    proPriceYearly:   '$49',
+    proDiscount:      '32%',
+    trialDays:        '7',
+  };
+
+  let config = { ...DEFAULTS };
+
+  const FIRESTORE_URL =
+    'https://firestore.googleapis.com/v1/projects/qbonic-production/databases/(default)/documents/app_config/plans';
+
+  function getFirestoreValue(fields, path) {
+    const parts = path.split('.');
+    let node = fields;
+    for (const part of parts) {
+      if (!node) return null;
+      node = node[part]?.mapValue?.fields ?? node[part];
+    }
+    if (!node) return null;
+    return node.stringValue ?? node.integerValue ?? node.doubleValue ?? null;
+  }
+
+  function formatRows(rawInt, isProPlan) {
+    const n = parseInt(rawInt, 10);
+    if (isNaN(n)) return null;
+    const formatted = n >= 1000 ? `${(n / 1000).toLocaleString()}K` : n.toLocaleString();
+    return isProPlan ? `${formatted.replace('K', ',000+ rows')}` : `${formatted} rows`;
+  }
+
+  function hydrate(cfg) {
+    const map = {
+      'free-max-rows':     cfg.freeMaxRows,
+      'pro-max-rows':      cfg.proMaxRows,
+      'pro-price-monthly': cfg.proPriceMonthly,
+      'pro-price-yearly':  cfg.proPriceYearly,
+      'pro-discount':      cfg.proDiscount,
+      'pro-trial-days':    cfg.trialDays,
+    };
+
+    document.querySelectorAll('[data-bind]').forEach(el => {
+      const key = el.getAttribute('data-bind');
+      if (map[key] !== undefined) el.textContent = map[key];
+    });
+
+    document.querySelectorAll('[data-plan-field]').forEach(el => {
+      const key = el.getAttribute('data-plan-field');
+      if (cfg[key] !== undefined) el.textContent = cfg[key];
+    });
+  }
+
+  async function fetchAndHydrate() {
+    hydrate(config); // Immediate initial render with static fallback
+
+    try {
+      const res = await fetch(FIRESTORE_URL);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data?.fields) return;
+
+      const fields = data.fields;
+      const freeMaxRowsRaw = getFirestoreValue(fields, 'free.limits.maxRows');
+      const proMaxRowsRaw  = getFirestoreValue(fields, 'pro.limits.maxRows');
+      const monthlyDisplay = getFirestoreValue(fields, 'pro.pricing.monthlyDisplay');
+      const yearlyDisplay  = getFirestoreValue(fields, 'pro.pricing.yearlyDisplay');
+      const discountPct    = getFirestoreValue(fields, 'pro.pricing.yearlyDiscountPercent');
+      const trialDaysRaw   = getFirestoreValue(fields, 'pro.trialDays');
+
+      if (freeMaxRowsRaw) config.freeMaxRows = formatRows(freeMaxRowsRaw, false) || config.freeMaxRows;
+      if (proMaxRowsRaw)  config.proMaxRows  = formatRows(proMaxRowsRaw, true)  || config.proMaxRows;
+      if (monthlyDisplay) config.proPriceMonthly = monthlyDisplay;
+      if (yearlyDisplay)  config.proPriceYearly  = yearlyDisplay;
+      if (discountPct)    config.proDiscount     = `${discountPct}%`;
+      if (trialDaysRaw)   config.trialDays       = String(trialDaysRaw);
+
+      hydrate(config);
+    } catch (_err) {
+      // Non-blocking silent fallback to preserve UX
+    }
+  }
+
+  function init() {
+    fetchAndHydrate();
+  }
+
+  return { init, fetchAndHydrate, getConfig: () => config };
+})();
+
+/* ==========================================================================
    BOOTSTRAP
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -367,4 +478,5 @@ document.addEventListener('DOMContentLoaded', () => {
   FaqAccordion.init();
   SignupHashPulse.init();
   NavButtons.init();
+  PricingManager.init();
 });
