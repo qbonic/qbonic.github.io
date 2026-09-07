@@ -893,7 +893,7 @@ button, input, select, textarea {
    -------------------------------------------------------------------------- */
 .comparison-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
 }
 
@@ -3511,6 +3511,12 @@ body.light-theme .whitepaper-icon-box {
   .nav-menu {
     display: none;
   }
+  .nav-demo-btn {
+    display: none !important;
+  }
+  .header-actions {
+    gap: 0.6rem;
+  }
   .mobile-toggle {
     display: flex;
   }
@@ -3522,6 +3528,16 @@ body.light-theme .whitepaper-icon-box {
   }
   .hero-subtitle {
     font-size: 1rem;
+  }
+  .hero-trust-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 0.75rem;
+    padding: 1.25rem 1rem;
+    text-align: center;
+  }
+  .trust-divider {
+    display: none;
   }
   .section {
     padding: 3.5rem 0;
@@ -3552,6 +3568,41 @@ body.light-theme .whitepaper-icon-box {
   }
   .back-to-top {
     justify-self: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.5rem;
+  }
+  .hero-tour-sublink-wrapper {
+    margin-top: -1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .hero-tour-sublink {
+    width: 100%;
+    justify-content: center;
+  }
+  .faq-whitepaper-card {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 1.2rem;
+  }
+  .faq-whitepaper-card > div {
+    flex-direction: column;
+    text-align: center;
+  }
+  .faq-whitepaper-card .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
