@@ -805,7 +805,7 @@ button, input, select, textarea {
   justify-content: center;
   gap: 1.2rem;
   flex-wrap: wrap;
-  margin-bottom: 4rem;
+  margin-bottom: 1.6rem;
 }
 
 /* Hero Trust Stats Bar */
@@ -3576,6 +3576,7 @@ body.light-theme .whitepaper-icon-box {
     flex-direction: column;
     width: 100%;
     gap: 0.75rem;
+    margin-bottom: 1.2rem;
   }
   .hero-cta-group .btn {
     width: 100%;
@@ -3583,8 +3584,8 @@ body.light-theme .whitepaper-icon-box {
     padding: 0.85rem 1.5rem;
   }
   .hero-tour-sublink-wrapper {
-    margin-top: -1.5rem;
-    margin-bottom: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 2.2rem;
   }
   .hero-tour-sublink {
     width: 100%;
@@ -4120,7 +4121,7 @@ body.light-theme .whitepaper-icon-box {
 
 /* Hero 40-Sec Video Tour Sublink */
 .hero-tour-sublink-wrapper {
-  margin-top: -2.5rem;
+  margin-top: 0;
   margin-bottom: 3.5rem;
   text-align: center;
 }
