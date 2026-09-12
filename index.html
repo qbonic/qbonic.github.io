@@ -31,13 +31,13 @@
 
   <!-- Synchronous theme init — must run in <head> to prevent flash-of-wrong-theme (FOWT) -->
   <script>
-    (function() {
+    (function () {
       try {
         var p = new URLSearchParams(window.location.search);
         var t = p.get('theme') || localStorage.getItem('qbonic_theme');
         document.documentElement.setAttribute('data-theme', (t === 'light' || t === 'qbonic-light') ? 'light' : 'dark');
         if (t) localStorage.setItem('qbonic_theme', (t === 'light' || t === 'qbonic-light') ? 'light' : 'dark');
-      } catch(e) {}
+      } catch (e) { }
     })();
   </script>
 
@@ -122,12 +122,19 @@
       gap: 14px;
       margin: 28px 0 36px;
     }
+
     @media (max-width: 992px) {
-      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
+
     @media (max-width: 580px) {
-      .trust-grid { grid-template-columns: 1fr; }
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
     }
+
     .trust-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -141,27 +148,32 @@
       position: relative;
       overflow: hidden;
     }
+
     .trust-card:hover {
       border-color: var(--border-glow);
       transform: translateY(-2px);
       box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.3);
     }
+
     [data-theme="light"] .trust-card,
     body.light-theme .trust-card {
       background: #FFFFFF;
       border-color: rgba(15, 23, 42, 0.12);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     }
+
     [data-theme="light"] .trust-card:hover,
     body.light-theme .trust-card:hover {
       border-color: var(--primary);
       box-shadow: 0 10px 24px -6px rgba(14, 165, 233, 0.15);
     }
+
     .trust-card-header {
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
     .trust-icon-box {
       width: 36px;
       height: 36px;
@@ -172,10 +184,26 @@
       font-size: 1.15rem;
       flex-shrink: 0;
     }
-    .trust-icon-emerald { background: rgba(16, 185, 129, 0.12); color: #10b981; }
-    .trust-icon-blue { background: rgba(56, 189, 248, 0.12); color: #38bdf8; }
-    .trust-icon-purple { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
-    .trust-icon-amber { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+
+    .trust-icon-emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+    }
+
+    .trust-icon-blue {
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+    }
+
+    .trust-icon-purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: #a855f7;
+    }
+
+    .trust-icon-amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+    }
 
     .trust-card-title {
       font-family: var(--font-heading);
@@ -184,6 +212,7 @@
       color: var(--text-main);
       margin: 0;
     }
+
     .trust-card-desc {
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -202,15 +231,18 @@
       max-width: 960px;
       margin: 0 auto;
     }
+
     .video-showcase-window:hover {
       border-color: rgba(56, 189, 248, 0.4);
       box-shadow: 0 24px 60px -15px rgba(56, 189, 248, 0.2), 0 0 0 1px rgba(56, 189, 248, 0.25);
     }
+
     [data-theme="light"] .video-showcase-window {
       background: #FFFFFF;
       border-color: rgba(15, 23, 42, 0.12);
       box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12);
     }
+
     .video-window-titlebar {
       background: rgba(15, 23, 42, 0.8);
       backdrop-filter: blur(10px);
@@ -220,24 +252,37 @@
       justify-content: space-between;
       border-bottom: 1px solid var(--border-subtle);
     }
+
     [data-theme="light"] .video-window-titlebar {
       background: #F1F5F9;
       border-color: rgba(15, 23, 42, 0.1);
     }
+
     .window-dots {
       display: flex;
       align-items: center;
       gap: 7px;
     }
+
     .w-dot {
       width: 11px;
       height: 11px;
       border-radius: 50%;
       display: inline-block;
     }
-    .w-red { background: #FF5F56; }
-    .w-yellow { background: #FFBD2E; }
-    .w-green { background: #27C93F; }
+
+    .w-red {
+      background: #FF5F56;
+    }
+
+    .w-yellow {
+      background: #FFBD2E;
+    }
+
+    .w-green {
+      background: #27C93F;
+    }
+
     .window-title {
       font-family: var(--font-heading);
       font-size: 0.85rem;
@@ -247,9 +292,11 @@
       align-items: center;
       gap: 6px;
     }
+
     [data-theme="light"] .window-title {
       color: #475569;
     }
+
     .window-badge {
       font-size: 0.75rem;
       font-weight: 700;
@@ -259,6 +306,7 @@
       border-radius: 999px;
       border: 1px solid rgba(56, 189, 248, 0.25);
     }
+
     .video-showcase-container {
       position: relative;
       width: 100%;
@@ -266,6 +314,7 @@
       height: 0;
       background: #000000;
     }
+
     .video-showcase-container iframe {
       position: absolute;
       top: 0;
@@ -274,6 +323,7 @@
       height: 100%;
       border: none;
     }
+
     .video-showcase-footer {
       background: var(--bg-surface);
       border-top: 1px solid var(--border-subtle);
@@ -284,10 +334,12 @@
       flex-wrap: wrap;
       gap: 16px;
     }
+
     [data-theme="light"] .video-showcase-footer {
       background: #F8FAFC;
       border-color: rgba(15, 23, 42, 0.1);
     }
+
     .v-feature {
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -295,6 +347,7 @@
       align-items: center;
       gap: 6px;
     }
+
     .v-feature strong {
       color: var(--text-main);
     }
@@ -307,9 +360,21 @@
       display: inline-block;
       flex-shrink: 0;
     }
-    .stat-dot.green { background: #10b981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.6); }
-    .stat-dot.blue { background: #38bdf8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); }
-    .stat-dot.purple { background: #a855f7; box-shadow: 0 0 8px rgba(168, 85, 247, 0.6); }
+
+    .stat-dot.green {
+      background: #10b981;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    }
+
+    .stat-dot.blue {
+      background: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+    }
+
+    .stat-dot.purple {
+      background: #a855f7;
+      box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+    }
 
     .footer-stat {
       font-size: 0.85rem;
@@ -318,23 +383,35 @@
       align-items: center;
       gap: 8px;
     }
+
     .footer-stat strong {
       color: var(--text-main);
     }
+
     .dot {
       width: 11px;
       height: 11px;
       border-radius: 50%;
       display: inline-block;
     }
-    .dot-red { background: #FF5F56; }
-    .dot-yellow { background: #FFBD2E; }
-    .dot-green { background: #27C93F; }
+
+    .dot-red {
+      background: #FF5F56;
+    }
+
+    .dot-yellow {
+      background: #FFBD2E;
+    }
+
+    .dot-green {
+      background: #27C93F;
+    }
 
     @media (max-width: 640px) {
       .video-window-titlebar {
         padding: 10px 14px;
       }
+
       .window-title {
         font-size: 0.78rem;
         white-space: nowrap;
@@ -342,31 +419,46 @@
         text-overflow: ellipsis;
         max-width: 220px;
       }
+
       .video-showcase-footer {
         flex-direction: column;
         align-items: flex-start;
         padding: 14px 16px;
         gap: 10px;
       }
-      .footer-stat, .v-feature {
+
+      .footer-stat,
+      .v-feature {
         width: 100%;
         font-size: 0.8rem;
       }
     }
+
     @media (max-width: 480px) {
       .window-badge {
         display: none;
       }
+
       .window-title {
         max-width: 180px;
       }
     }
+
     /* Form Focus Pulse on Anchor Navigation */
     @keyframes pulseCard {
-      0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6); }
-      70% { box-shadow: 0 0 0 14px rgba(56, 189, 248, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+      0% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(56, 189, 248, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+      }
     }
+
     .signup-card-wrapper.highlight-pulse {
       animation: pulseCard 1.6s cubic-bezier(0.4, 0, 0.6, 1) 2;
     }
@@ -404,8 +496,10 @@
       <nav class="nav-menu" id="navMenu">
         <a href="#demo" class="nav-link">Product Tour</a>
         <a href="#problem" class="nav-link">Why Qbonic</a>
-        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="nav-link" id="navPricingBtn">Pricing</a>
-        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="nav-link" id="navFaqsBtn">Security & FAQs</a>
+        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="nav-link"
+          id="navPricingBtn">Pricing</a>
+        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="nav-link"
+          id="navFaqsBtn">Security & FAQs</a>
         <a href="#about" class="nav-link">About Us</a>
         <a href="#contact" class="nav-link">Contact Us</a>
       </nav>
@@ -418,8 +512,11 @@
           </label>
           <span class="theme-switch-icon">☀️</span>
         </div>
-        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="btn btn-secondary btn-sm nav-demo-btn" id="navDemoBtn"><span class="demo-bolt">⚡</span> Try Interactive Demo</a>
-        <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
+        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)"
+          class="btn btn-secondary btn-sm nav-demo-btn" id="navDemoBtn"><span class="demo-bolt">⚡</span> Try Interactive
+          Demo</a>
+        <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)"
+          class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
           <span class="burger-bar"></span>
           <span class="burger-bar"></span>
@@ -441,12 +538,16 @@
       <nav class="drawer-nav">
         <a href="#demo" class="drawer-link">Product Tour</a>
         <a href="#problem" class="drawer-link">Why Qbonic</a>
-        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="drawer-link" id="drawerPricingBtn">Pricing</a>
-        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="drawer-link" id="drawerFaqsBtn">Security & FAQs</a>
+        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="drawer-link"
+          id="drawerPricingBtn">Pricing</a>
+        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="drawer-link"
+          id="drawerFaqsBtn">Security & FAQs</a>
         <a href="#about" class="drawer-link">About Us</a>
         <a href="#contact" class="drawer-link">Contact Us</a>
-        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="drawer-link btn btn-secondary mt-3" id="drawerDemoBtn">⚡ Try Interactive Demo (No Signup)</a>
-        <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)" class="drawer-link btn btn-primary mt-2" id="drawerSignupBtn">Join Free Beta &rarr;</a>
+        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)"
+          class="drawer-link btn btn-secondary mt-3" id="drawerDemoBtn">⚡ Try Interactive Demo (No Signup)</a>
+        <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)"
+          class="drawer-link btn btn-primary mt-2" id="drawerSignupBtn">Join Free Beta &rarr;</a>
       </nav>
     </div>
   </div>
@@ -468,15 +569,19 @@
         </h1>
 
         <p class="hero-subtitle">
-          Explore, filter, and summarize 50,000+ rows in under 2 seconds with zero formulas. <strong>100% in-browser privacy</strong> — your raw financial records and customer rows never leave your computer or touch the cloud.
+          Explore, filter, and summarize 50,000+ rows in under 2 seconds with zero formulas. <strong>100% in-browser
+            privacy</strong> — your raw financial records and customer rows never leave your computer or touch the
+          cloud.
         </p>
 
         <div class="hero-cta-group">
-          <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="btn btn-primary btn-lg glow-button hero-demo-btn" id="heroTryDemoBtn">
+          <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)"
+            class="btn btn-primary btn-lg glow-button hero-demo-btn" id="heroTryDemoBtn">
             <span>⚡ Try Interactive Demo</span>
             <span class="demo-cta-pill">No Signup</span>
           </a>
-          <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)" class="btn btn-secondary btn-lg" id="heroGetStartedBtn">
+          <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)"
+            class="btn btn-secondary btn-lg" id="heroGetStartedBtn">
             <span>Join Free Beta</span>
             <span style="margin-left: 6px;">&rarr;</span>
           </a>
@@ -518,7 +623,8 @@
         <div class="section-header">
           <div class="section-tag">WATCH IN ACTION • 40 SECONDS</div>
           <h2 class="section-title">See 100% In-Browser Analytics in Action</h2>
-          <p class="section-subtitle">Watch how Qbonic parses 100,000+ rows directly inside your browser memory in seconds with zero cloud uploads.</p>
+          <p class="section-subtitle">Watch how Qbonic parses 100,000+ rows directly inside your browser memory in
+            seconds with zero cloud uploads.</p>
         </div>
 
         <div class="video-showcase-window glow-border">
@@ -532,10 +638,8 @@
             <div class="window-badge">1080p HD</div>
           </div>
           <div class="video-showcase-container">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/ODs5cmz5Gsc?rel=0&modestbranding=1&controls=1"
-              title="Qbonic Interactive Pivot Dashboards Demo"
-              frameborder="0"
+            <iframe src="https://www.youtube-nocookie.com/embed/ODs5cmz5Gsc?rel=0&modestbranding=1&controls=1"
+              title="Qbonic Interactive Pivot Dashboards Demo" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen>
             </iframe>
@@ -629,19 +733,24 @@
             <h2 class="signup-title" style="margin-bottom: 1rem;">
               Ready to Build Your First Private Dashboard?
             </h2>
-            <p class="signup-subtitle" style="max-width: 620px; margin: 0 auto 2rem; font-size: 1.05rem; line-height: 1.6;">
-              Drop in your CSV or Google Sheet to explore, filter, and summarize your data with <strong>100% in-browser privacy</strong>. Your raw records never touch any cloud server.
+            <p class="signup-subtitle"
+              style="max-width: 620px; margin: 0 auto 2rem; font-size: 1.05rem; line-height: 1.6;">
+              Drop in your CSV or Google Sheet to explore, filter, and summarize your data with <strong>100% in-browser
+                privacy</strong>. Your raw records never touch any cloud server.
             </p>
 
             <div class="hero-cta-group" style="margin-bottom: 1.2rem; justify-content: center;">
-              <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)" class="btn btn-primary btn-lg glow-button" id="bottomGetStartedBtn" style="padding: 0.9rem 2.5rem; font-size: 1.08rem;">
+              <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)"
+                class="btn btn-primary btn-lg glow-button" id="bottomGetStartedBtn"
+                style="padding: 0.9rem 2.5rem; font-size: 1.08rem;">
                 <span>Join Free Beta</span>
                 <span style="margin-left: 6px;">&rarr;</span>
               </a>
             </div>
 
             <div style="margin-bottom: 2rem;">
-              <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="hero-tour-sublink" id="bottomTryDemoBtn">
+              <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="hero-tour-sublink"
+                id="bottomTryDemoBtn">
                 <span>⚡</span> Try Guided Interactive Demo &rarr;
               </a>
             </div>
@@ -664,7 +773,8 @@
         <div class="section-header text-center">
           <span class="section-tag">FAQ & PRIVACY</span>
           <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-subtitle">Everything you need to know about in-browser memory execution, AI isolation, and Founding Cohort access.</p>
+          <p class="section-subtitle">Everything you need to know about in-browser memory execution, AI isolation, and
+            plan tiers.</p>
         </div>
 
         <!-- 4-Card Trust Anchor Grid -->
@@ -674,7 +784,8 @@
               <div class="trust-icon-box trust-icon-emerald">🛡️</div>
               <h3 class="trust-card-title">Zero Server Upload</h3>
             </div>
-            <p class="trust-card-desc">100% in-browser RAM processing. Raw spreadsheet rows never reach any cloud server.</p>
+            <p class="trust-card-desc">100% in-browser RAM processing. Raw spreadsheet rows never reach any cloud
+              server.</p>
           </div>
 
           <div class="trust-card">
@@ -682,7 +793,8 @@
               <div class="trust-icon-box trust-icon-blue">🤖</div>
               <h3 class="trust-card-title">AI Metadata Isolation</h3>
             </div>
-            <p class="trust-card-desc">Groq AI only sees column headers for smart suggestions. Zero cell values shared.</p>
+            <p class="trust-card-desc">Groq AI only sees column headers for smart suggestions. Zero cell values shared.
+            </p>
           </div>
 
           <div class="trust-card">
@@ -690,7 +802,8 @@
               <div class="trust-icon-box trust-icon-purple">💳</div>
               <h3 class="trust-card-title">PCI-DSS Level 1</h3>
             </div>
-            <p class="trust-card-desc">Handled by Paddle Merchant of Record. Qbonic never sees or stores card numbers.</p>
+            <p class="trust-card-desc">Handled by Paddle Merchant of Record. Qbonic never sees or stores card numbers.
+            </p>
           </div>
 
           <div class="trust-card">
@@ -698,7 +811,8 @@
               <div class="trust-icon-box trust-icon-amber">⚖️</div>
               <h3 class="trust-card-title">Privacy by Design</h3>
             </div>
-            <p class="trust-card-desc">Engineered around GDPR Article 25. Zero persistent data retention or tracking.</p>
+            <p class="trust-card-desc">Engineered around GDPR Article 25. Zero persistent data retention or tracking.
+            </p>
           </div>
         </div>
 
@@ -709,13 +823,15 @@
               <div class="faq-trigger-left">
                 <div class="faq-item-icon-box icon-box-emerald">🛡️</div>
                 <div class="faq-title-wrap">
-                  <span class="faq-q-text">Where does my spreadsheet data go? Does Qbonic upload files to any server?</span>
+                  <span class="faq-q-text">Where does my spreadsheet data go? Does Qbonic upload files to any
+                    server?</span>
                   <span class="reassurance-pill pill-emerald">100% In-Browser</span>
                 </div>
               </div>
               <div class="faq-trigger-right">
                 <div class="faq-chevron-circle">
-                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </div>
@@ -723,7 +839,9 @@
             </button>
             <div class="faq-content">
               <p>
-                <strong>100% in-browser processing.</strong> Raw CSV, TSV, and Excel data is parsed directly inside your device's local memory (RAM / Web Workers). Zero raw spreadsheet cell values or customer records are ever uploaded to remote servers or third-party cloud databases.
+                <strong>100% in-browser processing.</strong> Raw CSV, TSV, and Excel data is parsed directly inside your
+                device's local memory (RAM / Web Workers). Zero raw spreadsheet cell values or customer records are ever
+                uploaded to remote servers or third-party cloud databases.
               </p>
             </div>
           </div>
@@ -734,13 +852,15 @@
               <div class="faq-trigger-left">
                 <div class="faq-item-icon-box icon-box-blue">🤖</div>
                 <div class="faq-title-wrap">
-                  <span class="faq-q-text">Does AI (Groq) see my actual customer rows, sales numbers, or private data?</span>
+                  <span class="faq-q-text">Does AI (Groq) see my actual customer rows, sales numbers, or private
+                    data?</span>
                   <span class="reassurance-pill pill-blue">Metadata Only</span>
                 </div>
               </div>
               <div class="faq-trigger-right">
                 <div class="faq-chevron-circle">
-                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </div>
@@ -748,7 +868,10 @@
             </button>
             <div class="faq-content">
               <p>
-                <strong>No.</strong> Groq AI only receives high-level column metadata (header names, inferred data types, distinct value counts, and up to 3 anonymized sample values) to suggest smart classifications and formulas. Your full dataset, customer tables, and financial records are never uploaded or shared with external AI servers.
+                <strong>No.</strong> Groq AI only receives high-level column metadata (header names, inferred data
+                types, distinct value counts, and up to 3 anonymized sample values) to suggest smart classifications and
+                formulas. Your full dataset, customer tables, and financial records are never uploaded or shared with
+                external AI servers.
               </p>
             </div>
           </div>
@@ -765,7 +888,8 @@
               </div>
               <div class="faq-trigger-right">
                 <div class="faq-chevron-circle">
-                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </div>
@@ -773,7 +897,9 @@
             </button>
             <div class="faq-content">
               <p>
-                <strong>Yes.</strong> Qbonic is engineered on strict <em>"Privacy-by-Design"</em> principles (GDPR Article 25). Because raw dataset rows never leave your computer, there is zero persistent cloud data retention and zero invasive third-party cross-site advertising cookies.
+                <strong>Yes.</strong> Qbonic is engineered on strict <em>"Privacy-by-Design"</em> principles (GDPR
+                Article 25). Because raw dataset rows never leave your computer, there is zero persistent cloud data
+                retention and zero invasive third-party cross-site advertising cookies.
               </p>
             </div>
           </div>
@@ -784,13 +910,15 @@
               <div class="faq-trigger-left">
                 <div class="faq-item-icon-box icon-box-purple">⚙️</div>
                 <div class="faq-title-wrap">
-                  <span class="faq-q-text">Can I use Qbonic without creating a Groq AI account or entering an API key?</span>
+                  <span class="faq-q-text">Can I use Qbonic without creating a Groq AI account or entering an API
+                    key?</span>
                   <span class="reassurance-pill pill-purple">Zero Setup Needed</span>
                 </div>
               </div>
               <div class="faq-trigger-right">
                 <div class="faq-chevron-circle">
-                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </div>
@@ -798,7 +926,11 @@
             </button>
             <div class="faq-content">
               <p>
-                <strong>Absolutely.</strong> Qbonic includes an intelligent built-in rule heuristics engine that works out of the box with zero API key or configuration required. Because spreadsheets vary across business domains, automated classifications (both rule-based and AI) serve as smart starting points—we recommend reviewing the interactive Configuration page to fine-tune column types, unit formats (Currency, %, Count), and custom KPI formulas for your exact use case.
+                <strong>Absolutely.</strong> Qbonic includes an intelligent built-in rule heuristics engine that works
+                out of the box with zero API key or configuration required. Because spreadsheets vary across business
+                domains, automated classifications (both rule-based and AI) serve as smart starting points—we recommend
+                reviewing the interactive Configuration page to fine-tune column types, unit formats (Currency, %,
+                Count), and custom KPI formulas for your exact use case.
               </p>
             </div>
           </div>
@@ -815,7 +947,8 @@
               </div>
               <div class="faq-trigger-right">
                 <div class="faq-chevron-circle">
-                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </div>
@@ -823,7 +956,11 @@
             </button>
             <div class="faq-content">
               <p>
-                Connect Google Sheets, Zoho Sheets, or drag-and-drop <code>.csv</code>, <code>.tsv</code>, <code>.xlsx</code>, and <code>.xls</code> files. The engine processes up to <strong data-bind="free-max-rows">1,000 rows</strong> on the Free Plan and up to <strong data-bind="pro-max-rows">30,000+ rows</strong> on the Pro Plan directly in your browser's local memory.
+                Connect Google Sheets, Zoho Sheets, or drag-and-drop <code>.csv</code>, <code>.tsv</code>,
+                <code>.xlsx</code>, and <code>.xls</code> files. The engine processes up to <strong
+                  data-bind="free-max-rows">1,000 rows</strong> on the Free Plan and up to <strong
+                  data-bind="pro-max-rows">30,000+ rows</strong> on the Pro Plan directly in your browser's local
+                memory.
               </p>
             </div>
           </div>
@@ -840,7 +977,8 @@
               </div>
               <div class="faq-trigger-right">
                 <div class="faq-chevron-circle">
-                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </div>
@@ -848,7 +986,9 @@
             </button>
             <div class="faq-content">
               <p>
-                <strong>Yes!</strong> All pivot cube aggregations, sparklines, tables, and multi-dimension cross-filters run 100% locally in your browser DOM without requiring an active internet connection. Background product telemetry requests fail silently when offline with zero interruption to your analysis.
+                <strong>Yes!</strong> All pivot cube aggregations, sparklines, tables, and multi-dimension cross-filters
+                run 100% locally in your browser DOM without requiring an active internet connection. Background product
+                telemetry requests fail silently when offline with zero interruption to your analysis.
               </p>
             </div>
           </div>
@@ -865,7 +1005,8 @@
               </div>
               <div class="faq-trigger-right">
                 <div class="faq-chevron-circle">
-                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </div>
@@ -873,7 +1014,15 @@
             </button>
             <div class="faq-content">
               <p>
-                You can start with our Free Plan ($0) or upgrade to <strong>Pro with a <span data-bind="pro-trial-days">7</span>-Day Free Trial (<span data-bind="pro-price-monthly">$5.99</span>/month or <span data-bind="pro-price-yearly">$49</span>/year, saving <span data-bind="pro-discount">32%</span>)</strong> for <span data-bind="pro-max-rows">30,000+</span> rows, unlimited dimensions, and custom KPI formulas. View our full <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Pricing & Feature Comparison Page</a>. Powered by Paddle with instant 1-click self-serve cancellation.
+                You can start with our Free Plan ($0) or upgrade to <strong>Pro with a <span
+                    data-bind="pro-trial-days">7</span>-Day Free Trial (<span
+                    data-bind="pro-price-monthly">$5.99</span>/month or <span
+                    data-bind="pro-price-yearly">$49</span>/year, saving <span
+                    data-bind="pro-discount">32%</span>)</strong> for <span data-bind="pro-max-rows">30,000+</span>
+                rows, unlimited dimensions, and custom KPI formulas. View our full <a
+                  href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)"
+                  style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Pricing & Feature
+                  Comparison Page</a>. Powered by Paddle with instant 1-click self-serve cancellation.
               </p>
             </div>
           </div>
@@ -884,13 +1033,15 @@
               <div class="faq-trigger-left">
                 <div class="faq-item-icon-box icon-box-amber">⚡</div>
                 <div class="faq-title-wrap">
-                  <span class="faq-q-text">How does Qbonic compare to Excel Pivot Tables or complex BI tools like PowerBI/Tableau?</span>
+                  <span class="faq-q-text">How does Qbonic compare to Excel Pivot Tables or complex BI tools like
+                    PowerBI/Tableau?</span>
                   <span class="reassurance-pill pill-amber">Zero Formulas</span>
                 </div>
               </div>
               <div class="faq-trigger-right">
                 <div class="faq-chevron-circle">
-                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </div>
@@ -898,7 +1049,9 @@
             </button>
             <div class="faq-content">
               <p>
-                Zero steep learning curves, instant interactive dashboards, and no messy spreadsheet formulas. Unlike desktop BI software that requires installations and cloud pipelines, Qbonic opens in any web browser and transforms your data instantly while guaranteeing 100% data privacy.
+                Zero steep learning curves, instant interactive dashboards, and no messy spreadsheet formulas. Unlike
+                desktop BI software that requires installations and cloud pipelines, Qbonic opens in any web browser and
+                transforms your data instantly while guaranteeing 100% data privacy.
               </p>
             </div>
           </div>
@@ -909,13 +1062,17 @@
           <div style="display: flex; align-items: center; gap: 16px; max-width: 620px;">
             <div class="whitepaper-icon-box">🔒</div>
             <div>
-              <h3 style="font-size: 1.12rem; font-weight: 800; color: var(--text-main); margin: 0 0 4px;">Looking for Enterprise Security & Architecture Details?</h3>
+              <h3 style="font-size: 1.12rem; font-weight: 800; color: var(--text-main); margin: 0 0 4px;">Looking for
+                Enterprise Security & Architecture Details?</h3>
               <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
-                Read our comprehensive 29-point Security, Privacy & Architecture FAQ covering GDPR, CCPA, memory sandboxing, and AI metadata isolation.
+                Read our comprehensive 29-point Security, Privacy & Architecture FAQ covering GDPR, CCPA, memory
+                sandboxing, and AI metadata isolation.
               </p>
             </div>
           </div>
-          <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="btn btn-primary btn-sm" id="whitepaperFaqsBtn" style="white-space: nowrap; font-weight: 700; border-radius: 999px; padding: 10px 22px;">
+          <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)"
+            class="btn btn-primary btn-sm" id="whitepaperFaqsBtn"
+            style="white-space: nowrap; font-weight: 700; border-radius: 999px; padding: 10px 22px;">
             View All 29 Detailed FAQs &rarr;
           </a>
         </div>
@@ -1088,17 +1245,24 @@
           <p class="footer-tagline">Interactive Pivot Dashboards</p>
         </div>
 
-        <div class="footer-links-wrapper" style="display: flex; flex-direction: column; gap: 12px; align-items: flex-end;">
+        <div class="footer-links-wrapper"
+          style="display: flex; flex-direction: column; gap: 12px; align-items: flex-end;">
           <nav class="footer-links" aria-label="Footer navigation">
-            <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" id="footerPricingBtn">Pricing</a>
-            <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" id="footerFaqsBtn">Security & FAQs</a>
-            <a href="https://console.qbonic.com/terms.html" onclick="redirectToTerms(event)" id="footerTermsBtn">Terms of Service</a>
-            <a href="https://console.qbonic.com/privacy.html" onclick="redirectToPrivacy(event)" id="footerPrivacyBtn">Privacy Policy</a>
-            <a href="https://console.qbonic.com/refund.html" onclick="redirectToRefund(event)" id="footerRefundBtn">Refund Policy</a>
+            <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)"
+              id="footerPricingBtn">Pricing</a>
+            <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)"
+              id="footerFaqsBtn">Security & FAQs</a>
+            <a href="https://console.qbonic.com/terms.html" onclick="redirectToTerms(event)" id="footerTermsBtn">Terms
+              of Service</a>
+            <a href="https://console.qbonic.com/privacy.html" onclick="redirectToPrivacy(event)"
+              id="footerPrivacyBtn">Privacy Policy</a>
+            <a href="https://console.qbonic.com/refund.html" onclick="redirectToRefund(event)"
+              id="footerRefundBtn">Refund Policy</a>
             <a href="index.html#contact">Contact Us</a>
           </nav>
           <nav class="footer-links footer-seo-links" aria-label="Product Comparisons" style="font-size: 0.85rem;">
-            <span style="color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Comparisons:</span>
+            <span
+              style="color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Comparisons:</span>
             <a href="vs/powerbi-local.html">Power BI vs Qbonic</a>
             <a href="vs/excel-pivots.html">Excel Pivots vs Qbonic</a>
             <a href="alternatives/privacy-first-bi.html">Privacy-First BI</a>
@@ -1116,18 +1280,18 @@
   </footer>
 
   <!-- Video Demo Lightbox Modal -->
-  <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Qbonic Product Demo Video">
+  <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-label="Qbonic Product Demo Video">
     <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
     <div class="video-modal-dialog">
-      <button type="button" class="video-modal-close" id="closeVideoModal" aria-label="Close video modal">&times;</button>
+      <button type="button" class="video-modal-close" id="closeVideoModal"
+        aria-label="Close video modal">&times;</button>
       <div class="video-modal-content">
         <div class="video-responsive-wrapper">
-          <iframe 
-            id="youtubePlayer" 
-            src="" 
-            data-src="https://www.youtube-nocookie.com/embed/ODs5cmz5Gsc?autoplay=1&rel=0&modestbranding=1" 
-            title="Qbonic Product Demo Walkthrough" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          <iframe id="youtubePlayer" src=""
+            data-src="https://www.youtube-nocookie.com/embed/ODs5cmz5Gsc?autoplay=1&rel=0&modestbranding=1"
+            title="Qbonic Product Demo Walkthrough"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
           </iframe>
         </div>
