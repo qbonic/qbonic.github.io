@@ -379,7 +379,7 @@ const NavButtons = (() => {
 const PricingManager = (() => {
   const DEFAULTS = {
     freeMaxRows:      '1,000 rows',
-    proMaxRows:       '30,000+ rows',
+    proMaxRows:       '60,000+ rows',
     proPriceMonthly:  '$5.99',
     proPriceYearly:   '$49',
     proDiscount:      '32%',
@@ -389,7 +389,7 @@ const PricingManager = (() => {
   let config = { ...DEFAULTS };
 
   const FIRESTORE_URL =
-    'https://firestore.googleapis.com/v1/projects/qbonic-production/databases/(default)/documents/app_config/plans';
+    'https://firestore.googleapis.com/v1/projects/qbonic-app/databases/(default)/documents/app_config/plans';
 
   function getFirestoreValue(fields, path) {
     const parts = path.split('.');
@@ -405,8 +405,7 @@ const PricingManager = (() => {
   function formatRows(rawInt, isProPlan) {
     const n = parseInt(rawInt, 10);
     if (isNaN(n)) return null;
-    const formatted = n >= 1000 ? `${(n / 1000).toLocaleString()}K` : n.toLocaleString();
-    return isProPlan ? `${formatted.replace('K', ',000+ rows')}` : `${formatted} rows`;
+    return isProPlan ? `${n.toLocaleString()}+ rows` : `${n.toLocaleString()} rows`;
   }
 
   function hydrate(cfg) {
