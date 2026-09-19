@@ -383,7 +383,7 @@ const PricingManager = (() => {
     proPriceMonthly:  '$5.99',
     proPriceYearly:   '$49',
     proDiscount:      '32%',
-    trialDays:        '7',
+    trialDays:        '14',
   };
 
   let config = { ...DEFAULTS };
