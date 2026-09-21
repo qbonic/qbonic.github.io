@@ -194,6 +194,28 @@ window.redirectToRefund   = AuthRouter.redirectToRefund;
 window.redirectToWhatsNew = AuthRouter.redirectToWhatsNew;
 window.redirectToApp      = (plan) => AuthRouter.redirectToSignup(null, plan);
 
+function copyContactEmail(btn) {
+  const email = 'admin@qbonic.com';
+  navigator.clipboard.writeText(email).then(() => {
+    if (!btn) return;
+    const textSpan = btn.querySelector('.copy-btn-text');
+    const iconSpan = btn.querySelector('.copy-btn-icon');
+    const originalText = textSpan ? textSpan.textContent : 'Copy Email';
+    const originalIcon = iconSpan ? iconSpan.textContent : '📋';
+
+    if (textSpan) textSpan.textContent = 'Copied!';
+    if (iconSpan) iconSpan.textContent = '✓';
+    btn.classList.add('copied');
+
+    setTimeout(() => {
+      if (textSpan) textSpan.textContent = originalText;
+      if (iconSpan) iconSpan.textContent = originalIcon;
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => {});
+}
+window.copyContactEmail = copyContactEmail;
+
 /* ==========================================================================
    3. CROSS-DOMAIN LINK THEME PRESERVER
    Universal click interceptor: ensures any link to console or legal/pricing/faq
@@ -245,7 +267,69 @@ const CrossDomainLinkSync = (() => {
 })();
 
 /* ==========================================================================
-   4. NAV DRAWER MANAGER
+   4. NAV DROPDOWN MANAGER (Resources ▾)
+   Desktop hover & click-toggle, click outside, and Escape key listener.
+   ========================================================================== */
+const NavDropdownManager = (() => {
+  let closeTimeout = null;
+
+  function closeAll() {
+    document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+      dropdown.classList.remove('open');
+      const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function init() {
+    document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+      const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+      if (!trigger) return;
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.contains('open');
+        closeAll();
+        if (!isOpen) {
+          dropdown.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      // Buffer timeout on mouseleave to avoid flicker
+      dropdown.addEventListener('mouseenter', () => {
+        if (closeTimeout) {
+          clearTimeout(closeTimeout);
+          closeTimeout = null;
+        }
+      });
+
+      dropdown.addEventListener('mouseleave', () => {
+        closeTimeout = setTimeout(() => {
+          dropdown.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }, 120);
+      });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-dropdown')) {
+        closeAll();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAll();
+    });
+  }
+
+  return { init, closeAll };
+})();
+
+/* ==========================================================================
+   5. NAV DRAWER MANAGER
    Mobile drawer open/close, backdrop click, Escape key listener.
    ========================================================================== */
 const NavDrawerManager = (() => {
@@ -496,15 +580,159 @@ const PricingManager = (() => {
 })();
 
 /* ==========================================================================
+   10. HERO INTERACTIVE DEMO PREVIEW CONTROLLER
+   Provides a live interactive micro-interaction directly in the hero fold.
+   Clicking dimension rows instantly recalculates KPI figures and morphs
+   the SVG sparkline curve in <10ms without any backend queries.
+   ========================================================================== */
+const HeroPreviewManager = (() => {
+  const DATA = {
+    all: {
+      sales: '$12.64M',
+      salesSub: 'Entire Dataset (51.3k rows)',
+      profit: '$1.47M',
+      profitSub: 'Total Margin',
+      margin: '11.6%',
+      marginSub: 'KPI Formula (fx)',
+      asp: '$70.9',
+      aspSub: 'Per Unit Sold',
+      peak: 'Peak: $92.75K/day',
+      pathD: 'M0,55 Q40,35 80,48 T160,25 T240,42 T320,15',
+      areaD: 'M0,55 Q40,35 80,48 T160,25 T240,42 T320,15 L320,80 L0,80 Z',
+      dotCx: '320',
+      dotCy: '15'
+    },
+    Technology: {
+      sales: '$4.74M',
+      salesSub: '37.5% of Total Sales',
+      profit: '$645.2K',
+      profitSub: '43.9% Profit Share',
+      margin: '13.6%',
+      marginSub: '+2.0% vs Avg',
+      asp: '$132.5',
+      aspSub: 'High-Value Items',
+      peak: 'Peak: $48.20K/day (Phones)',
+      pathD: 'M0,60 Q40,25 80,38 T160,18 T240,28 T320,8',
+      areaD: 'M0,60 Q40,25 80,38 T160,18 T240,28 T320,8 L320,80 L0,80 Z',
+      dotCx: '320',
+      dotCy: '8'
+    },
+    Furniture: {
+      sales: '$4.11M',
+      salesSub: '32.5% of Total Sales',
+      profit: '$285.4K',
+      profitSub: '19.4% Profit Share',
+      margin: '6.9%',
+      marginSub: 'High Shipping Costs',
+      asp: '$68.4',
+      aspSub: 'Bulk Freight',
+      peak: 'Peak: $31.40K/day (Chairs)',
+      pathD: 'M0,50 Q40,45 80,40 T160,35 T240,48 T320,30',
+      areaD: 'M0,50 Q40,45 80,40 T160,35 T240,48 T320,30 L320,80 L0,80 Z',
+      dotCx: '320',
+      dotCy: '30'
+    },
+    'Office Supplies': {
+      sales: '$3.79M',
+      salesSub: '30.0% of Total Sales',
+      profit: '$539.4K',
+      profitSub: '36.7% Profit Share',
+      margin: '14.2%',
+      marginSub: 'High Margin Velocity',
+      asp: '$32.1',
+      aspSub: 'High Order Volume',
+      peak: 'Peak: $28.15K/day (Binders)',
+      pathD: 'M0,45 Q40,30 80,52 T160,28 T240,36 T320,22',
+      areaD: 'M0,45 Q40,30 80,52 T160,28 T240,36 T320,22 L320,80 L0,80 Z',
+      dotCx: '320',
+      dotCy: '22'
+    }
+  };
+
+  let activeCategory = null;
+
+  function render(cat) {
+    const d = DATA[cat] || DATA.all;
+    
+    const salesEl = document.getElementById('heroKpiSales');
+    const salesSubEl = document.getElementById('heroKpiSalesSub');
+    const profitEl = document.getElementById('heroKpiProfit');
+    const profitSubEl = document.getElementById('heroKpiProfitSub');
+    const marginEl = document.getElementById('heroKpiMargin');
+    const marginSubEl = document.getElementById('heroKpiMarginSub');
+    const aspEl = document.getElementById('heroKpiAsp');
+    const aspSubEl = document.getElementById('heroKpiAspSub');
+    const peakEl = document.getElementById('heroSparklinePeak');
+    const pathEl = document.getElementById('heroSparklinePath');
+    const areaEl = document.getElementById('heroSparklineArea');
+    const dotEl = document.getElementById('heroSparklineDot');
+
+    if (salesEl) salesEl.textContent = d.sales;
+    if (salesSubEl) salesSubEl.textContent = d.salesSub;
+    if (profitEl) profitEl.textContent = d.profit;
+    if (profitSubEl) profitSubEl.textContent = d.profitSub;
+    if (marginEl) marginEl.textContent = d.margin;
+    if (marginSubEl) marginSubEl.textContent = d.marginSub;
+    if (aspEl) aspEl.textContent = d.asp;
+    if (aspSubEl) aspSubEl.textContent = d.aspSub;
+    if (peakEl) peakEl.textContent = d.peak;
+
+    if (pathEl) pathEl.setAttribute('d', d.pathD);
+    if (areaEl) areaEl.setAttribute('d', d.areaD);
+    if (dotEl) {
+      dotEl.setAttribute('cx', d.dotCx);
+      dotEl.setAttribute('cy', d.dotCy);
+    }
+
+    document.querySelectorAll('.hero-slicer-row').forEach(row => {
+      const rowCat = row.getAttribute('data-category');
+      const isSelected = rowCat === cat;
+      row.classList.toggle('active', isSelected);
+      row.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+    });
+  }
+
+  function init() {
+    const card = document.getElementById('heroPreviewCard');
+    if (!card) return;
+
+    const rows = card.querySelectorAll('.hero-slicer-row');
+    rows.forEach(row => {
+      row.addEventListener('click', (e) => {
+        const cat = row.getAttribute('data-category');
+        if (activeCategory === cat) {
+          activeCategory = null;
+          render('all');
+        } else {
+          activeCategory = cat;
+          render(cat);
+        }
+      });
+
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          row.click();
+        }
+      });
+    });
+  }
+
+  return { init, render };
+})();
+
+/* ==========================================================================
    BOOTSTRAP
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   ThemeManager.initToggle();
   CrossDomainLinkSync.init();
+  NavDropdownManager.init();
   NavDrawerManager.init();
   HeaderScrollObserver.init();
   FaqAccordion.init();
   SignupHashPulse.init();
   NavButtons.init();
   PricingManager.init();
+  HeroPreviewManager.init();
 });

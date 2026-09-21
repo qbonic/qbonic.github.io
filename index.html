@@ -471,87 +471,8 @@
   <div class="ambient-glow bg-glow-1" aria-hidden="true"></div>
   <div class="ambient-glow bg-glow-2" aria-hidden="true"></div>
 
-  <!-- Minimal Header -->
-  <header class="site-header" id="siteHeader">
-    <div class="header-inner">
-      <a href="#" class="brand-logo">
-        <div class="logo-icon-box">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#logo_grad)" stroke="#38BDF8" stroke-width="1.5"
-              stroke-linejoin="round" />
-            <defs>
-              <linearGradient id="logo_grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#38BDF8" />
-                <stop offset="1" stop-color="#6366F1" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div class="brand-text-group">
-          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
-          <span class="brand-tagline">Interactive Pivot Dashboards</span>
-        </div>
-      </a>
-
-      <nav class="nav-menu" id="navMenu">
-        <a href="#demo" class="nav-link">Product Tour</a>
-        <a href="#problem" class="nav-link">Why Qbonic</a>
-        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="nav-link"
-          id="navPricingBtn">Pricing</a>
-        <a href="whats-new.html" onclick="redirectToWhatsNew(event)" class="nav-link"
-          id="navWhatsNewBtn">What's New</a>
-        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="nav-link"
-          id="navFaqsBtn">Security & FAQs</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <div class="theme-switch-wrapper" title="Switch Theme">
-          <span class="theme-switch-icon">🌙</span>
-          <label class="theme-switch" for="themeToggle">
-            <input type="checkbox" id="themeToggle" aria-label="Toggle light or dark theme">
-            <span class="slider round"></span>
-          </label>
-          <span class="theme-switch-icon">☀️</span>
-        </div>
-        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)"
-          class="btn btn-secondary btn-sm nav-demo-btn" id="navDemoBtn"><span class="demo-bolt">⚡</span> Try Demo</a>
-        <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)"
-          class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-          <span class="burger-bar"></span>
-          <span class="burger-bar"></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-    <div class="drawer-content">
-      <div class="drawer-header">
-        <div class="brand-text-group">
-          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
-          <span class="brand-tagline">Interactive Pivot Dashboards</span>
-        </div>
-        <button class="drawer-close" id="drawerClose">&times;</button>
-      </div>
-      <nav class="drawer-nav">
-        <a href="#demo" class="drawer-link">Product Tour</a>
-        <a href="#problem" class="drawer-link">Why Qbonic</a>
-        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="drawer-link"
-          id="drawerPricingBtn">Pricing</a>
-        <a href="whats-new.html" onclick="redirectToWhatsNew(event)" class="drawer-link"
-          id="drawerWhatsNewBtn">What's New</a>
-        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="drawer-link"
-          id="drawerFaqsBtn">Security & FAQs</a>
-        <a href="#contact" class="drawer-link">Contact</a>
-        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)"
-          class="drawer-link btn btn-secondary mt-3" id="drawerDemoBtn">⚡ Try Demo</a>
-        <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)"
-          class="drawer-link btn btn-primary mt-2" id="drawerSignupBtn">Join Free Beta &rarr;</a>
-      </nav>
-    </div>
-  </div>
+  <!-- Shared Header Component -->
+  <qbonic-header></qbonic-header>
 
   <main>
     <!-- HERO SECTION (Clear Value Proposition & Self-Serve Free Beta) -->
@@ -591,6 +512,150 @@
           <a href="#demo" class="hero-tour-sublink" id="heroWatchDemoLink">
             <span>▶</span> Watch 40-Sec Product Video Tour
           </a>
+        </div>
+
+        <!-- Interactive Demo Preview Card (Above the Fold) -->
+        <div class="hero-preview-wrapper">
+          <div class="hero-preview-card" id="heroPreviewCard">
+            <!-- Simulated Window Header -->
+            <div class="hero-preview-header">
+              <div class="hero-preview-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div class="hero-preview-titlebar">
+                <span>Global Superstore Sales</span>
+                <span style="opacity: 0.4;">•</span>
+                <span style="font-weight: 500; font-size: 0.75rem; color: var(--text-muted);">51,290 Rows in RAM</span>
+              </div>
+              <div class="hero-preview-badge">
+                <span class="badge-dot" style="width: 6px; height: 6px; background-color: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+                <span>0 Bytes Cloud</span>
+              </div>
+            </div>
+
+            <!-- Preview Card Body -->
+            <div class="hero-preview-body">
+              <!-- KPI Row -->
+              <div class="hero-preview-kpis">
+                <div class="hero-kpi-card highlight">
+                  <div class="hero-kpi-label">Sales (SUM)</div>
+                  <div class="hero-kpi-value" id="heroKpiSales">$12.64M</div>
+                  <div class="hero-kpi-sub" id="heroKpiSalesSub">Entire Dataset (51.3k rows)</div>
+                </div>
+                <div class="hero-kpi-card">
+                  <div class="hero-kpi-label">Profit (SUM)</div>
+                  <div class="hero-kpi-value" id="heroKpiProfit">$1.47M</div>
+                  <div class="hero-kpi-sub" id="heroKpiProfitSub">Total Margin</div>
+                </div>
+                <div class="hero-kpi-card">
+                  <div class="hero-kpi-label">Profit Margin %</div>
+                  <div class="hero-kpi-value" id="heroKpiMargin">11.6%</div>
+                  <div class="hero-kpi-sub" id="heroKpiMarginSub">KPI Formula (fx)</div>
+                </div>
+                <div class="hero-kpi-card">
+                  <div class="hero-kpi-label">Avg Price (ASP)</div>
+                  <div class="hero-kpi-value" id="heroKpiAsp">$70.9</div>
+                  <div class="hero-kpi-sub" id="heroKpiAspSub">Per Unit Sold</div>
+                </div>
+              </div>
+
+              <!-- Interactive Grid -->
+              <div class="hero-preview-grid">
+                <!-- Left: Category Slicer -->
+                <div class="hero-mini-card">
+                  <div class="hero-mini-header">
+                    <span class="hero-mini-title">
+                      <span>📁</span> Category <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">(3)</span>
+                    </span>
+                    <span class="hero-mini-hint">
+                      <span>⚡</span> Click to slice
+                    </span>
+                  </div>
+                  <div class="hero-slicer-rows" id="heroSlicerRows">
+                    <div class="hero-slicer-row" data-category="Technology" role="button" tabindex="0" title="Click to filter by Technology">
+                      <div class="hero-slicer-bar" style="width: 37.5%;"></div>
+                      <div class="hero-slicer-left">
+                        <span class="hero-rank-badge">1</span>
+                        <span class="hero-slicer-name">Technology</span>
+                      </div>
+                      <div class="hero-slicer-right">
+                        <span class="hero-slicer-val">$4.74M</span>
+                        <span class="hero-slicer-pct">37.5%</span>
+                      </div>
+                    </div>
+
+                    <div class="hero-slicer-row" data-category="Furniture" role="button" tabindex="0" title="Click to filter by Furniture">
+                      <div class="hero-slicer-bar" style="width: 32.5%;"></div>
+                      <div class="hero-slicer-left">
+                        <span class="hero-rank-badge">2</span>
+                        <span class="hero-slicer-name">Furniture</span>
+                      </div>
+                      <div class="hero-slicer-right">
+                        <span class="hero-slicer-val">$4.11M</span>
+                        <span class="hero-slicer-pct">32.5%</span>
+                      </div>
+                    </div>
+
+                    <div class="hero-slicer-row" data-category="Office Supplies" role="button" tabindex="0" title="Click to filter by Office Supplies">
+                      <div class="hero-slicer-bar" style="width: 30.0%;"></div>
+                      <div class="hero-slicer-left">
+                        <span class="hero-rank-badge">3</span>
+                        <span class="hero-slicer-name">Office Supplies</span>
+                      </div>
+                      <div class="hero-slicer-right">
+                        <span class="hero-slicer-val">$3.79M</span>
+                        <span class="hero-slicer-pct">30.0%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right: Reactive Sparkline Timeline -->
+                <div class="hero-mini-card">
+                  <div class="hero-mini-header">
+                    <span class="hero-mini-title">
+                      <span>📈</span> Sales Timeline <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">(Jan – Jun)</span>
+                    </span>
+                    <span style="font-size: 0.72rem; color: var(--accent-emerald); font-weight: 700;">
+                      ● &lt;10ms Recalculation
+                    </span>
+                  </div>
+                  <div class="hero-sparkline-wrap">
+                    <svg class="hero-sparkline-svg" viewBox="0 0 320 80" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="hero_sparkline_grad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.5"/>
+                          <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.0"/>
+                        </linearGradient>
+                      </defs>
+                      <path id="heroSparklineArea" class="hero-sparkline-area" d="M0,55 Q40,35 80,48 T160,25 T240,42 T320,15 L320,80 L0,80 Z"/>
+                      <path id="heroSparklinePath" class="hero-sparkline-path" d="M0,55 Q40,35 80,48 T160,25 T240,42 T320,15"/>
+                      <circle id="heroSparklineDot" class="hero-sparkline-dot" cx="320" cy="15" r="4"/>
+                    </svg>
+                    <div class="hero-sparkline-footer">
+                      <span>01/01/2025</span>
+                      <span id="heroSparklinePeak">Peak: $92.75K/day</span>
+                      <span>30/06/2025</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer Action Bar -->
+            <div class="hero-preview-footer">
+              <div class="hero-preview-meta">
+                <span>⚡</span>
+                <span><strong>Instant Sub-Second Slicing:</strong> Slices full 51k-row cube in memory with zero backend queries.</span>
+              </div>
+              <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="hero-preview-launch-btn">
+                <span>⚡ Launch Full 51k-Row Demo</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
         </div>
 
         <!-- Trust Stats Bar -->
@@ -1124,35 +1189,83 @@
 
     <!-- CONTACT US SECTION -->
     <section class="section contact-section" id="contact">
-      <div class="container container-narrow">
+      <div class="container">
         <div class="section-header text-center">
           <span class="section-tag">GET IN TOUCH</span>
           <h2 class="section-title">Contact Us</h2>
           <p class="section-description">
-            Have questions about Beta access, custom Google Sheet integrations, or enterprise volume limits? Reach out
-            directly to our team.
+            Have questions about data privacy, custom spreadsheet workflows, or volume limits? We're here to help.
           </p>
         </div>
 
-        <div class="contact-card-wrapper glow-border">
-          <div class="contact-card-body">
-            <div class="contact-methods-grid">
-              <div class="contact-method-item">
-                <div class="method-icon-box">📧</div>
-                <div class="method-details">
-                  <span class="method-label">Official Email</span>
-                  <a href="mailto:admin@qbonic.com" class="method-value">admin@qbonic.com</a>
-                  <span class="method-sub">Click to send an instant email</span>
+        <div class="contact-trio-grid">
+          <!-- Card 1: Official Email Support (Primary Featured) -->
+          <div class="contact-suite-card contact-featured-card glow-border">
+            <div class="suite-card-top">
+              <div class="suite-header-row">
+                <div class="suite-icon-box primary-icon-box">✉️</div>
+                <div class="contact-response-badge">
+                  <span class="pulse-dot"></span>
+                  <span>Direct to Founder</span>
                 </div>
               </div>
+              <span class="suite-category">Direct Support</span>
+              <h3 class="suite-title">Email Directly</h3>
+              <p class="suite-email-highlight">admin@qbonic.com</p>
+              <p class="suite-desc">
+                For general inquiries, Beta access requests, volume limits, or custom technical assistance.
+              </p>
+            </div>
+            <div class="suite-card-bottom">
+              <a href="mailto:admin@qbonic.com?subject=Question%20about%20Qbonic" class="btn btn-primary btn-sm suite-btn-full">
+                <span>✉️ Send Email</span>
+              </a>
+              <button type="button" class="btn btn-secondary btn-sm suite-copy-btn" id="copyContactEmailBtn" onclick="copyContactEmail(this)" title="Copy email address">
+                <span class="copy-btn-icon">📋</span>
+                <span class="copy-btn-text">Copy</span>
+              </button>
+            </div>
+          </div>
 
-              <div class="contact-method-item">
-                <div class="method-icon-box">🏢</div>
-                <div class="method-details">
-                  <span class="method-label">Operating Entity</span>
-                  <span class="method-value">VitanuGenAI Technology Pvt Ltd, India 🇮🇳</span>
-                </div>
+          <!-- Card 2: Security & Architecture FAQs (Instant Self-Serve) -->
+          <div class="contact-suite-card">
+            <div class="suite-card-top">
+              <div class="suite-header-row">
+                <div class="suite-icon-box">🛡️</div>
+                <div class="suite-badge-neutral">Zero Wait Time</div>
               </div>
+              <span class="suite-category">Instant Answers</span>
+              <h3 class="suite-title">Security & 29 FAQs</h3>
+              <p class="suite-desc">
+                Instant self-service answers covering our 100% in-browser RAM architecture, GDPR compliance, and billing.
+              </p>
+            </div>
+            <div class="suite-card-bottom">
+              <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="btn btn-secondary btn-sm suite-btn-full suite-action-link" id="contactFaqLink">
+                <span>Browse All 29 FAQs</span>
+                <span class="suite-arrow">&rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: Feature Requests & Product Feedback -->
+          <div class="contact-suite-card">
+            <div class="suite-card-top">
+              <div class="suite-header-row">
+                <div class="suite-icon-box">💡</div>
+                <div class="suite-badge-neutral">User Driven</div>
+              </div>
+              <span class="suite-category">Product Feedback</span>
+              <h3 class="suite-title">Suggest a Feature</h3>
+              <p class="suite-desc">
+                Have an idea for a custom connector, export format, or visualization? We prioritize our roadmap directly around user requests.
+              </p>
+            </div>
+            <div class="suite-card-bottom">
+              <a href="mailto:admin@qbonic.com?subject=Feature%20Request%20for%20Qbonic&body=Hi%20Qbonic%20Team,%0A%0AI'd%20love%20to%20suggest%20the%20following%20feature/integration:%0A" class="btn btn-secondary btn-sm suite-btn-full suite-action-link">
+                <span>Suggest a Feature</span>
+                <span class="suite-arrow">&rarr;</span>
+              </a>
             </div>
           </div>
         </div>
@@ -1236,8 +1349,8 @@
     </div>
   </dialog>
 
-  <!-- FOOTER (Shared Web Component) -->
-  <qbonic-footer mode="full"></qbonic-footer>
+  <!-- FOOTER (Shared Web Component - Clean 1-Row Legal Bar) -->
+  <qbonic-footer></qbonic-footer>
 
   <!-- Video Demo Lightbox Modal -->
   <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true"
@@ -1259,6 +1372,7 @@
     </div>
   </div>
 
+  <script src="qbonic-header.js" defer></script>
   <script src="qbonic-footer.js" defer></script>
   <script src="site-core.js" defer></script>
   <script src="app.js"></script>

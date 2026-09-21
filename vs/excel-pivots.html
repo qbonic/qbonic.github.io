@@ -50,7 +50,7 @@
     .comparison-container {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: var(--section-spacing-y) 20px;
     }
     .comparison-header {
       text-align: center;
@@ -137,50 +137,8 @@
 </head>
 
 <body class="dark-theme">
-  <!-- Header -->
-  <header class="site-header" id="siteHeader">
-    <div class="header-inner">
-      <a href="../index.html" class="brand-logo">
-        <div class="logo-icon-box">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#logo_grad)" stroke="#38BDF8" stroke-width="1.5" stroke-linejoin="round" />
-            <defs>
-              <linearGradient id="logo_grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#38BDF8" />
-                <stop offset="1" stop-color="#6366F1" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div class="brand-text-group">
-          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
-          <span class="brand-tagline">Interactive Pivot Dashboards</span>
-        </div>
-      </a>
-
-      <nav class="nav-menu" id="navMenu">
-        <a href="../index.html#demo" class="nav-link">Product Tour</a>
-        <a href="../index.html#problem" class="nav-link">Why Qbonic</a>
-        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="nav-link" id="navPricingBtn">Pricing</a>
-        <a href="../whats-new.html" onclick="redirectToWhatsNew(event)" class="nav-link" id="navWhatsNewBtn">What's New</a>
-        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="nav-link" id="navFaqsBtn">Security & FAQs</a>
-        <a href="../index.html#contact" class="nav-link">Contact</a>
-      </nav>
-
-      <div class="header-actions">
-        <div class="theme-switch-wrapper" title="Switch Theme">
-          <span class="theme-switch-icon">🌙</span>
-          <label class="theme-switch" for="themeToggle">
-            <input type="checkbox" id="themeToggle" aria-label="Toggle light or dark theme">
-            <span class="slider round"></span>
-          </label>
-          <span class="theme-switch-icon">☀️</span>
-        </div>
-        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="btn btn-secondary btn-sm nav-demo-btn" id="navDemoBtn"><span class="demo-bolt">⚡</span> Try Demo</a>
-        <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
-      </div>
-    </div>
-  </header>
+  <!-- Shared Header Component -->
+  <qbonic-header active="excel-pivots"></qbonic-header>
 
   <main class="comparison-container">
     <div class="comparison-header">
@@ -247,8 +205,9 @@
   </main>
 
   <!-- Footer (Shared Web Component) -->
-  <qbonic-footer mode="full"></qbonic-footer>
+  <qbonic-footer></qbonic-footer>
 
+  <script src="../qbonic-header.js" defer></script>
   <script src="../qbonic-footer.js" defer></script>
   <script src="../site-core.js" defer></script>
 </body>
