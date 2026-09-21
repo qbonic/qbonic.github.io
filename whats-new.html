@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P4YG3984FX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-P4YG3984FX', {
+      'client_storage': 'none',
+      'anonymize_ip': true
+    });
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>What's New in Qbonic | Product Changelog, Features & Release Notes</title>
+  <meta name="title" content="What's New in Qbonic | Product Changelog, Features & Release Notes">
+  <meta name="description"
+    content="Discover the latest capabilities, performance improvements, and bug fixes in Qbonic. Explore our roadmap milestones from Executive PDF Export to Zero-Server Sharing.">
+  <meta name="keywords"
+    content="Qbonic changelog, whats new in qbonic, release notes, pivot table updates, in-browser analytics roadmap, excel pivot features">
+  <meta name="author" content="VitanuGenAI Technology Pvt Ltd">
+  <meta name="robots" content="index, follow">
+
+  <!-- Synchronous theme init — must run in <head> to prevent flash-of-wrong-theme (FOWT) -->
+  <script>
+    (function () {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var t = p.get('theme') || localStorage.getItem('qbonic_theme');
+        document.documentElement.setAttribute('data-theme', (t === 'light' || t === 'qbonic-light') ? 'light' : 'dark');
+        if (t) localStorage.setItem('qbonic_theme', (t === 'light' || t === 'qbonic-light') ? 'light' : 'dark');
+      } catch (e) { }
+    })();
+  </script>
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://qbonic.com/whats-new.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qbonic.com/whats-new.html">
+  <meta property="og:title" content="What's New in Qbonic | Product Changelog & Release Notes">
+  <meta property="og:description"
+    content="Explore recent milestones and new capabilities added to Qbonic's 100% in-browser pivot analytics platform.">
+  <meta property="og:image" content="https://qbonic.com/favicon.svg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://qbonic.com/whats-new.html">
+  <meta name="twitter:title" content="What's New in Qbonic | Product Changelog">
+  <meta name="twitter:description"
+    content="Explore recent milestones and new capabilities added to Qbonic's 100% in-browser pivot analytics platform.">
+  <meta name="twitter:image" content="https://qbonic.com/favicon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Main Stylesheet (Cache-Busted) -->
+  <link rel="stylesheet" href="style.css?v=21">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemPage",
+    "name": "What's New in Qbonic",
+    "description": "Product changelog and release milestones for Qbonic in-browser analytics.",
+    "url": "https://qbonic.com/whats-new.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "VitanuGenAI Technology Pvt Ltd",
+      "url": "https://qbonic.com"
+    }
+  }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       What's New Page Styles (B2C Executive Usability Standards)
+       ========================================================================== */
+    .changelog-hero {
+      padding: 36px 0 14px;
+      text-align: center;
+      position: relative;
+    }
+
+    .changelog-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      letter-spacing: 0.2px;
+    }
+
+    [data-theme="light"] .changelog-hero-badge {
+      background: rgba(2, 132, 199, 0.08);
+      border-color: rgba(2, 132, 199, 0.22);
+    }
+
+    .changelog-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+      line-height: 1.18;
+    }
+
+    .changelog-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Streamlined & Compact Controls Bar */
+    .changelog-controls {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 16px 0 28px;
+      box-shadow: 0 6px 20px -8px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
+    }
+
+    [data-theme="light"] .changelog-controls {
+      background: #FFFFFF;
+      border-color: rgba(15, 23, 42, 0.12);
+      box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.06);
+    }
+
+    .controls-left-cluster {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Segmented View Mode Toggle Pill (Condensed vs Detailed) */
+    .view-mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    [data-theme="light"] .view-mode-toggle {
+      background: #F1F5F9;
+      border-color: rgba(15, 23, 42, 0.12);
+    }
+
+    .view-mode-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .view-mode-btn:hover {
+      color: var(--text-main);
+    }
+
+    .view-mode-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.35);
+    }
+
+    [data-theme="light"] .view-mode-btn.active {
+      color: #FFFFFF;
+      background: var(--primary);
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+    }
+
+    .release-counter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+    }
+
+    [data-theme="light"] .release-counter-pill {
+      background: #F8FAFC;
+      border-color: rgba(15, 23, 42, 0.12);
+      color: #475569;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+    }
+
+    .search-box-wrapper {
+      position: relative;
+      flex-grow: 1;
+      max-width: 260px;
+      min-width: 170px;
+    }
+
+    .search-box-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 7px 12px 7px 32px;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    [data-theme="light"] .search-box-input {
+      background: #F8FAFC;
+      border-color: rgba(15, 23, 42, 0.15);
+      color: #0F172A;
+    }
+
+    .search-box-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    .search-box-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* 2-Column Layout: Main Feed + Sticky Right Milestone Stepper Rail */
+    .changelog-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      gap: 36px;
+      align-items: start;
+      position: relative;
+      margin-bottom: 50px;
+    }
+
+    @media (max-width: 1024px) {
+      .changelog-layout {
+        grid-template-columns: 1fr;
+      }
+      .milestone-stepper-sidebar {
+        display: none !important;
+      }
+    }
+
+    /* Right Sticky Milestone Rail */
+    .milestone-stepper-sidebar {
+      position: sticky;
+      top: 90px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 20px 16px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+    }
+
+    .rail-header {
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .rail-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+    }
+
+    /* Continuous vertical track line */
+    .rail-list::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 14px;
+      bottom: 14px;
+      width: 2px;
+      background: var(--border-subtle);
+      z-index: 1;
+    }
+
+    .rail-item {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 12px;
+    }
+
+    .rail-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .rail-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      padding: 6px 8px;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .rail-link:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    [data-theme="light"] .rail-link:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .rail-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--text-muted);
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+    }
+
+    .rail-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .rail-version {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      transition: color 0.2s ease;
+      line-height: 1.2;
+    }
+
+    .rail-date {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+
+    .rail-item.active .rail-dot {
+      background: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.8), 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .rail-item.active .rail-version {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .rail-item.active .rail-link {
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    /* Milestone Cards Container */
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Master Card Component */
+    .milestone-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.35);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      scroll-margin-top: 100px;
+      overflow: hidden;
+    }
+
+    .milestone-card:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .milestone-card.is-latest {
+      border-color: rgba(56, 189, 248, 0.45);
+      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(56, 189, 248, 0.03) 100%);
+    }
+
+    .milestone-card.highlight-pulse {
+      animation: pulseCardHighlight 1.5s ease 1;
+    }
+
+    @keyframes pulseCardHighlight {
+      0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6); }
+      70% { box-shadow: 0 0 0 14px rgba(56, 189, 248, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+    }
+
+    /* ==========================================================================
+       FORMAT A: CONDENSED VIEW (1/4th Height ~52px Ultra-Compact Row)
+       ========================================================================== */
+    .condensed-row {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease;
+    }
+
+    .condensed-row:hover {
+      background: rgba(56, 189, 248, 0.04);
+    }
+
+    .condensed-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex-grow: 1;
+    }
+
+    .condensed-version {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .condensed-date {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+    }
+
+    .condensed-headline {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+
+    .condensed-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .condensed-chevron {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+
+    .milestone-card.is-expanded .condensed-chevron {
+      transform: rotate(180deg);
+      color: var(--primary);
+    }
+
+    /* ==========================================================================
+       FORMAT B: DETAILED VIEW (Rich Visual Card with Full Breakdown)
+       ========================================================================== */
+    .detailed-summary-box {
+      padding: 24px 26px 18px;
+      cursor: pointer;
+    }
+
+    .milestone-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .version-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .version-badge {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .codename-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .date-badge {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .latest-pill {
+      background: #10B981;
+      color: #0F172A;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+
+    .quantified-counters {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .count-chip {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .count-features {
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .count-improvements {
+      background: rgba(168, 85, 247, 0.12);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+
+    .count-fixes {
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .milestone-headline {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 8px 0 12px;
+      line-height: 1.45;
+    }
+
+    .highlights-preview {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .highlight-pill {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 3px 10px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .highlight-pill strong {
+      color: var(--text-main);
+    }
+
+    .expand-toggle-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 12px;
+      margin-top: 6px;
+    }
+
+    .expand-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      font-size: 0.84rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .expand-toggle-btn:hover {
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    .toggle-arrow {
+      transition: transform 0.25s ease;
+      font-size: 0.8rem;
+    }
+
+    .milestone-card.is-expanded .toggle-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Accordion Drawer Details */
+    .milestone-details-drawer {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+      padding: 0 24px;
+    }
+
+    .milestone-card.is-expanded .milestone-details-drawer {
+      max-height: 3500px;
+      opacity: 1;
+      padding: 16px 24px 24px;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    /* Feature Items */
+    .feature-items-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .feature-item-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px 18px;
+      transition: all 0.2s ease;
+    }
+
+    .feature-item-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      transform: translateX(3px);
+    }
+
+    .feature-top-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .feature-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+      flex-shrink: 0;
+    }
+
+    .feature-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0;
+    }
+
+    .tag-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    [data-theme="light"] .tag-badge {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .feature-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .secondary-section {
+      margin-top: 16px;
+      border-top: 1px dashed var(--border-subtle);
+      padding-top: 14px;
+    }
+
+    .section-subhead {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .secondary-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .secondary-item {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .secondary-item strong {
+      color: var(--text-main);
+    }
+
+    .dot-purple { color: #c084fc; font-size: 1rem; line-height: 1; }
+    .dot-green { color: #34d399; font-size: 1rem; line-height: 1; }
+
+    /* Year Divider */
+    .year-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 4px 0;
+    }
+
+    .year-divider-line {
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    .year-divider-text {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--bg-card);
+      border: 1px dashed var(--border-subtle);
+      border-radius: 20px;
+    }
+
+    .empty-state-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .empty-state-title { font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
+    .empty-state-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .changelog-hero { padding: 95px 0 20px; }
+      .changelog-controls { flex-direction: column; align-items: stretch; }
+      .controls-left-cluster { justify-content: space-between; }
+      .search-box-wrapper { max-width: 100%; }
+      .condensed-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .condensed-headline { white-space: normal; }
+      .detailed-summary-box { padding: 18px 16px 14px; }
+      .milestone-details-drawer { padding: 0 16px; }
+      .milestone-card.is-expanded .milestone-details-drawer { padding: 14px 16px 18px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Ambient Glow -->
+  <div class="ambient-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow bg-glow-2" aria-hidden="true"></div>
+
+  <!-- Site Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#logo_grad)" stroke="#38BDF8" stroke-width="1.5"
+              stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="logo_grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38BDF8" />
+                <stop offset="1" stop-color="#6366F1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <span class="brand-tagline">Interactive Pivot Dashboards</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html#demo" class="nav-link">Product Tour</a>
+        <a href="index.html#problem" class="nav-link">Why Qbonic</a>
+        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="nav-link"
+          id="navPricingBtn">Pricing</a>
+        <a href="whats-new.html" class="nav-link active" style="color: var(--primary); font-weight: 700;">What's New</a>
+        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="nav-link"
+          id="navFaqsBtn">Security & FAQs</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="theme-switch-wrapper" title="Switch Theme">
+          <span class="theme-switch-icon">🌙</span>
+          <label class="theme-switch" for="themeToggle">
+            <input type="checkbox" id="themeToggle" aria-label="Toggle light or dark theme">
+            <span class="slider round"></span>
+          </label>
+          <span class="theme-switch-icon">☀️</span>
+        </div>
+        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)"
+          class="btn btn-secondary btn-sm nav-demo-btn" id="navDemoBtn"><span class="demo-bolt">⚡</span> Try Demo</a>
+        <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)"
+          class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <div class="brand-text-group">
+          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
+          <span class="brand-tagline">Interactive Pivot Dashboards</span>
+        </div>
+        <button class="drawer-close" id="drawerClose">&times;</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="index.html#demo" class="drawer-link">Product Tour</a>
+        <a href="index.html#problem" class="drawer-link">Why Qbonic</a>
+        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="drawer-link"
+          id="drawerPricingBtn">Pricing</a>
+        <a href="whats-new.html" class="drawer-link active" style="color: var(--primary); font-weight: 700;">What's New</a>
+        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="drawer-link"
+          id="drawerFaqsBtn">Security & FAQs</a>
+        <a href="index.html#contact" class="drawer-link">Contact</a>
+        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)"
+          class="drawer-link btn btn-secondary mt-3" id="drawerDemoBtn">⚡ Try Demo</a>
+        <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)"
+          class="drawer-link btn btn-primary mt-2" id="drawerSignupBtn">Join Free Beta &rarr;</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <!-- Hero Section -->
+    <section class="changelog-hero">
+      <div class="changelog-hero-badge">
+        <span>✨</span>
+        <span>Product Updates & Release Notes</span>
+      </div>
+      <h1 class="changelog-title">What's New in Qbonic</h1>
+      <p class="changelog-subtitle">
+        Explore new capabilities, performance upgrades, and privacy features built for modern business operators.
+      </p>
+    </section>
+
+    <!-- Streamlined Controls Bar (Density Switcher, Milestone Count & Compact Search) -->
+    <div class="changelog-controls">
+      
+      <div class="controls-left-cluster">
+        <!-- Segmented View Mode Toggle Pill -->
+        <div class="view-mode-toggle" id="viewModeToggleGroup" role="group" aria-label="Changelog layout format">
+          <button type="button" class="view-mode-btn" data-mode="condensed" id="modeCondensedBtn" title="Compact 1-line high-density summary list">
+            <span>☰</span>
+            <span>Condensed</span>
+          </button>
+          <button type="button" class="view-mode-btn active" data-mode="detailed" id="modeDetailedBtn" title="Detailed visual release cards">
+            <span>☷</span>
+            <span>Detailed</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Milestone Count Pill -->
+        <div class="release-counter-pill" id="releaseCounterPill">
+          <span class="live-dot"></span>
+          <span id="releaseCounterText">4 Milestones</span>
+        </div>
+      </div>
+
+      <!-- Search Input -->
+      <div class="search-box-wrapper">
+        <span class="search-box-icon">🔍</span>
+        <input type="text" id="changelogSearchInput" class="search-box-input" placeholder="Search features, PDF, sharing..." aria-label="Search releases">
+      </div>
+    </div>
+
+    <!-- 2-Column Layout: Main Feed + Sticky Right Milestone Stepper Rail -->
+    <div class="changelog-layout">
+      
+      <!-- Left Column: Milestone Cards Timeline -->
+      <div class="timeline-container" id="timelineContainer">
+        <!-- Loading State Skeleton -->
+        <div class="empty-state" id="loadingState">
+          <div class="empty-state-icon">⚡</div>
+          <div class="empty-state-title">Loading product milestones...</div>
+          <div class="empty-state-desc">Fetching the latest release notes from Qbonic.</div>
+        </div>
+      </div>
+
+      <!-- Right Column: Sticky Milestone Dot Stepper Rail -->
+      <aside class="milestone-stepper-sidebar" id="stepperSidebar" aria-label="Milestone navigation">
+        <div class="rail-header">
+          <span>Milestones</span>
+          <span style="font-size: 0.72rem; color: var(--primary); font-weight: 700;" id="railMilestoneCount">4 Releases</span>
+        </div>
+        <ul class="rail-list" id="railList">
+          <!-- Populated dynamically by JS -->
+        </ul>
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- Site Footer (Shared Web Component) -->
+  <qbonic-footer mode="full"></qbonic-footer>
+
+  <!-- Scripts -->
+  <script src="qbonic-footer.js" defer></script>
+  <script src="site-core.js"></script>
+
+  <!-- Interactive Changelog Controller -->
+  <script>
+    (function () {
+      // Embedded Fallback Dataset (Instant zero-flicker render)
+      const EMBEDDED_RELEASES = [
+        {
+          "version": "v1.4.0",
+          "codename": "Executive Briefings & Instant Sharing",
+          "releaseDate": "September 2026",
+          "year": 2026,
+          "isLatest": true,
+          "headline": "Executive 16:9 Landscape PDF Export, Zero-Server Link Sharing & Dual-Set Dimension Filters",
+          "counts": { "features": 3, "improvements": 4, "fixes": 3 },
+          "features": [
+            {
+              "title": "Executive 16:9 Landscape PDF Export",
+              "description": "Export board-ready PDF briefings with pure vector SVG sparklines, 100% dark/light theme consistency, auto multi-page layout, and active filter reflections.",
+              "tag": "Export",
+              "badge": "New"
+            },
+            {
+              "title": "1-Click Zero-Server URL Link Sharing",
+              "description": "Share interactive report blueprints compressed into secure URL hash fragments. Recipients load the exact dashboard view with zero server uploads.",
+              "tag": "Collaboration",
+              "badge": "New"
+            },
+            {
+              "title": "Dual-Set Dimension & Exclude (NOT) Slicing",
+              "description": "Filter datasets with multi-select inclusion or invert filters with strike-through exclusions across all pivot cards and charts.",
+              "tag": "Analytics",
+              "badge": "New"
+            }
+          ],
+          "improvements": [
+            { "title": "Segmented Command Bar Ergonomics", "description": "Consolidated Share and PDF Export into an ergonomic, responsive segmented capsule with viewport adaptation." },
+            { "title": "Silent Sheet & File Data Refresh", "description": "Contextual refresh button updates Google Sheets and local data seamlessly with live spinner indicators." },
+            { "title": "Shared Blueprint Author Attribution", "description": "Visual indicator and author metadata badges for imported and team-shared report blueprints." },
+            { "title": "Dynamic 60,000+ Row Pro Tier", "description": "Expanded client-side processing capacity to over 60,000 rows with optimized IndexedDB caching." }
+          ],
+          "fixes": [
+            { "title": "Multi-Page Sparkline Baseline Alignment", "description": "Eliminated SVG sparkline rendering clipping across multi-page executive print reports." },
+            { "title": "Blueprint Login Preserving State", "description": "Fixed transient pending blueprint drops during authentication and redirected directly to dashboard." },
+            { "title": "Entity Slicing Mutual Exclusivity", "description": "Prevented accidental measure and dimension column collision across unassigned tables." }
+          ]
+        },
+        {
+          "version": "v1.3.0",
+          "codename": "Configuration Workbench & Telemetry",
+          "releaseDate": "September 2026",
+          "year": 2026,
+          "isLatest": false,
+          "headline": "4-Column Workbench, Date Ribbon & Viral Referral Telemetry",
+          "counts": { "features": 2, "improvements": 3, "fixes": 2 },
+          "features": [
+            {
+              "title": "Top Date Ribbon & 4-Column Workbench",
+              "description": "Visual drag-and-drop column configuration with instant metadata detection and formula builders.",
+              "tag": "Workbench",
+              "badge": "New"
+            },
+            {
+              "title": "Multi-User Campaign & VIP Promo Engine",
+              "description": "Support for custom individual and group promo codes with real-time Firestore entitlement syncing.",
+              "tag": "Billing",
+              "badge": "New"
+            }
+          ],
+          "improvements": [
+            { "title": "Pre-Computed Column Statistics", "description": "Instant statistical profiling (null ratio, distinct count, distribution) cached in IndexedDB." },
+            { "title": "Privacy & API Key Isolation", "description": "Sanitized client-side environment configurations with zero cloud data leakage." },
+            { "title": "Standardized 14-Day Pro Free Trial", "description": "Streamlined checkout and instant trial activation without upfront lock-in." }
+          ],
+          "fixes": [
+            { "title": "Column Classification Edge Cases", "description": "Resolved currency, accounting negative, and date parsing ambiguities in messy sheets." },
+            { "title": "ReferenceError TDZ Resolution", "description": "Guaranteed hook and state execution order across cold report reloads." }
+          ]
+        },
+        {
+          "version": "v1.2.0",
+          "codename": "Zero-Login Interactive Demo & Dynamic Theming",
+          "releaseDate": "August 2026",
+          "year": 2026,
+          "isLatest": false,
+          "headline": "Interactive 0-Login Demo, Instant Cross-Domain Theme Sync & Mobile Experience Gate",
+          "counts": { "features": 2, "improvements": 2, "fixes": 1 },
+          "features": [
+            {
+              "title": "Zero-Login Interactive Demo Mode",
+              "description": "Explore realistic global sales dashboards instantly without creating an account.",
+              "tag": "Onboarding",
+              "badge": "New"
+            },
+            {
+              "title": "Cross-Domain Instant Theme Synchronization",
+              "description": "Seamless light and dark mode switching synchronized between marketing website and web console.",
+              "tag": "UX",
+              "badge": "New"
+            }
+          ],
+          "improvements": [
+            { "title": "Mobile-to-Desktop Smart Experience Gate", "description": "Polished desktop-first advisory dialog guiding mobile visitors to open on desktop/laptop." },
+            { "title": "Instant Pricing & Plan Limits Live-Sync", "description": "Live plan tiers and row capacities updated seamlessly without app reload." }
+          ],
+          "fixes": [
+            { "title": "Interactive Demo Lifecycle & Timer Recovery", "description": "Fixed video duration and demo timeout lifecycle handlers." }
+          ]
+        },
+        {
+          "version": "v1.0.0",
+          "codename": "Platform Foundation",
+          "releaseDate": "August 2026",
+          "year": 2026,
+          "isLatest": false,
+          "headline": "100% In-Browser Privacy Pivot Analytics for Google Sheets & CSVs",
+          "counts": { "features": 3, "improvements": 2, "fixes": 0 },
+          "features": [
+            {
+              "title": "Zero-Server In-Browser Pivot Engine",
+              "description": "Multi-dimensional aggregation and instant metric calculation running entirely client-side.",
+              "tag": "Core",
+              "badge": "New"
+            },
+            {
+              "title": "Multi-Format Spreadsheet Ingestion",
+              "description": "Seamless parsing for CSV, Excel (.xlsx, .xls), and live Google Sheets integration.",
+              "tag": "Data",
+              "badge": "New"
+            },
+            {
+              "title": "Automated Interactive Dashboards",
+              "description": "Generates summary KPI tiles, trend sparklines, and entity breakdown tables in under 2 minutes.",
+              "tag": "Visuals",
+              "badge": "New"
+            }
+          ],
+          "improvements": [
+            { "title": "Dark & Light Theme Design System", "description": "Tailored HSL color palette with high-contrast WCAG 2.1 AA accessibility standards." },
+            { "title": "Offline-First Local Dataset Persistence", "description": "Secure IndexedDB workspace storage with user-scoped isolation." }
+          ],
+          "fixes": []
+        }
+      ];
+
+      let allReleases = [...EMBEDDED_RELEASES];
+      let activeSearchQuery = '';
+      let activeViewMode = 'detailed';
+      try {
+        const saved = localStorage.getItem('qbonic_changelog_mode');
+        if (saved === 'condensed' || saved === 'detailed') {
+          activeViewMode = saved;
+        }
+      } catch (_) { }
+
+      // Track per-card accordion expansion state
+      const expansionState = {};
+
+      const container = document.getElementById('timelineContainer');
+      const railList = document.getElementById('railList');
+      const railCountEl = document.getElementById('railMilestoneCount');
+      const releaseCounterText = document.getElementById('releaseCounterText');
+      const searchInput = document.getElementById('changelogSearchInput');
+      const modeCondensedBtn = document.getElementById('modeCondensedBtn');
+      const modeDetailedBtn = document.getElementById('modeDetailedBtn');
+
+      function setViewMode(mode) {
+        activeViewMode = mode;
+        try { localStorage.setItem('qbonic_changelog_mode', mode); } catch (_) { }
+
+        // In Detailed view mode, expand ALL releases; in Condensed view mode, collapse ALL releases
+        allReleases.forEach(rel => {
+          expansionState[rel.version] = (mode === 'detailed');
+        });
+
+        updateViewModeUI();
+        renderChangelog();
+        setupScrollSpy();
+      }
+
+      // Smart Rolling Loader
+      async function loadReleases() {
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const base = isLocal ? 'http://localhost:5173' : 'https://console.qbonic.com';
+
+        try {
+          // 1. Fetch index manifest
+          const indexRes = await fetch(`${base}/releases/index.json`, { cache: 'no-cache' });
+          if (!indexRes.ok) throw new Error('Could not fetch index.json');
+          const indexData = await indexRes.json();
+          const latestYear = indexData.latestYear || 2026;
+          const availableYears = indexData.availableYears || [latestYear];
+
+          // 2. Fetch latest year releases
+          const latestYearRes = await fetch(`${base}/releases/${latestYear}.json`, { cache: 'no-cache' });
+          if (!latestYearRes.ok) throw new Error(`Could not fetch ${latestYear}.json`);
+          let merged = await latestYearRes.json();
+
+          // 3. Smart Rolling Window: If latest year has < 4 milestones, fetch previous year
+          if (merged.length < 4 && availableYears.length > 1) {
+            const prevYear = availableYears.find(y => y < latestYear);
+            if (prevYear) {
+              try {
+                const prevRes = await fetch(`${base}/releases/${prevYear}.json`, { cache: 'no-cache' });
+                if (prevRes.ok) {
+                  const prevData = await prevRes.json();
+                  merged = [...merged, ...prevData];
+                }
+              } catch (_) { /* non-critical */ }
+            }
+          }
+
+          if (Array.isArray(merged) && merged.length > 0) {
+            allReleases = merged;
+          }
+        } catch (err) {
+          console.info('[Changelog] Using bundled fallback releases data:', err.message);
+        }
+
+        allReleases.forEach(rel => {
+          if (expansionState[rel.version] === undefined) {
+            expansionState[rel.version] = (activeViewMode === 'detailed');
+          }
+        });
+
+        updateViewModeUI();
+        renderChangelog();
+        renderSidebarRail();
+        setupScrollSpy();
+      }
+
+      function updateViewModeUI() {
+        if (modeCondensedBtn && modeDetailedBtn) {
+          modeCondensedBtn.classList.toggle('active', activeViewMode === 'condensed');
+          modeDetailedBtn.classList.toggle('active', activeViewMode === 'detailed');
+        }
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function getCleanVersionId(version) {
+        return 'rel-' + (version || '').replace(/[^a-zA-Z0-9]/g, '-');
+      }
+
+      function renderSidebarRail() {
+        if (!railList) return;
+
+        const filtered = getFilteredReleases();
+        const countStr = `${filtered.length} Milestone${filtered.length === 1 ? '' : 's'}`;
+        
+        if (railCountEl) railCountEl.textContent = countStr;
+        if (releaseCounterText) releaseCounterText.textContent = countStr;
+
+        if (filtered.length === 0) {
+          railList.innerHTML = `<li style="font-size: 0.78rem; color: var(--text-muted); padding: 8px 0;">No matching releases</li>`;
+          return;
+        }
+
+        railList.innerHTML = filtered.map((rel, idx) => {
+          const cardId = getCleanVersionId(rel.version);
+          return `
+            <li class="rail-item ${idx === 0 ? 'active' : ''}" data-target="${cardId}">
+              <a class="rail-link" onclick="window.__scrollToMilestone('${cardId}')">
+                <span class="rail-dot"></span>
+                <div class="rail-info">
+                  <span class="rail-version">${escapeHtml(rel.version)}</span>
+                  <span class="rail-date">${escapeHtml(rel.releaseDate)}</span>
+                </div>
+              </a>
+            </li>
+          `;
+        }).join('');
+      }
+
+      function getFilteredReleases() {
+        const query = activeSearchQuery.toLowerCase().trim();
+        if (!query) return allReleases;
+
+        return allReleases.filter(item => {
+          const matchHeadline = item.headline && item.headline.toLowerCase().includes(query);
+          const matchVersion = item.version && item.version.toLowerCase().includes(query);
+          const matchCodename = item.codename && item.codename.toLowerCase().includes(query);
+
+          const matchFeature = Array.isArray(item.features) && item.features.some(f => 
+            (f.title && f.title.toLowerCase().includes(query)) ||
+            (f.description && f.description.toLowerCase().includes(query)) ||
+            (f.tag && f.tag.toLowerCase().includes(query))
+          );
+
+          const matchImprovement = Array.isArray(item.improvements) && item.improvements.some(imp => 
+            (imp.title && imp.title.toLowerCase().includes(query)) ||
+            (imp.description && imp.description.toLowerCase().includes(query))
+          );
+
+          const matchFix = Array.isArray(item.fixes) && item.fixes.some(fix => 
+            (fix.title && fix.title.toLowerCase().includes(query)) ||
+            (fix.description && fix.description.toLowerCase().includes(query))
+          );
+
+          return matchHeadline || matchVersion || matchCodename || matchFeature || matchImprovement || matchFix;
+        });
+      }
+
+      function renderChangelog() {
+        if (!container) return;
+
+        const filtered = getFilteredReleases();
+        const countStr = `${filtered.length} Milestone${filtered.length === 1 ? '' : 's'}`;
+        if (releaseCounterText) releaseCounterText.textContent = countStr;
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-state-icon">🔍</div>
+              <div class="empty-state-title">No release milestones found</div>
+              <div class="empty-state-desc">Try searching for other keywords or clearing the search query.</div>
+            </div>
+          `;
+          return;
+        }
+
+        let html = '';
+        let lastRenderedYear = null;
+
+        filtered.forEach((rel, idx) => {
+          const cardId = getCleanVersionId(rel.version);
+          const itemYear = rel.year || (rel.releaseDate && rel.releaseDate.match(/\b20\d\d\b/) ? rel.releaseDate.match(/\b20\d\d\b/)[0] : null);
+
+          if (itemYear && itemYear !== lastRenderedYear && idx > 0) {
+            html += `
+              <div class="year-divider">
+                <div class="year-divider-line"></div>
+                <div class="year-divider-text">${escapeHtml(itemYear)}</div>
+                <div class="year-divider-line"></div>
+              </div>
+            `;
+          }
+          if (itemYear) lastRenderedYear = itemYear;
+
+          const counts = rel.counts || {
+            features: Array.isArray(rel.features) ? rel.features.length : 0,
+            improvements: Array.isArray(rel.improvements) ? rel.improvements.length : 0,
+            fixes: Array.isArray(rel.fixes) ? rel.fixes.length : 0
+          };
+
+          const isLatest = rel.isLatest || idx === 0;
+          
+          let isExpanded;
+          if (expansionState[rel.version] !== undefined) {
+            isExpanded = expansionState[rel.version];
+          } else {
+            isExpanded = (activeViewMode === 'detailed');
+          }
+
+          // Full Features list
+          let featuresHtml = '';
+          if (Array.isArray(rel.features) && rel.features.length > 0) {
+            featuresHtml = `
+              <div class="feature-items-grid">
+                ${rel.features.map(feat => `
+                  <div class="feature-item-card">
+                    <div class="feature-top-line">
+                      <div class="feature-title-group">
+                        <span class="feature-bullet"></span>
+                        <h4 class="feature-title">${escapeHtml(feat.title)}</h4>
+                      </div>
+                      ${feat.tag ? `<span class="tag-badge">${escapeHtml(feat.tag)}</span>` : ''}
+                    </div>
+                    <p class="feature-desc">${escapeHtml(feat.description)}</p>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          }
+
+          // Full Improvements list
+          let improvementsHtml = '';
+          if (Array.isArray(rel.improvements) && rel.improvements.length > 0) {
+            improvementsHtml = `
+              <div class="secondary-section">
+                <div class="section-subhead">
+                  <span class="dot-purple">⚡</span> Improvements & Polish
+                </div>
+                <ul class="secondary-list">
+                  ${rel.improvements.map(imp => `
+                    <li class="secondary-item">
+                      <span class="dot-purple">•</span>
+                      <div><strong>${escapeHtml(imp.title)}:</strong> ${escapeHtml(imp.description)}</div>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            `;
+          }
+
+          // Full Fixes list
+          let fixesHtml = '';
+          if (Array.isArray(rel.fixes) && rel.fixes.length > 0) {
+            fixesHtml = `
+              <div class="secondary-section">
+                <div class="section-subhead">
+                  <span class="dot-green">🛠️</span> Bug Fixes & Reliability
+                </div>
+                <ul class="secondary-list">
+                  ${rel.fixes.map(fix => `
+                    <li class="secondary-item">
+                      <span class="dot-green">•</span>
+                      <div><strong>${escapeHtml(fix.title)}:</strong> ${escapeHtml(fix.description)}</div>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            `;
+          }
+
+          // Top Highlight preview tags
+          const highlightTags = (rel.features || []).slice(0, 3).map(f => f.title);
+
+          html += `
+            <article class="milestone-card ${isLatest ? 'is-latest' : ''} ${isExpanded ? 'is-expanded' : ''}" id="${cardId}" data-version="${escapeHtml(rel.version)}">
+              
+              <!-- 1. CONDENSED HEADER ROW (1/4th Height ~52px) -->
+              <div class="condensed-row" onclick="window.__toggleCardExpansion('${escapeHtml(rel.version)}')">
+                <div class="condensed-left">
+                  <span class="condensed-version">${escapeHtml(rel.version)}</span>
+                  ${isLatest ? `<span class="latest-pill">LATEST</span>` : ''}
+                  <span class="condensed-date">${escapeHtml(rel.releaseDate)}</span>
+                  <h3 class="condensed-headline">${escapeHtml(rel.headline)}</h3>
+                </div>
+
+                <div class="condensed-right">
+                  <div class="quantified-counters">
+                    ${counts.features ? `<span class="count-chip count-features">✨ ${counts.features}</span>` : ''}
+                    ${counts.improvements ? `<span class="count-chip count-improvements">⚡ ${counts.improvements}</span>` : ''}
+                    ${counts.fixes ? `<span class="count-chip count-fixes">🛠️ ${counts.fixes}</span>` : ''}
+                  </div>
+                  <span class="condensed-chevron">▾</span>
+                </div>
+              </div>
+
+              <!-- 2. EXPANDED ACCORDION DETAILS DRAWER -->
+              <div class="milestone-details-drawer">
+                
+                <header class="milestone-header">
+                  <div class="version-meta">
+                    <span class="version-badge">${escapeHtml(rel.version)}</span>
+                    ${rel.codename ? `<span class="codename-badge">• ${escapeHtml(rel.codename)}</span>` : ''}
+                    <span class="date-badge">${escapeHtml(rel.releaseDate)}</span>
+                  </div>
+
+                  <div class="quantified-counters">
+                    ${counts.features ? `<span class="count-chip count-features">✨ ${counts.features} Features</span>` : ''}
+                    ${counts.improvements ? `<span class="count-chip count-improvements">⚡ ${counts.improvements} Improvements</span>` : ''}
+                    ${counts.fixes ? `<span class="count-chip count-fixes">🛠️ ${counts.fixes} Fixes</span>` : ''}
+                  </div>
+                </header>
+
+                <h3 class="milestone-headline">${escapeHtml(rel.headline)}</h3>
+
+                ${highlightTags.length > 0 ? `
+                  <div class="highlights-preview">
+                    ${highlightTags.map(tag => `
+                      <span class="highlight-pill"><strong>✨</strong> ${escapeHtml(tag)}</span>
+                    `).join('')}
+                  </div>
+                ` : ''}
+
+                <!-- Full Feature Breakdown -->
+                ${featuresHtml}
+                ${improvementsHtml}
+                ${fixesHtml}
+
+                <div class="expand-toggle-bar">
+                  <button type="button" class="expand-toggle-btn" onclick="window.__toggleCardExpansion('${escapeHtml(rel.version)}')">
+                    <span>Collapse to Condensed View</span>
+                    <span class="toggle-arrow">▴</span>
+                  </button>
+                  <span style="font-size: 0.74rem; color: var(--text-muted);">
+                    Click to minimize release
+                  </span>
+                </div>
+
+              </div>
+
+            </article>
+          `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      // Global window toggle handler
+      window.__toggleCardExpansion = function (version) {
+        expansionState[version] = !expansionState[version];
+        const card = document.querySelector(`.milestone-card[data-version="${version}"]`);
+        if (card) {
+          card.classList.toggle('is-expanded', !!expansionState[version]);
+        }
+      };
+
+      // Jump to Milestone from Right Stepper Rail
+      window.__scrollToMilestone = function (cardId) {
+        const el = document.getElementById(cardId);
+        if (!el) return;
+
+        const version = el.getAttribute('data-version');
+        if (version && !expansionState[version]) {
+          expansionState[version] = true;
+          el.classList.add('is-expanded');
+        }
+
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        el.classList.remove('highlight-pulse');
+        void el.offsetWidth;
+        el.classList.add('highlight-pulse');
+
+        document.querySelectorAll('.rail-item').forEach(item => {
+          item.classList.toggle('active', item.getAttribute('data-target') === cardId);
+        });
+      };
+
+      // ScrollSpy via IntersectionObserver
+      let observer = null;
+      function setupScrollSpy() {
+        if (observer) observer.disconnect();
+
+        const cards = document.querySelectorAll('.milestone-card');
+        if (!cards.length) return;
+
+        observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              document.querySelectorAll('.rail-item').forEach(item => {
+                item.classList.toggle('active', item.getAttribute('data-target') === id);
+              });
+            }
+          });
+        }, {
+          rootMargin: '-20% 0px -60% 0px',
+          threshold: 0
+        });
+
+        cards.forEach(card => observer.observe(card));
+      }
+
+      // Direct View Mode Button Listeners
+      if (modeCondensedBtn) {
+        modeCondensedBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          setViewMode('condensed');
+        });
+      }
+
+      if (modeDetailedBtn) {
+        modeDetailedBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          setViewMode('detailed');
+        });
+      }
+
+      // Live Search Event Handler
+      if (searchInput) {
+        let debounceTimer = null;
+        searchInput.addEventListener('input', (e) => {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => {
+            activeSearchQuery = e.target.value;
+            // Auto expand during search for instant scan
+            if (activeSearchQuery.trim()) {
+              allReleases.forEach(rel => { expansionState[rel.version] = true; });
+            }
+            renderChangelog();
+            renderSidebarRail();
+            setupScrollSpy();
+          }, 150);
+        });
+      }
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+        loadReleases();
+      });
+    })();
+  </script>
+</body>
+
+</html>
