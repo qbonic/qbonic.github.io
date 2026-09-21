@@ -498,10 +498,11 @@
         <a href="#problem" class="nav-link">Why Qbonic</a>
         <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="nav-link"
           id="navPricingBtn">Pricing</a>
+        <a href="whats-new.html" onclick="redirectToWhatsNew(event)" class="nav-link"
+          id="navWhatsNewBtn">What's New</a>
         <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="nav-link"
           id="navFaqsBtn">Security & FAQs</a>
-        <a href="#about" class="nav-link">About Us</a>
-        <a href="#contact" class="nav-link">Contact Us</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-actions">
         <div class="theme-switch-wrapper" title="Switch Theme">
@@ -513,8 +514,7 @@
           <span class="theme-switch-icon">☀️</span>
         </div>
         <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)"
-          class="btn btn-secondary btn-sm nav-demo-btn" id="navDemoBtn"><span class="demo-bolt">⚡</span> Try Interactive
-          Demo</a>
+          class="btn btn-secondary btn-sm nav-demo-btn" id="navDemoBtn"><span class="demo-bolt">⚡</span> Try Demo</a>
         <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)"
           class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -540,12 +540,13 @@
         <a href="#problem" class="drawer-link">Why Qbonic</a>
         <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="drawer-link"
           id="drawerPricingBtn">Pricing</a>
+        <a href="whats-new.html" onclick="redirectToWhatsNew(event)" class="drawer-link"
+          id="drawerWhatsNewBtn">What's New</a>
         <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="drawer-link"
           id="drawerFaqsBtn">Security & FAQs</a>
-        <a href="#about" class="drawer-link">About Us</a>
-        <a href="#contact" class="drawer-link">Contact Us</a>
+        <a href="#contact" class="drawer-link">Contact</a>
         <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)"
-          class="drawer-link btn btn-secondary mt-3" id="drawerDemoBtn">⚡ Try Interactive Demo (No Signup)</a>
+          class="drawer-link btn btn-secondary mt-3" id="drawerDemoBtn">⚡ Try Demo</a>
         <a href="https://console.qbonic.com/?auth=signup" onclick="redirectToSignup(event)"
           class="drawer-link btn btn-primary mt-2" id="drawerSignupBtn">Join Free Beta &rarr;</a>
       </nav>
@@ -1235,48 +1236,8 @@
     </div>
   </dialog>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-top-row">
-        <div class="footer-brand">
-          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
-          <p class="footer-tagline">Interactive Pivot Dashboards</p>
-        </div>
-
-        <div class="footer-links-wrapper"
-          style="display: flex; flex-direction: column; gap: 12px; align-items: flex-end;">
-          <nav class="footer-links" aria-label="Footer navigation">
-            <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)"
-              id="footerPricingBtn">Pricing</a>
-            <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)"
-              id="footerFaqsBtn">Security & FAQs</a>
-            <a href="https://console.qbonic.com/terms.html" onclick="redirectToTerms(event)" id="footerTermsBtn">Terms
-              of Service</a>
-            <a href="https://console.qbonic.com/privacy.html" onclick="redirectToPrivacy(event)"
-              id="footerPrivacyBtn">Privacy Policy</a>
-            <a href="https://console.qbonic.com/refund.html" onclick="redirectToRefund(event)"
-              id="footerRefundBtn">Refund Policy</a>
-            <a href="index.html#contact">Contact Us</a>
-          </nav>
-          <nav class="footer-links footer-seo-links" aria-label="Product Comparisons" style="font-size: 0.85rem;">
-            <span
-              style="color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Comparisons:</span>
-            <a href="vs/powerbi-local.html">Power BI vs Qbonic</a>
-            <a href="vs/excel-pivots.html">Excel Pivots vs Qbonic</a>
-            <a href="alternatives/privacy-first-bi.html">Privacy-First BI</a>
-          </nav>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p class="copyright-text">&copy; 2026 Qbonic. All rights reserved.</p>
-        <p class="company-attribution">Crafted with ❤️ in India by <strong>VitanuGenAI Technology Pvt Ltd 🇮🇳</strong>
-        </p>
-        <button class="back-to-top" id="backToTop" aria-label="Scroll to top">↑ Back to Top</button>
-      </div>
-    </div>
-  </footer>
+  <!-- FOOTER (Shared Web Component) -->
+  <qbonic-footer mode="full"></qbonic-footer>
 
   <!-- Video Demo Lightbox Modal -->
   <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true"
@@ -1298,6 +1259,7 @@
     </div>
   </div>
 
+  <script src="qbonic-footer.js" defer></script>
   <script src="site-core.js" defer></script>
   <script src="app.js"></script>
 </body>

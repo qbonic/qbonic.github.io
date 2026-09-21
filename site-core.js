@@ -37,28 +37,41 @@ const ThemeManager = (() => {
     const docTheme = document.documentElement.getAttribute('data-theme');
     if (docTheme === 'light' || docTheme === 'qbonic-light') return 'light';
     if (docTheme === 'dark' || docTheme === 'qbonic-dark') return 'dark';
-    const toggle = document.getElementById('themeToggle');
-    if (toggle) return toggle.checked ? 'light' : 'dark';
     try {
       const saved = localStorage.getItem('qbonic_theme');
       if (saved === 'light' || saved === 'qbonic-light') return 'light';
+      if (saved === 'dark' || saved === 'qbonic-dark') return 'dark';
     } catch (e) { /* storage blocked */ }
     return 'dark';
   }
 
   function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    try { localStorage.setItem('qbonic_theme', theme); } catch (e) { /* storage blocked */ }
-    const toggle = document.getElementById('themeToggle');
-    if (toggle) toggle.checked = (theme === 'light');
+    const isLight = (theme === 'light' || theme === 'qbonic-light');
+    const finalTheme = isLight ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', finalTheme);
+    try { localStorage.setItem('qbonic_theme', finalTheme); } catch (e) { /* storage blocked */ }
+    
+    try {
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('theme')) {
+        url.searchParams.set('theme', finalTheme);
+        window.history.replaceState({}, '', url.toString());
+      }
+    } catch (e) { /* ignore */ }
+
+    document.querySelectorAll('#themeToggle, input.theme-toggle-input').forEach(toggle => {
+      toggle.checked = isLight;
+    });
   }
 
   function initToggle() {
-    const toggle = document.getElementById('themeToggle');
-    if (!toggle) return;
-    toggle.checked = (getTheme() === 'light');
-    toggle.addEventListener('change', () => {
-      applyTheme(toggle.checked ? 'light' : 'dark');
+    initSync();
+    const isLight = (getTheme() === 'light');
+    document.querySelectorAll('#themeToggle, input.theme-toggle-input').forEach(toggle => {
+      toggle.checked = isLight;
+      toggle.addEventListener('change', (e) => {
+        applyTheme(e.target.checked ? 'light' : 'dark');
+      });
     });
   }
 
@@ -147,6 +160,15 @@ const AuthRouter = (() => {
     window.location.href = _themed(_baseUrl('refund.html'));
   }
 
+  function redirectToWhatsNew(e) {
+    if (e) e.preventDefault();
+    const trigger = (e && e.currentTarget && e.currentTarget.id) || 'whats_new_nav';
+    _trackAnalytics('whats_new_viewed', { trigger_location: trigger });
+    const isSubdir = window.location.pathname.includes('/vs/') || window.location.pathname.includes('/alternatives/');
+    const target = (isSubdir ? '../' : '') + 'whats-new.html';
+    window.location.href = _themed(target);
+  }
+
   return {
     redirectToLogin,
     redirectToSignup,
@@ -155,20 +177,22 @@ const AuthRouter = (() => {
     redirectToFaqs,
     redirectToPrivacy,
     redirectToTerms,
-    redirectToRefund
+    redirectToRefund,
+    redirectToWhatsNew
   };
 })();
 
 // Expose as global functions
-window.redirectToLogin   = AuthRouter.redirectToLogin;
-window.redirectToSignup  = AuthRouter.redirectToSignup;
-window.redirectToDemo    = AuthRouter.redirectToDemo;
-window.redirectToPricing = AuthRouter.redirectToPricing;
-window.redirectToFaqs    = AuthRouter.redirectToFaqs;
-window.redirectToPrivacy = AuthRouter.redirectToPrivacy;
-window.redirectToTerms   = AuthRouter.redirectToTerms;
-window.redirectToRefund  = AuthRouter.redirectToRefund;
-window.redirectToApp     = (plan) => AuthRouter.redirectToSignup(null, plan);
+window.redirectToLogin    = AuthRouter.redirectToLogin;
+window.redirectToSignup   = AuthRouter.redirectToSignup;
+window.redirectToDemo     = AuthRouter.redirectToDemo;
+window.redirectToPricing  = AuthRouter.redirectToPricing;
+window.redirectToFaqs     = AuthRouter.redirectToFaqs;
+window.redirectToPrivacy  = AuthRouter.redirectToPrivacy;
+window.redirectToTerms    = AuthRouter.redirectToTerms;
+window.redirectToRefund   = AuthRouter.redirectToRefund;
+window.redirectToWhatsNew = AuthRouter.redirectToWhatsNew;
+window.redirectToApp      = (plan) => AuthRouter.redirectToSignup(null, plan);
 
 /* ==========================================================================
    3. CROSS-DOMAIN LINK THEME PRESERVER
@@ -331,8 +355,9 @@ const NavButtons = (() => {
     const pricingIds = ['navPricingBtn', 'drawerPricingBtn', 'footerPricingBtn'];
     const faqsIds    = ['navFaqsBtn', 'drawerFaqsBtn', 'footerFaqsBtn', 'whitepaperFaqsBtn'];
     const privacyIds = ['navPrivacyBtn', 'drawerPrivacyBtn', 'footerPrivacyBtn'];
-    const termsIds   = ['navTermsBtn', 'drawerTermsBtn', 'footerTermsBtn'];
-    const refundIds  = ['navRefundBtn', 'drawerRefundBtn', 'footerRefundBtn'];
+    const termsIds    = ['navTermsBtn', 'drawerTermsBtn', 'footerTermsBtn'];
+    const refundIds   = ['navRefundBtn', 'drawerRefundBtn', 'footerRefundBtn'];
+    const whatsNewIds = ['navWhatsNewBtn', 'drawerWhatsNewBtn', 'footerWhatsNewBtn'];
 
     loginIds.forEach(id => {
       const el = document.getElementById(id);
@@ -365,6 +390,10 @@ const NavButtons = (() => {
     refundIds.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('click', AuthRouter.redirectToRefund);
+    });
+    whatsNewIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('click', AuthRouter.redirectToWhatsNew);
     });
   }
   return { init };
