@@ -95,12 +95,37 @@
       font-weight: 600;
     }
     .vs-cta-banner {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(99, 102, 241, 0.12));
-      border: 1px solid var(--border-glow);
-      border-radius: 20px;
-      padding: 40px 32px;
       text-align: center;
-      margin-top: 40px;
+      margin: 48px auto 56px;
+      max-width: 680px;
+      padding: 0 16px;
+    }
+    .vs-cta-title {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+    .vs-cta-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0 auto 18px;
+      line-height: 1.5;
+      max-width: 540px;
+    }
+    .vs-cta-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .vs-cta-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 10px;
     }
     @media (max-width: 768px) {
       .comparison-table th, .comparison-table td {
@@ -134,10 +159,12 @@
       </a>
 
       <nav class="nav-menu" id="navMenu">
-        <a href="../index.html" class="nav-link">Home</a>
         <a href="../index.html#demo" class="nav-link">Product Tour</a>
-        <a href="https://console.qbonic.com/pricing.html" class="nav-link">Pricing</a>
-        <a href="https://console.qbonic.com/detailed_faqs.html" class="nav-link">Security & FAQs</a>
+        <a href="../index.html#problem" class="nav-link">Why Qbonic</a>
+        <a href="https://console.qbonic.com/pricing.html" onclick="redirectToPricing(event)" class="nav-link" id="navPricingBtn">Pricing</a>
+        <a href="../whats-new.html" onclick="redirectToWhatsNew(event)" class="nav-link" id="navWhatsNewBtn">What's New</a>
+        <a href="https://console.qbonic.com/detailed_faqs.html" onclick="redirectToFaqs(event)" class="nav-link" id="navFaqsBtn">Security & FAQs</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
       </nav>
 
       <div class="header-actions">
@@ -149,8 +176,8 @@
           </label>
           <span class="theme-switch-icon">☀️</span>
         </div>
-        <a href="https://console.qbonic.com/?demo=true" class="btn btn-secondary btn-sm"><span class="demo-bolt">⚡</span> Try Interactive Demo</a>
-        <a href="https://console.qbonic.com/?auth=signin" class="btn btn-primary btn-sm">Login</a>
+        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="btn btn-secondary btn-sm nav-demo-btn" id="navDemoBtn"><span class="demo-bolt">⚡</span> Try Demo</a>
+        <a href="https://console.qbonic.com/?auth=signin" onclick="redirectToLogin(event)" class="btn btn-primary btn-sm" id="navLoginBtn">Login</a>
       </div>
     </div>
   </header>
@@ -206,53 +233,23 @@
     </div>
 
     <div class="vs-cta-banner">
-      <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 12px;">
-        Stop fighting spreadsheet lag.
-      </h2>
-      <p style="color: var(--text-secondary); margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">
-        Drop your CSV or Excel file directly into Qbonic and experience real-time pivot slicing with 100% local privacy.
+      <h2 class="vs-cta-title">Stop fighting spreadsheet lag.</h2>
+      <p class="vs-cta-desc">
+        Drop your CSV or Excel file directly into Qbonic and experience real-time pivot slicing with zero formulas.
       </p>
-      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-        <a href="https://console.qbonic.com/?demo=true" class="btn btn-primary btn-lg glow-button">
-          <span>⚡ Try Interactive Demo</span>
-        </a>
-        <a href="https://console.qbonic.com/?auth=signup" class="btn btn-secondary btn-lg">
-          <span>Join Free Beta →</span>
+      <div class="vs-cta-actions">
+        <a href="https://console.qbonic.com/?demo=true" onclick="redirectToDemo(event)" class="btn btn-primary btn-lg glow-button" style="border-radius: 999px; padding: 12px 28px; font-weight: 700;">
+          <span>⚡ Launch Interactive Demo</span>
         </a>
       </div>
+      <div class="vs-cta-sub">Instant 51k-Row Dataset • Zero Setup • No Account Needed</div>
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-top-row">
-        <div class="footer-brand">
-          <span class="brand-name">Qbonic<span class="brand-dot">.</span></span>
-          <p class="footer-tagline">Interactive Pivot Dashboards</p>
-        </div>
-        <div class="footer-links-wrapper" style="display: flex; flex-direction: column; gap: 12px; align-items: flex-end;">
-          <nav class="footer-links">
-            <a href="../index.html">Home</a>
-            <a href="https://console.qbonic.com/pricing.html">Pricing</a>
-            <a href="https://console.qbonic.com/detailed_faqs.html">Security & FAQs</a>
-            <a href="https://console.qbonic.com/privacy.html">Privacy Policy</a>
-            <a href="https://console.qbonic.com/terms.html">Terms of Service</a>
-          </nav>
-          <nav class="footer-links footer-seo-links" style="font-size: 0.85rem;">
-            <span style="color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">More Comparisons:</span>
-            <a href="powerbi-local.html">Power BI vs Qbonic</a>
-            <a href="../alternatives/privacy-first-bi.html">Privacy-First BI</a>
-          </nav>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p class="copyright-text">&copy; 2026 Qbonic. All rights reserved.</p>
-        <p class="company-attribution">Crafted with ❤️ in India by <strong>VitanuGenAI Technology Pvt Ltd 🇮🇳</strong></p>
-      </div>
-    </div>
-  </footer>
+  <!-- Footer (Shared Web Component) -->
+  <qbonic-footer mode="full"></qbonic-footer>
 
+  <script src="../qbonic-footer.js" defer></script>
   <script src="../site-core.js" defer></script>
 </body>
 </html>
