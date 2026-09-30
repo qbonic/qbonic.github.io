@@ -150,7 +150,7 @@
 
               <!-- Middle: Attribution (Guaranteed Dead-Centered) -->
               <div style="justify-self: center; text-align: center; font-weight: 600; white-space: nowrap; color: ${colors.textMain};" class="qbonic-footer-mid">
-                Crafted with ❤️ by <strong style="font-weight: 700; color: ${colors.textMain};">VitanuGenAI Technology Pvt Ltd, India 🇮🇳</strong>
+                Crafted with ❤️ by <strong style="font-weight: 700; color: ${colors.textMain};">Qbonic Technology LLP, India 🇮🇳</strong>
               </div>
 
               <!-- Right: Distinct Primary Hyperlinks -->
