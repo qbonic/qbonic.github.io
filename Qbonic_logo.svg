@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Deep Midnight Gradient Canvas -->
+    <linearGradient id="qbonic_bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0C1427"/>
+      <stop offset="50%" stop-color="#070B16"/>
+      <stop offset="100%" stop-color="#03050A"/>
+    </linearGradient>
+
+    <!-- Radial Cyan Core Atmosphere Glow -->
+    <radialGradient id="qbonic_ambient" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.28"/>
+      <stop offset="40%" stop-color="#0284C7" stop-opacity="0.14"/>
+      <stop offset="75%" stop-color="#0369A1" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Electric Neon Bolt Gradient -->
+    <linearGradient id="qbonic_bolt" x1="15%" y1="5%" x2="85%" y2="95%">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="35%" stop-color="#38BDF8"/>
+      <stop offset="70%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+
+    <!-- Inner Core Specular Highlight -->
+    <linearGradient id="qbonic_highlight" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- Soft Ambient Neon Diffusion Filter -->
+    <filter id="qbonic_outer_glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="22" result="blur1"/>
+      <feGaussianBlur stdDeviation="12" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+      </feMerge>
+    </filter>
+
+    <!-- Crisp Neon Edge Rim Filter -->
+    <filter id="qbonic_rim_glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="rimBlur"/>
+      <feComposite in="SourceGraphic" in2="rimBlur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- 1. Full-Bleed Midnight Canvas (Zero Cropping Artifacts) -->
+  <rect width="512" height="512" fill="url(#qbonic_bg)"/>
+
+  <!-- 2. Ambient Electric Glow Field -->
+  <rect width="512" height="512" fill="url(#qbonic_ambient)"/>
+
+  <!-- 3. Outer Neon Halo -->
+  <g transform="translate(40, 40) scale(18)" filter="url(#qbonic_outer_glow)" opacity="0.85">
+    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#38BDF8"/>
+  </g>
+
+  <!-- 4. Primary Electric Bolt (Crisp Sharp Vector Core) -->
+  <g transform="translate(40, 40) scale(18)" filter="url(#qbonic_rim_glow)">
+    <!-- Base Vector Mark with Stroke -->
+    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
+          fill="url(#qbonic_bolt)"
+          stroke="#BAE6FD"
+          stroke-width="0.65"
+          stroke-linejoin="round"
+          stroke-linecap="round"/>
+
+    <!-- Subtle Inner Specular Rim -->
+    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
+          fill="url(#qbonic_highlight)"
+          opacity="0.35"/>
+  </g>
+</svg>
