@@ -946,7 +946,7 @@
       <aside class="milestone-stepper-sidebar" id="stepperSidebar" aria-label="Milestone navigation">
         <div class="rail-header">
           <span>Milestones</span>
-          <span style="font-size: 0.72rem; color: var(--primary); font-weight: 700;" id="railMilestoneCount">4 Releases</span>
+          <span style="font-size: 0.72rem; color: var(--primary); font-weight: 700;" id="railMilestoneCount">6 Releases</span>
         </div>
         <ul class="rail-list" id="railList">
           <!-- Populated dynamically by JS -->
@@ -971,13 +971,28 @@
       // Embedded Fallback Dataset (Instant zero-flicker render)
       const EMBEDDED_RELEASES = [
         {
-          "version": "v1.5.0",
-          "codename": "Private Google Sheets & Unified Pro Experience",
-          "releaseDate": "October 2026",
+          "version": "v1.5.1",
+          "codename": "Spreadsheet Streaming & In-Browser Formula Engine Reliability",
+          "releaseDate": "October 9, 2026",
           "year": 2026,
           "isLatest": true,
+          "headline": "Zero-Eval CSP Formula Engine & High-Resilience Public Google Sheets Streaming",
+          "counts": { "features": 0, "improvements": 0, "fixes": 2 },
+          "features": [],
+          "improvements": [],
+          "fixes": [
+            { "title": "Public Google Sheets Direct Ingestion", "description": "Resolved an issue where public Google Sheets could inadvertently trigger an account authorization prompt due to browser cross-origin redirect policies; public spreadsheets now stream directly and seamlessly without requiring Google sign-in." },
+            { "title": "Calculated KPI & Derived Metric Formula Precision", "description": "Upgraded the custom KPI mathematical evaluation engine to a native, zero-eval arithmetic parser compliant with strict Content Security Policy (CSP), ensuring calculated formulas (such as Profit Margin % and Average Selling Price) compute and display with 100% accuracy in production environments." }
+          ]
+        },
+        {
+          "version": "v1.5.0",
+          "codename": "Private Google Sheets & Unified Pro Experience",
+          "releaseDate": "October 6, 2026",
+          "year": 2026,
+          "isLatest": false,
           "headline": "Direct Private Google Sheets Ingestion with Live Cloud Sync & Enhanced Privacy Safeguards",
-          "counts": { "features": 1, "improvements": 4, "fixes": 6 },
+          "counts": { "features": 1, "improvements": 4, "fixes": 4 },
           "features": [
             {
               "title": "Private Google Sheets — Cloud Sync & Offline Options",
@@ -993,8 +1008,6 @@
             { "title": "Full-Bleed Scalable Vector Brand Mark", "description": "Introduced a new full-bleed midnight gradient SVG and high-resolution avatar assets optimized for OAuth branding and circular mask cropping." }
           ],
           "fixes": [
-            { "title": "Public Google Sheets Direct Ingestion", "description": "Resolved an issue where public Google Sheets could inadvertently trigger an account authorization prompt due to browser cross-origin redirect policies; public spreadsheets now stream directly and seamlessly without requiring Google sign-in." },
-            { "title": "Calculated KPI & Derived Metric Formula Precision", "description": "Upgraded the custom KPI mathematical evaluation engine to a native, zero-eval arithmetic parser compliant with strict Content Security Policy (CSP), ensuring calculated formulas (such as Profit Margin % and Average Selling Price) compute and display with 100% accuracy in production environments." },
             { "title": "Google Sheets Connection Reliability", "description": "Resolved an issue where initiating a Google Sheets connection under certain configurations could fail to launch the account authorization prompt." },
             { "title": "Pro Account Layout Polish", "description": "Removed an extraneous duplicate section header above the active Pro Account status card for a cleaner presentation." },
             { "title": "Pro Subscription Action Ergonomics", "description": "Ensured active Pro subscribers are smoothly directed to subscription and invoice management rather than redundant checkout prompts." },
@@ -1004,7 +1017,7 @@
         {
           "version": "v1.4.0",
           "codename": "Executive Briefings & Instant Sharing",
-          "releaseDate": "September 2026",
+          "releaseDate": "September 24, 2026",
           "year": 2026,
           "isLatest": false,
           "headline": "Executive 16:9 Landscape PDF Export, Zero-Server Link Sharing & Dual-Set Dimension Filters",
@@ -1044,7 +1057,7 @@
         {
           "version": "v1.3.0",
           "codename": "Configuration Workbench & Telemetry",
-          "releaseDate": "September 2026",
+          "releaseDate": "September 8, 2026",
           "year": 2026,
           "isLatest": false,
           "headline": "4-Column Workbench, Date Ribbon & Viral Referral Telemetry",
@@ -1076,7 +1089,7 @@
         {
           "version": "v1.2.0",
           "codename": "Zero-Login Interactive Demo & Dynamic Theming",
-          "releaseDate": "August 2026",
+          "releaseDate": "August 24, 2026",
           "year": 2026,
           "isLatest": false,
           "headline": "Interactive 0-Login Demo, Instant Cross-Domain Theme Sync & Mobile Experience Gate",
@@ -1106,7 +1119,7 @@
         {
           "version": "v1.0.0",
           "codename": "Platform Foundation",
-          "releaseDate": "August 2026",
+          "releaseDate": "August 10, 2026",
           "year": 2026,
           "isLatest": false,
           "headline": "100% In-Browser Privacy Pivot Analytics for Google Sheets & CSVs",
