@@ -977,7 +977,7 @@
           "year": 2026,
           "isLatest": true,
           "headline": "Direct Private Google Sheets Ingestion with Live Cloud Sync & Enhanced Privacy Safeguards",
-          "counts": { "features": 1, "improvements": 4, "fixes": 4 },
+          "counts": { "features": 1, "improvements": 4, "fixes": 6 },
           "features": [
             {
               "title": "Private Google Sheets — Cloud Sync & Offline Options",
@@ -993,6 +993,8 @@
             { "title": "Full-Bleed Scalable Vector Brand Mark", "description": "Introduced a new full-bleed midnight gradient SVG and high-resolution avatar assets optimized for OAuth branding and circular mask cropping." }
           ],
           "fixes": [
+            { "title": "Public Google Sheets Direct Ingestion", "description": "Resolved an issue where public Google Sheets could inadvertently trigger an account authorization prompt due to browser cross-origin redirect policies; public spreadsheets now stream directly and seamlessly without requiring Google sign-in." },
+            { "title": "Calculated KPI & Derived Metric Formula Precision", "description": "Upgraded the custom KPI mathematical evaluation engine to a native, zero-eval arithmetic parser compliant with strict Content Security Policy (CSP), ensuring calculated formulas (such as Profit Margin % and Average Selling Price) compute and display with 100% accuracy in production environments." },
             { "title": "Google Sheets Connection Reliability", "description": "Resolved an issue where initiating a Google Sheets connection under certain configurations could fail to launch the account authorization prompt." },
             { "title": "Pro Account Layout Polish", "description": "Removed an extraneous duplicate section header above the active Pro Account status card for a cleaner presentation." },
             { "title": "Pro Subscription Action Ergonomics", "description": "Ensured active Pro subscribers are smoothly directed to subscription and invoice management rather than redundant checkout prompts." },
