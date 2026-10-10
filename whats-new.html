@@ -972,14 +972,17 @@
       const EMBEDDED_RELEASES = [
         {
           "version": "v1.5.1",
-          "codename": "Spreadsheet Streaming & In-Browser Formula Engine Reliability",
+          "codename": "Formula Engine Reliability & Frictionless Desktop Onboarding",
           "releaseDate": "October 9, 2026",
           "year": 2026,
           "isLatest": true,
-          "headline": "Zero-Eval CSP Formula Engine & High-Resilience Public Google Sheets Streaming",
-          "counts": { "features": 0, "improvements": 0, "fixes": 2 },
+          "headline": "Zero-Eval CSP Formula Engine, Public Sheets Streaming & Live Sandbox Discovery",
+          "counts": { "features": 0, "improvements": 2, "fixes": 2 },
           "features": [],
-          "improvements": [],
+          "improvements": [
+            { "title": "Direct Interactive Sandbox Discovery", "description": "The workspace preview showcase is now directly interactive—hovering and clicking the dashboard canvas instantly launches the live evaluation sandbox with pre-loaded sample data, requiring zero account creation." },
+            { "title": "Password Manager Autofill & Frictionless Onboarding", "description": "Added native credential manager autofill support (1Password, Bitwarden, Apple iCloud Keychain, Chrome), streamlined 1-tap Google registration, and optimized form ergonomics for compact desktop viewports." }
+          ],
           "fixes": [
             { "title": "Public Google Sheets Direct Ingestion", "description": "Resolved an issue where public Google Sheets could inadvertently trigger an account authorization prompt due to browser cross-origin redirect policies; public spreadsheets now stream directly and seamlessly without requiring Google sign-in." },
             { "title": "Calculated KPI & Derived Metric Formula Precision", "description": "Upgraded the custom KPI mathematical evaluation engine to a native, zero-eval arithmetic parser compliant with strict Content Security Policy (CSP), ensuring calculated formulas (such as Profit Margin % and Average Selling Price) compute and display with 100% accuracy in production environments." }
