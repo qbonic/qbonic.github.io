@@ -101,6 +101,7 @@ const AuthRouter = (() => {
       try {
         window.gtag('event', eventName, {
           event_category: 'engagement',
+          transport_type: 'beacon',
           theme: ThemeManager.getTheme(),
           ...eventParams
         });
