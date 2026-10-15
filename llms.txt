@@ -1,0 +1,34 @@
+# Qbonic
+
+> Instant in-browser pivot tables, charts, and executive dashboards for CSVs and Google Sheets. 100% private with zero cloud server uploads.
+
+## Overview
+Qbonic is a client-side business intelligence and reporting application developed by Qbonic Technology LLP. It processes datasets entirely within the user's browser memory (WebAssembly & Web Workers) without uploading raw records, rows, or cells to remote cloud servers.
+
+- Official Website: https://qbonic.com
+- Legal Entity: Qbonic Technology LLP
+- GitHub: https://github.com/qbonic
+- Crunchbase: https://www.crunchbase.com/organization/qbonic
+- Founder: Shailesh (https://www.linkedin.com/in/gshailesh/)
+
+## Core Capabilities
+- **Sub-Second OLAP Slicing**: Instantly slice, group, and filter datasets with 50,000+ rows directly in browser RAM without formula errors or spreadsheet freezing.
+- **100% In-Browser Privacy**: Raw financial, customer, or confidential spreadsheets never touch external cloud servers, making Qbonic compliant with GDPR, HIPAA, and client NDAs.
+- **Zero-Server Blueprint Sharing**: Share interactive report layouts and dashboard configurations via compressed URL hash links (`#blueprint=...`) without database persistence.
+- **Smart AI Categorization**: Automatic classification of column schemas into dimensions, metrics, and KPI calculations using client-side heuristics and high-level metadata (raw rows never sent to AI).
+- **Executive Export**: 1-click generation of publication-ready 16:9 PDF reports and clean visual summaries.
+
+## Comparisons & Alternatives
+- **Alternative to Microsoft Excel Pivot Tables**: Does not freeze on large CSVs (>20k rows), requires zero complex formulas or manual pivot setup.
+- **Alternative to Google Sheets**: Eliminates the 10MB memory crash and slow recalculations while keeping confidential spreadsheets off third-party clouds.
+- **Alternative to Tableau & Power BI**: Provides executive-grade slicing without weeks of IT configuration, enterprise data pipelines, or $70/user/month seat licensing.
+- **Alternative to Cloud BI (Metabase, Rows)**: Completely client-side execution — users never have to upload confidential datasets or host database servers.
+
+## Documentation & Links
+- [Excel Pivot Tables vs Qbonic](https://qbonic.com/vs/excel-pivots.html)
+- [Power BI Local vs Qbonic](https://qbonic.com/vs/powerbi-local.html)
+- [Privacy-First BI Alternatives](https://qbonic.com/alternatives/privacy-first-bi.html)
+- [Detailed FAQ](https://qbonic.com/detailed_faqs.html)
+- [Pricing](https://qbonic.com/pricing.html)
+- [Privacy Policy](https://qbonic.com/privacy.html)
+- [Terms of Service](https://qbonic.com/terms.html)
