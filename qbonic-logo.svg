@@ -1,0 +1,30 @@
+<svg width="512" height="512" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Top Face: Ocean Sky to Cobalt -->
+    <linearGradient id="qbonic-ocean-top" x1="6" y1="4" x2="34" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+
+    <!-- Left Face: Vibrant Cobalt to Electric Royal Blue -->
+    <linearGradient id="qbonic-cobalt-left" x1="6" y1="14" x2="19" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#1D4ED8" />
+    </linearGradient>
+
+    <!-- Right Sliced Face (Q-Tail): Vibrant Emerald to Teal -->
+    <linearGradient id="qbonic-emerald-slice" x1="23.5" y1="16" x2="36.5" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+
+  <!-- Top Diamond Face (Ocean) -->
+  <path d="M20 4L34 12L20 20L6 12L20 4Z" fill="url(#qbonic-ocean-top)" />
+
+  <!-- Left Pillar Face (Cobalt) -->
+  <path d="M6 14L19 21.5V36L6 28.5V14Z" fill="url(#qbonic-cobalt-left)" />
+
+  <!-- Right Sliced Face / Q-Tail (Emerald) -->
+  <path d="M23.5 23.5L36.5 16V30.5L23.5 38V23.5Z" fill="url(#qbonic-emerald-slice)" />
+</svg>

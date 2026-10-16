@@ -1,25 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0F172A"/>
-      <stop offset="100%" stop-color="#080C14"/>
-    </linearGradient>
-    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38BDF8"/>
-      <stop offset="50%" stop-color="#22D3EE"/>
-      <stop offset="100%" stop-color="#6366F1"/>
-    </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="16" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
-  </defs>
-
-  <!-- Favicon Container Background -->
-  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="8"/>
-
-  <!-- Glowing Qbonic Brand Mark -->
-  <g transform="translate(40, 40) scale(18)" filter="url(#glow)">
-    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#iconGrad)" stroke="#38BDF8" stroke-width="0.8" stroke-linejoin="round"/>
-  </g>
+<svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Optimized for 16x16 and 32x32 browser tabs with high contrast & clear slice separation -->
+  <path d="M20 3.5L34.5 11.8L20 20.1L5.5 11.8L20 3.5Z" fill="#38BDF8"/>
+  <path d="M5.5 14.2L18.5 21.7V36.5L5.5 29V14.2Z" fill="#0284C7"/>
+  <path d="M24 23.8L37 16.3V31.1L24 38.6V23.8Z" fill="#10B981"/>
 </svg>

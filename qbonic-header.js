@@ -122,14 +122,27 @@
           <div class="header-inner">
             <a href="${urls.home}" class="brand-logo" id="headerBrandLogo">
               <div class="logo-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#header_logo_grad)" stroke="#38BDF8" stroke-width="1.5" stroke-linejoin="round" />
+                <svg width="26" height="26" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <linearGradient id="header_logo_grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#38BDF8" />
-                      <stop offset="1" stop-color="#6366F1" />
+                    <linearGradient id="header_ocean_top" x1="6" y1="4" x2="34" y2="20" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#38BDF8" />
+                      <stop offset="100%" stop-color="#0284C7" />
+                    </linearGradient>
+                    <linearGradient id="header_cobalt_left" x1="6" y1="14" x2="19" y2="36" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#0284C7" />
+                      <stop offset="100%" stop-color="#1D4ED8" />
+                    </linearGradient>
+                    <linearGradient id="header_emerald_slice" x1="23.5" y1="16" x2="36.5" y2="38" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#34D399" />
+                      <stop offset="100%" stop-color="#059669" />
                     </linearGradient>
                   </defs>
+                  <!-- Top Diamond Face (Ocean) -->
+                  <path d="M20 4L34 12L20 20L6 12L20 4Z" fill="url(#header_ocean_top)" />
+                  <!-- Left Pillar Face (Cobalt) -->
+                  <path d="M6 14L19 21.5V36L6 28.5V14Z" fill="url(#header_cobalt_left)" />
+                  <!-- Right Sliced Face / Q-Tail (Emerald) -->
+                  <path d="M23.5 23.5L36.5 16V30.5L23.5 38V23.5Z" fill="url(#header_emerald_slice)" />
                 </svg>
               </div>
               <div class="brand-text-group">
